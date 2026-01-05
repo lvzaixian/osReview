@@ -1,0 +1,1017 @@
+[
+  {
+    "id": "ch3-sect2-hw-001",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": ". 通配符\"*\"代表从它所在位置开始的________________，但________________中的\".\"和路径名中\"/\"必须显式匹配。",
+    "back": {
+      "answer": "任意字符串；文件名",
+      "explanation": "星号可展开成任意长度字符串，唯独\".\"和\"/\"必须字面出现。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-002",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "通配符\"?\"代表它所在位置上的________________字符；\"[ ]\"每次只匹配其中字符的________________个。",
+    "back": {
+      "answer": "任何单个；一",
+      "explanation": "\"?\"严格占位 1 个字符；方括号内枚举集合也只命中 1 个字符。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-003",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "特殊字符\"\\\\\"被称为________________字符；符号\"\\\\\\\\\"表示\"________________\"。",
+    "back": {
+      "answer": "转义；\\\\",
+      "explanation": "反斜杠用于转义后续字符，连续两个反斜杠则输出一个字面反斜杠本身。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-004",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "组合键________________可结束当前程序输入或从系统注销。",
+    "back": {
+      "answer": "Ctrl+D",
+      "explanation": "Ctrl+D 发送 EOF，终端收到后结束多数交互式程序或登录会话。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-005",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "组合键________________用于字符终端切换，如 Alt+F2 切到第 2 个虚拟控制台。",
+    "back": {
+      "answer": "Alt+F#",
+      "explanation": "传统 Linux 控制台用 Alt+F1~F6 切换，# 代表 1--6 任意数字。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-006",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "在 UNIX/Linux 中，目录只包括________________和________________号等相关信息，而文件的属性信息保存在________________信息中。",
+    "back": {
+      "answer": "文件名；i 节点；i 节点",
+      "explanation": "目录文件本质是\"文件名 ↔ i-node 号\"对照表，真正的属性存在 i-node 结构体里。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-007",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": ". 目录文件在形式上与________________文件一样，但具有目录属性，只能用________________来访问和管理。",
+    "back": {
+      "answer": "普通；目录管理命令",
+      "explanation": "目录与普通文件共用 inode，只是 mode 位不同；用户需用专用命令（ls、cd、mkdir 等）操作。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-008",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "UNIX/Linux 把每个 I/O 设备都看成一个________________，与________________一样处理。",
+    "back": {
+      "answer": "文件；普通文件",
+      "explanation": "\"一切皆文件\"------设备节点在 /dev 下表现为特殊文件，可用 open/read/write 统一接口访问。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-009",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "以长列表列出 /dev 并直接统计其中文件个数的完整命令是：________________",
+    "back": {
+      "answer": "$ ls -l /dev | wc -l",
+      "explanation": "ls -l 逐行列出，wc -l 统计行数即文件（含设备）数量。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-010",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "在 $ 提示符下，定义变量 x 值为 123 的格式是：________________",
+    "back": {
+      "answer": "$ x=123",
+      "explanation": "Shell 变量赋值语法，等号两侧不能有空格。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-sect2-hw-011",
+    "chapterId": "ch3-sect2",
+    "source": "homework",
+    "type": "fill",
+    "front": "在 shell 提示符下，显示当前命令搜索路径的命令及格式是：________________",
+    "back": {
+      "answer": "$ echo $PATH",
+      "explanation": "$PATH 环境变量保存可执行文件搜索路径，echo 即可打印。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch4-sect1-hw-012",
+    "chapterId": "ch4-sect1",
+    "source": "homework",
+    "type": "fill",
+    "front": "反单引号用于命令替换。依次写出两条命令的功能：① $ x=`pwd` ② $ echo $x 功能：________________",
+    "back": {
+      "answer": "将当前工作目录赋予变量 x，然后显示变量 x 的值；即\"显示当前工作目录\"。",
+      "explanation": "反单引号把 pwd 输出捕获成字符串赋给 x；echo $x 再把字符串打印出来，等价于直接执行 pwd。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch4-sect1-hw-001",
+    "chapterId": "ch4-sect1",
+    "source": "homework",
+    "type": "choice",
+    "front": "在 UNIX/Linux 系统添加新用户的命令是（ ）\n\nA. groupadd\nB. usermod\nC. userdel\nD. useradd",
+    "back": {
+      "answer": "D. useradd",
+      "explanation": "useradd 专用于新建账号。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch4-sect1-hw-002",
+    "chapterId": "ch4-sect1",
+    "source": "homework",
+    "type": "choice",
+    "front": "添加用户时使用参数（ ）可指定用户标识号\n\nA. -d\nB. -p\nC. -u\nD. -c",
+    "back": {
+      "answer": "C. -u",
+      "explanation": "-u 后直接接数字 UID。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch4-sect1-hw-003",
+    "chapterId": "ch4-sect1",
+    "source": "homework",
+    "type": "choice",
+    "front": "用户 mytest 修改自己的密码可使用（ ）\n\nA. passwd\nB. passwd -d mytest\nC. passwd mytest\nD. passwd -l",
+    "back": {
+      "answer": "A. passwd",
+      "explanation": "不带用户名的 passwd 默认改当前登录者自己的口令。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch4-sect1-hw-004",
+    "chapterId": "ch4-sect1",
+    "source": "homework",
+    "type": "choice",
+    "front": "解锁一个用户的命令和选项为（ ）\n\nA. passwd -u\nB. passwd -x\nC. passwd -d\nD. passwd -l",
+    "back": {
+      "answer": "A. passwd -u",
+      "explanation": "-u 去掉 shadow 里的\"!\"锁定标记。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch4-sect1-hw-005",
+    "chapterId": "ch4-sect1",
+    "source": "homework",
+    "type": "choice",
+    "front": "删除一个用户密码所使用的命令和选项（ ）\n\nA. passwd -u\nB. passwd -x\nC. passwd -d\nD. passwd -l",
+    "back": {
+      "answer": "C. passwd -d",
+      "explanation": "-d 立即清空密码哈希，账号变为无口令状态。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch6-sect3-hw-001",
+    "chapterId": "ch6-sect3",
+    "source": "homework",
+    "type": "choice",
+    "front": "(单选题, 11.1分) 若使pid进程无条件终止，使用的命令是（ ）\n\nA. kill -9\nB. kill -15\nC. killall -1\nD. kill -3",
+    "back": {
+      "answer": "A. kill -9",
+      "explanation": "-9 发送 SIGKILL，进程无法捕获或忽略，立即无条件终止。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch6-sect3-hw-002",
+    "chapterId": "ch6-sect3",
+    "source": "homework",
+    "type": "choice",
+    "front": "(多选题, 11.1分) 在Linux系统中用于进程状态查询的常用命令是（ ）和（ ）\n\nA. ps\nB. kill\nC. killall\nD. pstree",
+    "back": {
+      "answer": "A. ps D. pstree",
+      "explanation": "ps 快照列出进程；pstree 以树状显示进程父子关系；kill/killall 用于发信号而非查询。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-001",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) IP地址(Internet Protocol Address)，又译为 。每个IP地址都分为 和 两部分。",
+    "back": {
+      "answer": "(1) 网际协议地址格式 (2) 网络号 (3) 主机号",
+      "explanation": "IP 给\"网络号\"定边界，\"主机号\"定节点，合起来实现分层寻址。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-002",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) 由于一个IP地址由 位二进制数构成，将它分成 组，每组 位，各组都以十进制表示，并用圆点分开，这种表示方法称为\" 表示法\"。",
+    "back": {
+      "answer": "(1) 32 (2) 4 (3) 8 (4) 点分十进制",
+      "explanation": "32 b → 4×8 b → 4 个 0-255 十进制数，点分书写最直观。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-003",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) 子网掩码可以用来区分一个IP地址的网络号和主机号 位。A、B、C类IP地址的标准子网掩码分别为：A类---255.0.0.0 B类---255.255.0.0 C类---255.255.255.0",
+    "back": {
+      "answer": "(1) 各占多少",
+      "explanation": "掩码\"1\"位对应网络号，\"0\"位对应主机号，用\"各占多少\"概括其分界作用。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-004",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) 一个进程和另一个进程进行通信时，需要以某种方式标识自己。对此，TCP/IP用一个被称作 的逻辑结构来实现。一个 是一个16位的数字，它唯一地标识一个进程。",
+    "back": {
+      "answer": "(1) 端口 (2) 端口号",
+      "explanation": "端口是逻辑概念，端口号是 16 位无符号整数，0-65535。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-006",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) （MAC地址）一般位于网卡中，一个网卡具有全球 地址，用于标识网络设备，控制对网络介质的访问。",
+    "back": {
+      "answer": "(1) 物理地址 (2) 唯一的MAC",
+      "explanation": "MAC 48 位全球唯一，写在网卡 EEPROM，实现链路层寻址。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-007",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) （网络地址）即IP地址或网络地址。IPv4使用32位二进制来表示网络地址，称为 或逻辑地址。逻辑地址用于 层上对目的主机的寻址。",
+    "back": {
+      "answer": "(1) 逻辑地址 (2) IP地址 (3) 网络",
+      "explanation": "逻辑地址（IP）在网络层选路；MAC 在链路层选下一跳。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-008",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) hostname功能是显示和临时设置主机名，其语法为：",
+    "back": {
+      "answer": "hostname [-v] {name|-F file}",
+      "explanation": "不给参数时显示当前主机名；加 name 立即临时生效；-F 从文件读取。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-009",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) hostnamectl用于查询和设置主机名，其用法为：",
+    "back": {
+      "answer": "hostnamectl [options] {cmd}",
+      "explanation": "systemd 环境统一接口，可永久设置静态/瞬态/灵活主机名。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-010",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) ping命令的用法为：",
+    "back": {
+      "answer": "ping [options] hostname/IP",
+      "explanation": "连续发送 ICMP Echo，Ctrl-C 给出统计，常用于连通性测试。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-011",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) netstat主要用于 信息，包括 、 和 统计信息等。通过这些信息可以知道开启的端口、正在为哪些用户服务以及服务的状态等",
+    "back": {
+      "answer": "(1) 显示系统网络 (2) 网络连接 (3) 路由表 (4) 网络接口通信",
+      "explanation": "netstat -r 看路由，-i 看接口，-t/-u/-n 看端口连接。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-012",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) 显示所有TCP端口的命令是",
+    "back": {
+      "answer": "netstat -ia",
+      "explanation": "-i 列出接口，-a 含 listening 与 non-listening，组合后可看到全部 TCP 监听端口。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-013",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) 显示网络接口使用的统计信息，使用 选项执行 命令可以显示所有已配置接口的一些有用的统计信息，使用该参数，可以很容易检查连接的状态以及连接是否\"正常\"。因此，这是一个用于检测和排除网络故障的非常有用的措施。",
+    "back": {
+      "answer": "(1) -i (2) netstat",
+      "explanation": "netstat -i 每秒收发包/错包一目了然，可快速判断链路健康。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-014",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 6分) 命令的功能是管理网络接口，用于查看、配置、启用或禁用网络接口",
+    "back": {
+      "answer": "ifconfig",
+      "explanation": "传统工具，可启停接口、设 IP/掩码/广播地址；新版系统推荐 ip 命令。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch7-hw-015",
+    "chapterId": "ch7",
+    "source": "homework",
+    "type": "fill",
+    "front": "(填空题, 7分) ifconfig的功能是 。",
+    "back": {
+      "answer": "运行ifconfig显示所有网卡的配置信息",
+      "explanation": "不带参数时列出全部接口的 IP、MAC、掩码、收发统计等详细信息。"
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-001",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "UNIX/Linux系统中有三种基本的文件类型：____,____,____。",
+    "back": {
+      "answer": "普通文件,目录文件,设备文件",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-002",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "链接为 Linux 系统解决了文件的共享使用，还带来了____、____及____等好处。",
+    "back": {
+      "answer": "隐藏文件路径、增加权限安全,节省存储",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-003",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "文件在文件系统中的位置可以由____或____来决定。",
+    "back": {
+      "answer": "相对路径,绝对路径",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-004",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "标准输出重定向是指把命令的标准输出保存到文件中，可用两种方式：____,____。",
+    "back": {
+      "answer": "覆盖方式(>)，追加方式(>>)",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-005",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "反单引号的作用是____。",
+    "back": {
+      "answer": "命令替换",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-006",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "系统在启动时创建了很多进程。进程的创建者称为____，被创建者称为____。为对进程管理，系统为每个进程分配了一个____。",
+    "back": {
+      "answer": "父进程,子进程,编号PID：进程号或进程标识.",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-007",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "wc的功能是____。统计信息包括____等。",
+    "back": {
+      "answer": "对输入文件的信息进行统计, \t行数、单词数和总字节数",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-008",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "vim在命令模式下，输入____进入编辑模式，编辑完毕后通过按____返回命令模式。",
+    "back": {
+      "answer": "i,esc",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-009",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "sudo rm -rf /*进行了什么操作____。",
+    "back": {
+      "answer": "使用管理员（root）权限删除电脑中的一切东西（包括可移动设备中的文件）",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-010",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "vim中编辑完成后回到命令模式保存文件，并强制退出的命令____。",
+    "back": {
+      "answer": ":wq!",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-011",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "显示自身用户名称的命令____.",
+    "back": {
+      "answer": "whoami",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-012",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "当前为user@Ubuntu:~/Desktop$ ,输入ls ，无任何文件，在本目录temp下创建子目录child的命令____。",
+    "back": {
+      "answer": "mkdir -p temp/child",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-013",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "将文件file倒着显示命令____。",
+    "back": {
+      "answer": "tac file",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-014",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "将文件fiel1，file2移动到目录mydir下命令____。",
+    "back": {
+      "answer": "mv file1 file2 mydir",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch1-hw-hw-015",
+    "chapterId": "ch1-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "将根目录短式列表显示到屏幕上的同时也保存到文件f1和f2中____.(输入命令)",
+    "back": {
+      "answer": "ls / | tee f1 f2",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-001",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "撤销my_env环境变量的命令是______.",
+    "back": {
+      "answer": "export -n my_env",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-002",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "终止pid为1988的进程的命令是_____.",
+    "back": {
+      "answer": "kill -9 1988",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-003",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "组信息存放在______.",
+    "back": {
+      "answer": "/etc/group",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-004",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "系统在创建用户时，给每个用户划组，每个组一个____和_____.用户可以分配_____组。",
+    "back": {
+      "answer": "组名   组标识（gid）   不同",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-005",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "Linux系统中的用户信息存储在______文件中文件中",
+    "back": {
+      "answer": "/etc/passwd",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-006",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "密码的最后修改日期是从1970年1月1日到上次修改密码的天数间隔，这个信息存储在________文件中.",
+    "back": {
+      "answer": "/etc/shadow",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-007",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "用户管理的命令有______、______和______，它们分别用于用户创建、用户属性修改和用户删除。",
+    "back": {
+      "answer": "useradd、usermod、userdel",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-008",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "UNIX/Linux系统的标准安全级别为C2级(TCSEC标准)，具有用户______、______、________等特点。密码管理是_______的基础。",
+    "back": {
+      "answer": "身份认证、访问控制、操作的可靠性     身份认证",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-009",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "给用户 test修改密码的命令_________.",
+    "back": {
+      "answer": "passwd test",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-010",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "不退出系统而将自己切换成newuser人仍使用原环境工作________.",
+    "back": {
+      "answer": "su newuser",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-011",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "sudo的配置文件是________.",
+    "back": {
+      "answer": "/etc/sudoers",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-012",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "wall（write to all）功能是向登录到系统中工作的所有用户发送____信息.",
+    "back": {
+      "answer": "广播",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-013",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "只有______能够上锁或解锁一个用户",
+    "back": {
+      "answer": "root",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-014",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "命令 id 用于显示用户的 ________ 和 _______。",
+    "back": {
+      "answer": "用户标识号 (UID)   组标识号 (GID)",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch2-hw-hw-015",
+    "chapterId": "ch2-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "命令______用于显示当前的 终端设备名。",
+    "back": {
+      "answer": "tty",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-001",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "UNIX/Linux用________来解决存取权限的控制问题（重要的安全解决策略）。",
+    "back": {
+      "answer": "文件存取控制表",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-002",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "普通权限三种________,________,_________.",
+    "back": {
+      "answer": "读权限（r）  写权限（w）  执行权（x）",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-003",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "UNIX/Linux系统对文件操作的三种权限只对三类人分配，分别是______,______,_______.",
+    "back": {
+      "answer": "用户主（user：u）、同组人（group：g）和其他人（other：o）。",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-004",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "目录/dev的权限为rwxr-xr-x，转换为八进制后可以说/dev的权限为_______.",
+    "back": {
+      "answer": "755",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-005",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "文件或目录的默认权限由__________来控制，是权限的“补码”。默认情况，root的umask值为_____.(首位特殊)",
+    "back": {
+      "answer": "文件权限掩码(umask)   0022",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-006",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "改变文件的权限______.",
+    "back": {
+      "answer": "chmod",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-007",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "目录/dev的权限为rwxrx---- umask值为_______.",
+    "back": {
+      "answer": "0027",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-008",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "将/class中的所有文件和各级子目录及内容权限设置为755",
+    "back": {
+      "answer": "chmod -R 755 /class/*",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-009",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "______有权使用chown.",
+    "back": {
+      "answer": "超级用户",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-010",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "IDE硬盘设备的形式为_____.",
+    "back": {
+      "answer": "/dev/hdmn",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-011",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "SCSI存储设备的形式为_____.",
+    "back": {
+      "answer": "/dev/sdmn",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-012",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "用于管理硬盘上分区的命令有_______和_______,主要目的是用于对磁盘分区的显示与查询.",
+    "back": {
+      "answer": "fdisk parted",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-013",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "显示硬盘/dev/sda的分区信息__________.",
+    "back": {
+      "answer": "fdisk -l /dev/sda",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-014",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "在移动磁盘上创建ext2文件系统的命令是________.",
+    "back": {
+      "answer": "mkfs -t ext2 /dev/sdb",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  },
+  {
+    "id": "ch3-hw-hw-015",
+    "chapterId": "ch3-hw",
+    "source": "homework",
+    "type": "fill",
+    "front": "将U盘上vfat格式的系统安装在/mnt/fd上________.",
+    "back": {
+      "answer": "mount -t vfat /dev/sdc /mnt/fd",
+      "explanation": ""
+    },
+    "tags": [],
+    "difficulty": 2
+  }
+]
+
