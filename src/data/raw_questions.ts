@@ -12,7 +12,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "①错误，批处理系统的主要缺点就是无交互性（用户将作业提交后就无法干预）；②正确，分为单道（一次一个）和多道（内存中同时多个）；③正确，多道程序设计利用中断技术在I/O设备工作时释放CPU给其他作业，实现并行。因此正确的是②和③。",
+        mnemonic: "类比：批处理就像“寄快递”📦，一旦发货（提交）就没法改地址（无交互）了。"
     },
     {
         id: "obj-intro-2",
@@ -25,7 +26,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "CPU分为用户态（目态）和内核态（管态）。用户态只能执行非特权指令（如加减乘除）；内核态可以执行特权指令（如I/O操作、清内存），也可以执行非特权指令。因此“CPU处于用户态时只能执行非特权指令”是正确的描述。",
+        mnemonic: "身份隐喻：用户态是“平民”🚫，内核态是“皇帝”👑（特权指令只有皇帝能下旨）。"
     },
     {
         id: "obj-intro-3",
@@ -38,7 +40,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "键盘按下时会产生硬件中断，CPU暂停当前工作转去执行中断处理程序。因此中断处理程序最先获得输入信息，然后才交给设备驱动或登录程序。",
+        mnemonic: "动作逻辑：键盘一响⚡️，中断程序立刻抢过麦克风。"
     },
     {
         id: "obj-intro-4",
@@ -51,7 +54,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "①正确，系统调用进入内核态执行；②正确，通过接口访问硬件更安全；③正确，标准化接口（API）；④正确，是用户与内核的桥梁。通常认为①、②、④是系统调用最核心的特征。",
+        mnemonic: "定义：系统调用 = 通往内核世界的唯一签证🛂。"
     },
     {
         id: "obj-intro-5",
@@ -64,7 +68,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "利用流水线重叠执行。作业1: 2(I)+3(C)+4(O)=9ms。作业2不能立即I，需等作业1的I结束，但这里是并发，主要看瓶颈。画甘特图：J1: I(0-2) C(2-5) O(5-9); J2: I(2-4) C(5-8) O(9-13); J3: I(4-6) C(8-11) O(13-17)。总时间17ms。",
+        mnemonic: "视觉记忆：画甘特图📊，首尾相接，最长的那段就是瓶颈。"
     },
     {
         id: "obj-intro-6",
@@ -77,7 +82,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "内部异常（Exception）中，Fault（故障，如缺页）可恢复；Trap（陷阱，如系统调用）可恢复；Abort（终止，如硬件严重错误）不可恢复，不会返回原指令执行。因此“内部异常处理后返回到发生异常的指令继续执行”这一说法对于终止类异常是错误的。",
+        mnemonic: "逻辑分类：故障和陷阱能“浪子回头”，只有终止（Abort）是直接“退学”🏫。"
     },
     {
         id: "obj-intro-7",
@@ -90,7 +96,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "①除零是异常，自动切内核态处理；②sin()是标准库函数，在用户态执行，不一定切内核；③read是系统调用，必须切内核态。会导致切换到内核态的是①和③。",
+        mnemonic: "关键词：凡是“出错”（异常）或“求助OS”（系统调用），都得进内核🚨。"
     },
     {
         id: "obj-intro-8",
@@ -103,7 +110,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "并发（Concurrency）指宏观上同时（同一时间间隔内发生），微观上交替；并行（Parallelism）指同一时刻同时发生（需多核）。",
+        mnemonic: "生活类比：并发 = 一个人轮流吃三个馒头；并行 = 三个人同时吃三个馒头🍔。"
     },
     {
         id: "obj-intro-11",
@@ -116,7 +124,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "执行态 -> 就绪态：只有两种情况，1. 时间片用完；2. 被更高优先级抢占。其他情况如申请资源失败、启动I/O等都会导致进程进入阻塞态。",
+        mnemonic: "条件判断：如果是“被迫”停下（时间到/被抢），就去排队（就绪）；如果是“主动”请求（I/O），就去睡觉（阻塞）💤。"
     },
     {
         id: "obj-intro-12",
@@ -129,7 +138,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "主动出让CPU（Yield）会使线程从运行态回到就绪队列等待，不会进入阻塞态。其他如缺页、等待I/O或信号量都会导致线程阻塞。",
+        mnemonic: "Yield操作：只是礼貌让座💺（回就绪），不是身体不适（去阻塞）。"
     },
     {
         id: "obj-intro-15",
@@ -142,7 +152,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "执行 -> 阻塞：通常是请求资源或等待事件。①读文件（等待磁盘I/O）；③申请外设（等待设备）；④Wait操作（信号量不足等待）。②时间片用完是变就绪。因此导致阻塞的是①、③、④。",
+        mnemonic: "核心特征：凡是需要“等”外人（I/O、信号量）的，统统进阻塞区⏳。"
     },
     {
         id: "obj-intro-16",
@@ -155,7 +166,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "①用户登录成功会创建shell进程；③启动程序就是创建进程。②设备分配只是给已有进程分配资源，不涉及创建新进程。",
+        mnemonic: "登录和启动才是“生孩子”👶，分配设备只是“给玩具”。"
     },
     {
         id: "obj-intro-17",
@@ -168,7 +180,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "创建进程三步曲：申请PCB、初始化PCB、放入就绪队列。此时进程处于就绪态，而非执行态，需要等待调度。",
+        mnemonic: "流程记忆：填表（PCB） -> 挂号（初始化） -> 候诊区排队（就绪）🏥。"
     },
     {
         id: "obj-intro-18",
@@ -181,7 +194,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "管道是半双工的（通常单向，或分时双向）；容量受限于内存缓冲区大小（非磁盘）；读空管道或写满管道都会阻塞。因此“进程对管道进行读操作和写操作都可能被阻塞”是正确的。",
+        mnemonic: "物理特性：管道就像水管🚰，没水（读空）或水满（写满）都得停下来。"
     },
     {
         id: "obj-intro-19",
@@ -194,7 +208,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "用户级线程的TCB在用户空间，操作系统内核感知不到，因此OS不会为它建立线程控制块。",
+        mnemonic: "黑户理论：用户级线程是OS眼里的“黑户”🕵️，根本没有户口本（TCB）。"
     },
     {
         id: "obj-intro-20",
@@ -207,7 +222,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "这是经典定义：进程是资源分配的基本单位，线程是处理机调度的基本单位。不管系统是否支持线程，进程都是资源持有的主体。",
+        mnemonic: "分工明确：进程管“钱”（资源💰），线程管“干活”（调度）。"
     },
     {
         id: "obj-intro-21",
@@ -220,7 +236,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "同一进程的线程共享代码、全局变量、打开的文件。但每个线程必须有自己独立的栈（Stack）来保存函数调用上下文。",
+        mnemonic: "空间类比：代码和文件是“客厅”（公用），栈是“卧室”（私有🛏️）。"
     },
     {
         id: "obj-intro-22",
@@ -233,7 +250,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "while(TSL) 是典型的忙等待（Busy Waiting），进程在等待时不放弃CPU，一直循环检查，直到获取锁。",
+        mnemonic: "TSL特征：死皮赖脸，一直敲门🚪（循环检查）直到开门。"
     },
     {
         id: "obj-intro-23",
@@ -246,7 +264,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "临界区准则：空闲让进、忙则等待、有限等待。让权等待是推荐的但非必须（如自旋锁就不让权）。因此必须遵循的是①互斥、②空闲让进、③有限等待。",
+        mnemonic: "三大铁律：①只能进一个 ②没人赶紧进 ③别让人等太久⏳。"
     },
     {
         id: "obj-intro-25",
@@ -259,7 +278,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "信号量S。S > 0 表示可用资源数；S <= 0 表示|S|为等待进程数。这里初值3，当前1。说明消耗了2个，还剩1个可用。等待队列为0。",
+        mnemonic: "数值含义：正数 = 库存量📦；负数 = 排队人数。"
     },
     {
         id: "obj-deadlock-2",
@@ -272,7 +292,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "死锁一定是不安全状态；但不安全状态不一定会死锁（可能运气好没发生申请）。安全状态一定不会死锁。",
+        mnemonic: "集合关系：死锁 ⊂ 不安全状态 ⚠️。（死锁是子集，安全是补集）。"
     },
     {
         id: "obj-deadlock-3",
@@ -285,7 +306,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "资源总4。P1占2（需4-2=2），P2占1（需3-1=2），P3占0（需1）。剩4-3=1。Avail=1。先给P3？P3需1，Avail1，可以。P3完，释放0，Avail=1。此时P1需2，P2需2，Avail只有1，都无法满足。系统不存在安全序列，处于不安全状态。",
+        mnemonic: "计算陷阱：资源太少，无论先给谁，最后都凑不够“过路费”💸。"
     },
     {
         id: "obj-deadlock-4",
@@ -298,7 +320,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "银行家算法是“避免”死锁（通过计算安全性），不是“预防”（通过破坏必要条件）。当系统处于安全状态时，系统中一定无死锁进程。",
+        mnemonic: "算法目的：银行家算法就是个精明的会计🧮，只要账面（安全状态）平了，就绝不会破产（死锁）。"
     },
     {
         id: "obj-deadlock-5",
@@ -311,7 +334,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "SJF（短作业优先）。顺序T1, T2, T3。周转时间：J1=T1; J2=T1+T2; J3=T1+T2+T3。平均=(3T1+2T2+T3)/3。",
+        mnemonic: "公式规律：短作业优先 = 时间越短的，被加权的次数越多（倒序加权）📉。"
     },
     {
         id: "obj-deadlock-6",
@@ -324,7 +348,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "调度发生在：1. I/O中断（可能唤醒高优先级）；2. 进程阻塞（自己放弃）；3. 结束（放弃）；4. 时间片完（强迫放弃）。这四种情况都会引起调度。",
+        mnemonic: "触发时机：无论是“生老病死”（创建/结束）还是“暂停休息”（阻塞/时间片），都要喊调度员📢。"
     },
     {
         id: "obj-deadlock-7",
@@ -337,7 +362,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "0时刻开始，FCFS选中最早到达的J1。若SJF，0时刻只有J1，选中J1，J1(3)跑完，此时J2(1,3), J3(1,2)已到，选最短的J3。所以选中的分别是J1和J3。",
+        mnemonic: "算法差异：FCFS看谁来得早🕰️；SJF看谁干得快⚡️。"
     },
     {
         id: "obj-deadlock-8",
@@ -350,7 +376,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "优先权抢占。0ms: P1(1)到，跑。20ms: P2(10)到，抢P1。P1剩40。30ms: P3(100)到，抢P2。P2剩(42-10)=32。P3跑13ms -> 43ms结束。P3周转=13。43ms: P2回CPU，跑32 -> 75ms结束。P2周转=55。75ms: P1回CPU，跑40 -> 115ms结束。P1周转=115。平均=(13+55+115)/3 = 61ms。",
+        mnemonic: "抢占逻辑：强者上，弱者下。算时间时别忘了加上被抢占等待的那段空白⏳。"
     },
     {
         id: "obj-deadlock-9",
@@ -363,7 +390,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "值越小优先级越高。P3(6) > P2(10) > P0(15) > P1(20)。0ms: P0 run; 10ms: P2抢占(1次); 15ms: P3抢占(1次); P3完换P2(1次); P2完换P0(1次); P0完换P1(1次)。初始P0也算1次调度。总共6次。",
+        mnemonic: "计数规则：被抢占算一次，正常交接班🤝也算一次。"
     },
     {
         id: "obj-deadlock-10",
@@ -376,7 +404,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "非抢占。T时刻都在，优先权P2>P3>P1。顺序：P2 -> P3 -> P1。加上1us开销。P2周转 = 15+1+24 = 40。P3周转 = 18+1+24+1+36 = 80。P1周转 = 30+1+24+1+36+1+12 = 105。平均 = 75。",
+        mnemonic: "计算细节：非抢占就是乖乖排队。记得把那 1µs 的系统开销加进每个人的等待账单🧾里。"
     },
     {
         id: "obj-deadlock-11",
@@ -389,7 +418,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "时间片用完说明是CPU密集型进程，应降低其优先级，防止其长期垄断CPU，给I/O密集型进程更多机会。",
+        mnemonic: "调节策略：占着茅坑（CPU）不走的，下次就把他优先级调低⬇️。"
     },
     {
         id: "obj-deadlock-12",
@@ -402,7 +432,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "I/O密集型优先（提高设备利用率）。P3(85% I/O)最多，P2(50%)次之，P1(10%)最少。优先级 P3 > P2 > P1。",
+        mnemonic: "优先级原则：谁喜欢频繁进出（I/O多），就优先照顾谁，别让他等急了💾。"
     },
     {
         id: "obj-deadlock-13",
@@ -415,7 +446,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "时间片用完，进程并未阻塞（它还想算），只是被迫让出CPU，状态变为“就绪态”排队等待下一次调度，而不是阻塞态。",
+        mnemonic: "状态辨析：时间片到 = 重新排队🚶；阻塞 = 暂停业务🚫。"
     },
     {
         id: "obj-deadlock-14",
@@ -428,7 +460,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "分时系统时间片轮转需要：①PCB（记状态）、②时钟中断（计时）、③就绪队列（排队）。阻塞队列与时间片轮转机制本身无直接关系。",
+        mnemonic: "组件需求：轮转调度就像“限时自助餐”，需要：餐券（PCB）、闹钟（时钟中断）⏰、排队栏杆（就绪队列）。"
     },
     {
         id: "obj-deadlock-15",
@@ -441,7 +474,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "时间片轮转（RR）公平分配CPU时间，每个进程都能轮流获得执行机会，因此不可能导致饥饿现象。",
+        mnemonic: "绝对公平：RR算法就像转盘赌⚖️，只要还在转，每个人都有机会中奖（执行）。"
     },
     {
         id: "obj-deadlock-16",
@@ -454,7 +488,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "高响应比优先（HRRN）算法。响应比 = (等待时间+要求服务时间)/要求服务时间。等待时间越久响应比越高，防止了长作业饥饿；同时短任务分母小，响应比高，体现了短任务优先。",
+        mnemonic: "综合考量：等待时间是分子（越等越重要），服务时间是分母（越短越优先）📈。"
     },
     {
         id: "obj-deadlock-17",
@@ -467,7 +502,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "读盘是I/O操作。完成后，中断处理程序会将该进程从阻塞态唤醒，变为就绪态，等待CPU调度。",
+        mnemonic: "因果关系：I/O 完成 ✅ -> 唤醒进程 -> 回就绪队列。"
     },
     {
         id: "obj-deadlock-18",
@@ -480,7 +516,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "Q1(RR, 10ms), Q2(SJF)。P1(30), P2(20)。P1先跑10ms降级去Q2；P2跑10ms降级去Q2。Q1空，Q2按SJF调度，P2(剩10) < P1(剩20)，P2先跑。P1总等待：0(进Q1)+10(等P2在Q1)+10(等P2在Q2) = 20。P2总等待：10(等P1在Q1)。平均等待 15ms。",
+        mnemonic: "多级反馈：就像降级联赛⚽️，表现不好（时间片用完）就掉到下一级去踢（降级）。"
     },
     {
         id: "obj-deadlock-19",
@@ -493,7 +530,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "多级反馈队列设计要素包括：就绪队列的数量、各队列的优先级、各队列的调度算法、进程在就绪队列间的迁移条件。",
+        mnemonic: "全要素：多级反馈设计 = 队列数 + 优先级 + 算法 + 迁移规则📝。"
     },
     {
         id: "obj-deadlock-20",
@@ -506,7 +544,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "死锁最坏情况：每个进程都拿了1个，还需要1个。N个进程占了N个资源。只要再多1个资源，就能让其中一个进程完成并释放。所以至少需要 N + 1 个资源。",
+        mnemonic: "临界点计算：死锁极限 = N个进程各拿1个；破局关键 = 再多给1个资源💡。"
     },
     {
         id: "obj-deadlock-21",
@@ -519,7 +558,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "K个进程，每人要3个。死锁边缘是每人拿2个。资源总8。2K < 8 => K < 4。若K=4，每人2个，共8个，刚好分完且都无法推进，发生死锁。所以K最小值是4。",
+        mnemonic: "数学模型：当 (需求-1) * 进程数 = 资源总数时，就是死锁的边缘💀。"
     },
     {
         id: "obj-deadlock-22",
@@ -532,7 +572,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "需求3,4,5。最坏占有：2,3,4。总共占了2+3+4=9个资源。此时只要再多1个资源给任意一个进程，它就能完成并释放。所以m最小为 9+1 = 10。",
+        mnemonic: "公式记忆：Max需求减1求和，最后再加1➕。"
     },
     {
         id: "obj-deadlock-23",
@@ -545,7 +586,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "①剥夺资源是解除死锁方法之一；②预防是破坏必要条件，能确保不发生；④死锁必然有循环等待，涉及进程肯定阻塞。③银行家算法是避免死锁，不是判断（检测）死锁状态。",
+        mnemonic: "术语区分：预防=破坏条件；避免=银行家🧮；检测=资源图；解除=剥夺/撤销。"
     },
     {
         id: "obj-deadlock-24",
@@ -558,7 +600,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "死锁至少形成环路。典型的三角环 P1->R2->P2->R3->P3->R1->P1。P4只申R2，不参与环。所以至少3个进程处于死锁状态。",
+        mnemonic: "图形想象：死锁就是一个圈⭕️，至少得有3个人（本题语境）才能围成这个圈。"
     },
     {
         id: "obj-deadlock-25",
@@ -571,7 +614,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "S1避免（银行家）需要预知最大资源量，且会拒绝不安全申请；S2检测（不限制申请，只是定期查）。S1不会给可能导致死锁（不安全）的进程分配资源，而S2会（直到检测出死锁）。",
+        mnemonic: "策略对比：避免 = 事前诸葛亮（查户口）；检测 = 事后诸葛亮（收拾残局）🕵️‍♂️。"
     },
     {
         id: "obj-memory-1",
@@ -584,7 +628,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "最佳适应（Best Fit）：找能满足要求且最小的空闲区。需40K。内存中空闲区有：80K、60K、102K。40K最适合放在60K的空闲区（起始地址330K处）。",
+        mnemonic: "找坑原则：最佳适应 = 强迫症，非要找个大小最刚刚好的坑🕳️。"
     },
     {
         id: "obj-memory-2",
@@ -597,7 +642,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "55MB。顺序：1. 分15（剩40）；2. 分30（剩10）；3. 释15（空15, 占30, 空10）；4. 分8（Best Fit，找10的那个）：空15, 占30, 占8, 空2；5. 分6（Best Fit，找15的那个）：占6, 空9, 占30, 占8, 空2。最大空闲是9MB。",
+        mnemonic: "操作模拟：像搭积木🧱一样，一步步画出内存图，Best Fit就是“填缝”。"
     },
     {
         id: "obj-memory-3",
@@ -610,7 +656,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "逻辑空间16位页（$2^{16}$页）。每页1KB。页表项2B。每页能存 1024/2 = 512个页表项。需页表项 $2^{16}$个。二级页表：顶级页目录。每个目录项指向一个二级页表（存512个项）。需 $2^{16} / 512 = 128$ 个目录项。",
+        mnemonic: "计算捷径：页目录项数 = 总页数 / 单页能存的表项数➗。"
     },
     {
         id: "obj-memory-4",
@@ -623,7 +670,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "逻辑地址(2, 154B)。段号2，偏移154。查表：段2基址480K，长度20K。154B < 20K，合法。物理地址 = 480K + 154B。",
+        mnemonic: "寻址公式：物理地址 = 基址 + 偏移📍（前提是别越界）。"
     },
     {
         id: "obj-memory-6",
@@ -636,7 +684,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "回收内存时，如果回收区上方有空闲区、下方也有空闲区，则会将这三个区域合并为一个大的空闲区。原本在空闲表中作为独立项的“下方空闲区”被合并掉，导致空闲区表项减1。",
+        mnemonic: "消消乐原理：上下都空，三合一，空闲表项立刻少一条➖。"
     },
     {
         id: "obj-memory-8",
@@ -649,7 +698,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "分段管理方式按逻辑分段，无内部碎片（但有外部碎片）。分页有内部碎片。",
+        mnemonic: "碎片口诀：分段像切菜（按需切，无内碎）；分页像装箱（定长装，有缝隙📦）。"
     },
     {
         id: "obj-memory-9",
@@ -662,7 +712,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "段页式访问需三次：1. 查段表；2. 查页表；3. 访问内存数据。",
+        mnemonic: "访问次数：段页式 = 爬三层楼梯🧗（段表->页表->数据）。"
     },
     {
         id: "obj-memory-11",
@@ -675,7 +726,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "虚拟地址大小由CPU寻址范围（如32位/64位）决定，不由主存和硬盘实际大小决定。每个进程有独立虚拟地址空间；malloc返回虚拟地址；数据段代码段权限不同。",
+        mnemonic: "概念核心：虚拟地址只看CPU位数1️⃣0️⃣，不看你硬盘买多大。"
     },
     {
         id: "obj-memory-12",
@@ -688,7 +740,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "缺页率受：页面置换算法、工作集的大小（分配页框数）、进程的局部性等影响。页缓冲队列长度主要用于优化写回效率，不直接影响缺页发生的概率。",
+        mnemonic: "无关项：缓冲队列只是个“候车室”🚌，不决定谁会迟到（缺页）。"
     },
     {
         id: "obj-memory-13",
@@ -701,7 +754,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "Belady异常：页框多了，缺页反而多了。只有FIFO（先进先出）算法会发生。LRU和OPT是堆栈类算法，不会发生。",
+        mnemonic: "异常独享：Belady异常是FIFO算法的专属bug🐛。"
     },
     {
         id: "obj-memory-14",
@@ -714,7 +768,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "缺页处理不一定包含淘汰内存中的页。如果内存中有空闲页框，则直接调入，无需淘汰。",
+        mnemonic: "逻辑陷阱：只有“满座”了才需要赶人（淘汰），有空座直接坐🪑。"
     },
     {
         id: "obj-memory-16",
@@ -727,7 +782,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "缺页处理过程中，操作系统可能需要执行：分配页框、磁盘I/O（调入页）、修改页表。",
+        mnemonic: "全套服务：缺页处理 = 找地盘 + 搬运数据💾 + 登记造册（修页表）。"
     },
     {
         id: "obj-memory-17",
@@ -740,7 +796,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "逻辑地址 02 A01H。低12位是偏移 A01H。高位是页号。根据答案推断题目意图应是访问页表中的某一项，结合页框号拼接。正确逻辑是：物理地址 = 对应页框号 + 偏移量。假设页号对应页框为60H，则物理地址为60A01H。",
+        mnemonic: "拼接法：物理地址 = 页框号(拼) + 偏移量(凑)🧩。"
     },
     {
         id: "obj-memory-18",
@@ -753,7 +810,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "页表基址寄存器（PTBR）必须存物理地址，因为硬件（MMU）访问内存时还没法用虚拟地址。",
+        mnemonic: "硬件常识：寄存器里只存“真理”（物理地址📍），不存“幻想”（虚拟地址）。"
     },
     {
         id: "obj-memory-19",
@@ -766,7 +824,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "虚拟地址 2050 1225H。按结构切分：低12位是偏移 225H。中间10位是页号 101H。高10位是页目录号 081H。",
+        mnemonic: "位操作：把16进制转2进制，按 10-10-12 的比例像切蛋糕🍰一样切开。"
     },
     {
         id: "obj-memory-20",
@@ -779,7 +838,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "紧凑（Compaction）通过移动内存中的作业，把分散的小空闲区拼成大空闲区，从而能够容纳新的作业，集中了空闲区。",
+        mnemonic: "动作描述：紧凑 = 内存碎片大扫除🧹，把零散空地挤在一起。"
     },
     {
         id: "obj-memory-21",
@@ -792,7 +852,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "虚拟存储器的核心目的：逻辑上扩充内存容量，让用户感觉到内存容量远大于实际物理内存。",
+        mnemonic: "核心价值：虚存就是给用户画大饼🥞，让他以为内存无限大。"
     },
     {
         id: "obj-memory-22",
@@ -805,7 +866,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "页面增大，每个页包含的内容更多，根据局部性原理，一次加载更多相关数据，缺页次数会减少（但页内碎片变大）。",
+        mnemonic: "趋势判断：页面越大📄，一口吃得越多，需要张嘴（缺页）的次数就越少。"
     },
     {
         id: "obj-memory-23",
@@ -818,7 +880,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "多级页表通过只加载部分页表到内存，且页表可以离散存放，解决了页表本身占用大片连续内存空间的问题。",
+        mnemonic: "优点总结：多级页表 = 化整为零，不必非要找大片连续地皮🗺️。"
     },
     {
         id: "obj-memory-25",
@@ -831,7 +894,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "LRU（最近最少使用）。页框4。访问序列：2,0,2,9,3,4,2,8,2,4,8,4,5。最后栈状态（从旧到新）：2,8,4,5。下一次访问7，淘汰最老的2。",
+        mnemonic: "拟人化：LRU就是喜新厌旧，谁最久没理我，我就把谁踢走🦵。"
     },
     {
         id: "obj-io-1",
@@ -844,7 +908,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "文件系统通过目录（Directory）来管理文件名和文件的映射。FCB（文件控制块）通常包含在目录项中。",
+        mnemonic: "寻物指南：找文件就像查电话簿📖，那个“簿子”就是目录。"
     },
     {
         id: "obj-io-2",
@@ -857,7 +922,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "单级目录整个系统只有一张表，不允许重名。多级/树型目录允许不同目录下重名。",
+        mnemonic: "弊端：单级目录就像一个大通铺🛏️，名字一样会打架。"
     },
     {
         id: "obj-io-3",
@@ -870,7 +936,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "索引分配支持随机访问（直接算索引），且由于是块分配，支持长度可变。连续分配支持随机但不易变长；链接分配变长但不支持随机。",
+        mnemonic: "全能选手：索引分配 = 既能随机点歌🎤，又能随意切歌（变长）。"
     },
     {
         id: "obj-io-4",
@@ -883,7 +950,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "链接文件（链表）要找第N块，必须从头遍历，随机存取效率最低。",
+        mnemonic: "形象比喻：链接文件像糖葫芦🍡，想吃中间那颗，得先把前面的舔一遍。"
     },
     {
         id: "obj-io-5",
@@ -896,7 +964,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "连续文件要求物理块连续，类似于内存的可变分区分配，时间长了会产生外部碎片。",
+        mnemonic: "缺点记忆：连续文件太霸道，占地必须连成片，容易产生外部碎片🗑️。"
     },
     {
         id: "obj-io-6",
@@ -909,7 +978,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "UNIX经典成组链接法（Group Linking），结合了空闲表和链表的优点，管理空闲磁盘空间。",
+        mnemonic: "系统特性：UNIX 特产 = 成组链接法🔗。"
     },
     {
         id: "obj-io-7",
@@ -922,7 +992,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "CD-ROM视频主要是一次写入、顺序读取。连续结构读取速度最快（磁头不跳），播放性能最好。",
+        mnemonic: "场景适用：看电影🎬不能卡，连续存放速度最快。"
     },
     {
         id: "obj-io-8",
@@ -935,7 +1006,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "单个文件的最大长度取决于：地址项个数、间接级数、块大小。与系统能存储的索引节点总数（文件总数）无关。",
+        mnemonic: "无关排除：单文件多大，看它自己的结构🏗️，不看仓库（系统）能装多少个文件。"
     },
     {
         id: "obj-io-9",
@@ -948,7 +1020,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "一级目录。3200个目录项。每个64B。目录文件大小 = 3200 * 64B = 200KB。磁盘块1KB。目录占200块。顺序查找平均需遍历目录的一半 = 100块。",
+        mnemonic: "数学期望：顺序查找🔍的平均工时 = 总量的一半。"
     },
     {
         id: "obj-io-10",
@@ -961,7 +1034,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "簇（块）大小1KB。文件1026B = 1024B + 2B。需占2个簇 = 2KB = 2048B。",
+        mnemonic: "强迫症规则：哪怕只多出 1 bit，也要霸占整整一个房间（簇）🏠。"
     },
     {
         id: "obj-io-11",
@@ -974,7 +1048,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "管理空闲块的数据结构包括：位图、空闲链表、FAT（FAT表中空闲标记）。索引节点是用于管理被占用的文件的元数据。",
+        mnemonic: "排除法：inode 是管“有人”的房子的，不管空房子（空闲块）🚫。"
     },
     {
         id: "obj-io-12",
@@ -987,7 +1062,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "4直接 + 2一级 + 1二级。块256B，地址4B -> 每块存64个地址。直接：4 * 256B = 1KB。一级：2 * 64 * 256B = 32KB。二级：1 * 64 * 64 * 256B = 1024KB。总计 1057KB。",
+        mnemonic: "计算逻辑：像俄罗斯套娃🪆，一级套一级，算出总块数再乘块大小。"
     },
     {
         id: "obj-io-13",
@@ -1000,7 +1076,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "inode在内存。直接索引：访盘1次（读数据）。一级间接：访盘2次（读索引+读数据）。二级间接：访盘3次（读一索+读二索+读数据）。三级间接：访盘4次。",
+        mnemonic: "规律总结：N级索引 = N次读索引 + 1次读数据📖。"
     },
     {
         id: "obj-io-14",
@@ -1013,7 +1090,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "限制文件数量通常是inode号的位数。4字节 = 32位。最多2^32个号。与文件名长度无关。",
+        mnemonic: "瓶颈所在：户口本编号（inode号）只有32位，这就是天花板🔝。"
     },
     {
         id: "obj-io-15",
@@ -1026,7 +1104,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "10GB分区。簇4KB。簇总数 = 10GB / 4KB = 2.5M个簇。位图需 2.5M bit。2.5M bit / 8 = 312.5 KB。位图占簇数 = 312.5KB / 4KB ≈ 78.1 -> 80个簇。",
+        mnemonic: "计算步骤：先算总簇数，再把簇数变成 bit 位📉。"
     },
     {
         id: "obj-io-16",
@@ -1039,7 +1118,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "Cache（高速缓冲）主要为了缓和CPU和I/O设备之间速度不匹配的情况。",
+        mnemonic: "调解员：Cache 就是 CPU 和 I/O 之间的缓冲垫🧘，防止快慢不均打架。"
     },
     {
         id: "obj-io-17",
@@ -1052,7 +1132,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "CPU快打印机慢，为了解决矛盾，采用缓冲技术（Buffer）或SPOOLing。",
+        mnemonic: "慢设备救星：打印机🖨️太慢？SPOOLing 来帮忙假装它很快。"
     },
     {
         id: "obj-io-18",
@@ -1065,7 +1146,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "通道（Channel）是独立I/O处理器，负责内存与外设间数据传输，解放CPU。",
+        mnemonic: "角色扮演：通道 = 专业的搬运工👷，CPU = 只管发号施令的老板。"
     },
     {
         id: "obj-io-19",
@@ -1078,7 +1160,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "SPOOLing（假脱机）利用磁盘空间模拟独占设备，让多个作业觉得都有打印机。是用空间（磁盘）换取了时间（不必等待打印机真打完）。",
+        mnemonic: "核心思想：空间换时间⏳，用磁盘假装打印机。"
     },
     {
         id: "obj-io-20",
@@ -1091,7 +1174,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "SPOOLing技术将独占设备改造为共享设备，逻辑上称为“虚拟设备”。",
+        mnemonic: "魔法效果：SPOOLing 把“私家车”（独占）变成了“公交车”（共享🚌）。"
     },
     {
         id: "obj-io-21",
@@ -1104,7 +1188,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "DMA（直接内存存取）直接在内存和设备间传数据，仅开始和结束需CPU干预。",
+        mnemonic: "简写含义：DMA = Direct Memory Access = 直接往内存里搬🚛。"
     },
     {
         id: "obj-io-22",
@@ -1117,7 +1202,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "SSTF（最短寻道）。当前184。请求：184, 187, 176, 182, 199。路径：184 -> 182(2) -> 187(5) -> 176(11) -> 199(23)。总移动距离：2+5+11+23 = 41。",
+        mnemonic: "贪心逻辑：SSTF 就是个近视眼👓，只看得到离自己最近的那个。"
     },
     {
         id: "obj-io-23",
@@ -1130,7 +1216,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "SSTF（最短寻道时间优先）算法只看最近的请求，可能会随时改变移动臂的运动方向，导致左右来回跳动。",
+        mnemonic: "缺点描述：SSTF 像个无头苍蝇🪰，忽左忽右没定性。"
     },
     {
         id: "obj-io-24",
@@ -1143,7 +1230,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "同类设备共用一个驱动。绘图机1个，打印机1个。共需2个设备驱动程序。",
+        mnemonic: "归类法：同一种设备 = 同一个驱动💾，不需要每台机器都装一个。"
     },
     {
         id: "obj-io-25",
@@ -1156,7 +1244,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "磁盘读写时间 = 寻道 + 延迟 + 传输。寻道（移动磁臂）时间占比最大，调度算法主要优化它。",
+        mnemonic: "耗时大户：磁盘读写慢，全怪寻道（挪动磁头）太费时🐢。"
     },
     {
         id: "hw1-1",
@@ -1169,7 +1258,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "并发：若干事件在同一时间间隔内发生（交替）。并行：同一时刻发生。",
+        mnemonic: "微观视角：并发是排队打饭🍛，并行是大家一起吃。"
     },
     {
         id: "hw1-2",
@@ -1182,7 +1272,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "利用流水线重叠执行。作业1: 2(I)+3(C)+4(O)=9ms。作业2不能立即I，需等作业1的I结束，但这里是并发，主要看瓶颈。画甘特图：J1: I(0-2) C(2-5) O(5-9); J2: I(2-4) C(5-8) O(9-13); J3: I(4-6) C(8-11) O(13-17)。总时间17ms。",
+        mnemonic: "关键路径：流水作业不用全加，主要看最慢的那一环🐢。"
     },
     {
         id: "hw1-4",
@@ -1195,7 +1286,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "管道通信机制：进程对管道进行读操作和写操作都可能被阻塞（读空阻塞，写满阻塞）。",
+        mnemonic: "拥堵机制：管道就像单行道⛔️，前面堵了（满）或没车（空）都得停。"
     },
     {
         id: "hw1-5",
@@ -1208,7 +1300,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "①用户登录成功会创建shell进程；③启动程序就是创建进程。②设备分配只是给已有进程分配资源。",
+        mnemonic: "概念区分：登录和启动是“生”👶，分配资源是“养”🍼。"
     },
     {
         id: "hw1-6",
@@ -1221,7 +1314,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "进程是资源分配的基本单位，不管是单线程还是多线程系统，资源主要分配给进程。",
+        mnemonic: "产权归属：房子（资源）写的是爸爸（进程）的名字🏠。"
     },
     {
         id: "hw1-7",
@@ -1234,7 +1328,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "键盘按下时会产生硬件中断，CPU暂停当前工作转去执行中断处理程序。因此中断处理程序最先获得输入信息。",
+        mnemonic: "优先级：硬件中断是急诊🚑，谁都得给它让路。"
     },
     {
         id: "hw1-8",
@@ -1247,7 +1342,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "临界区互斥准则：①互斥、②空闲让进、③有限等待。让权等待非必须。",
+        mnemonic: "基本礼仪：有人别进，没人请进，别让人干等⏳。"
     },
     {
         id: "hw1-9",
@@ -1260,7 +1356,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "同一进程的线程共享代码、全局变量、打开的文件。但每个线程必须有自己独立的栈（Stack）来保存函数调用上下文，栈指针私有。",
+        mnemonic: "隐私范围：私房钱（栈）藏自己口袋💰，家具（代码/全局）大家共用。"
     },
     {
         id: "hw1-10",
@@ -1273,7 +1370,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "主动请求且需等待的操作会导致进程变阻塞：①读文件（IO）；③申外设；④Wait。②时间片用完是变就绪。",
+        mnemonic: "状态切换：因为自己想办事（I/O）而停下叫阻塞🛑；被别人赶下来（时间片）叫就绪。"
     },
     {
         id: "hw1-13",
@@ -1286,7 +1384,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "系统调用执行顺序：传递系统调用参数 -> 执行陷入(trap)指令 -> 执行相应的服务程序 -> 返回用户态。",
+        mnemonic: "执行流：先递交申请（传参）-> 敲门（Trap）🚪 -> 办事（服务） -> 回家（返回）。"
     },
     {
         id: "hw1-14",
@@ -1299,7 +1398,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "会导致进程从执行态变为就绪态的是：被高优先级进程抢占（被迫让出，但仍准备好运行）。A、C会变阻塞。",
+        mnemonic: "场景模拟：领导（高优）来了，我只好站起来（回就绪）让座🛋️。"
     },
     {
         id: "hw1-15",
@@ -1312,7 +1412,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "Race Condition。x=1。P1(加1), P2(减1)。若交替执行：P1读1, P2读1, P1写2, P2写0 -> 结果0。P1读1, P2读1, P2写0, P1写2 -> 结果2。正常串行结果1。所以0, 1, 2都有可能。",
+        mnemonic: "竞态条件：没加锁🔒的并发就是玄学，结果全看运气🎲。"
     },
     {
         id: "hw1-16",
@@ -1325,7 +1426,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "就绪态可由：新建（创建完成）、执行（时间片完）、阻塞（事件完成）转变而来。可以由其他两种基本状态转变而来的是就绪态。",
+        mnemonic: "交通枢纽：就绪态是十字路口🚦，四面八方都往这儿汇。"
     },
     {
         id: "hw1-17",
@@ -1338,7 +1440,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "退出等待（阻塞）进入就绪，说明获得了所等待的资源或事件发生。",
+        mnemonic: "因果：等到了东西🎁，就不用睡了（阻塞），起来排队（就绪）。"
     },
     {
         id: "hw1-18",
@@ -1351,7 +1454,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "CPU处于用户态时只能执行非特权指令。特权指令只能在内核态执行。",
+        mnemonic: "权限红线：特权指令🚫是红线，用户态碰了就报警。"
     },
     {
         id: "hw1-19",
@@ -1364,7 +1468,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "操作系统为每个用户级线程建立一个线程控制块是错误的，因为内核感知不到用户级线程。",
+        mnemonic: "隐形人：用户级线程对内核来说是隐形的👻，没有档案（TCB）。"
     },
     {
         id: "hw1-20",
@@ -1377,7 +1482,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "创建进程必须完成：①申请空白的进程控制块、②初始化进程控制块。此时尚未执行。",
+        mnemonic: "出生证明：创建进程就是填那张 PCB 表格📝，还没开始干活。"
     },
     {
         id: "hw1-21",
@@ -1390,7 +1496,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "会导致用户进程从用户态切换到内核态的操作：①整数除以零（异常）、③read系统调用。②sin()是库函数，在用户态执行。",
+        mnemonic: "进内核条件：要么犯错（异常💥），要么求助（系统调用）。"
     },
     {
         id: "hw1-22",
@@ -1403,7 +1510,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "①在执行系统调用服务程序的过程中，CPU处于内核态；②操作系统通过提供系统调用避免用户程序直接访问外设；④系统调用是操作系统内核为应用程序提供服务的接口。",
+        mnemonic: "服务窗口：系统调用是OS开给用户的服务窗口🪟。"
     },
     {
         id: "hw1-23",
@@ -1416,7 +1524,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "可能导致该线程由执行态变为就绪态的是：主动出让 CPU。",
+        mnemonic: "高风亮节：主动让出CPU🤝，我只是休息一下（就绪），不是卡住了（阻塞）。"
     },
     {
         id: "hw1-24",
@@ -1429,7 +1538,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "分时操作系统通常采用时间片轮转策略，保证所有用户都能及时得到响应。",
+        mnemonic: "分时特征：雨露均沾🌧️，每个人都有几秒钟展示时间。"
     },
     {
         id: "hw2-1",
@@ -1442,7 +1552,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "时间片轮转（RR）公平分配CPU，每个进程轮流执行，不可能导致饥饿现象。",
+        mnemonic: "反饥饿：轮着吃大锅饭🍲，谁也饿不着。"
     },
     {
         id: "hw2-4",
@@ -1455,7 +1566,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "引起进程调度的事件：中断处理结束、进程阻塞、进程执行结束、进程的时间片用完。全部都会触发调度。",
+        mnemonic: "忙碌的调度员：只要状态一变🔀，调度员就得出来干活。"
     },
     {
         id: "hw2-5",
@@ -1468,7 +1580,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "SJF（短作业优先）。顺序T1, T2, T3。周转时间：J1=T1; J2=T1+T2; J3=T1+T2+T3。平均=(3T1+2T2+T3)/3。",
+        mnemonic: "数学规律：越短的放越前面，总体等待时间就越短📉。"
     },
     {
         id: "hw2-6",
@@ -1481,7 +1594,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "设计多级反馈队列调度算法时需要考虑：就绪队列的数量、优先级、各队列的调度算法、进程在就绪队列间的迁移条件。",
+        mnemonic: "复杂设计：多级反馈 = 多个队列 + 动态优先级📶。"
     },
     {
         id: "hw2-7",
@@ -1494,7 +1608,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "死锁的预防是根据破坏死锁的四个必要条件之一而采取措施实现的。",
+        mnemonic: "釜底抽薪：预防死锁就是把“火”（必要条件）给抽掉🔥。"
     },
     {
         id: "hw2-10",
@@ -1507,7 +1622,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "读磁盘操作完成后（IO结束），操作系统会将该进程状态从阻塞态修改为就绪态。",
+        mnemonic: "状态流转：事办完了（IO结束）✅，就别在阻塞区占坑了，回就绪区去。"
     },
     {
         id: "hw2-11",
@@ -1520,7 +1636,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "S1避免（银行家）需要预知进程运行所需资源总量信息，而S2检测不需要。S1不会给可能导致死锁的进程分配资源，而S2会。",
+        mnemonic: "特点对比：避免法需要“知根知底”（预知总量）；检测法是“先斩后奏”🔪。"
     },
     {
         id: "hw2-12",
@@ -1533,7 +1650,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "分时系统实现时间片轮转调度需要：①进程控制块、②时钟中断处理程序、③进程就绪队列。",
+        mnemonic: "必备工具：轮转调度靠闹钟（时钟中断）⏰和排队栏（就绪队列）。"
     },
     {
         id: "hw2-13",
@@ -1546,7 +1664,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "死锁状态一定是不安全状态。",
+        mnemonic: "真值逻辑：死锁 => 不安全⚠️。（逆否不一定成立）。"
     },
     {
         id: "hw2-14",
@@ -1559,7 +1678,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "进程的时间片用完，说明该进程是计算密集型，降低其优先级可以避免其长期占用CPU。",
+        mnemonic: "惩罚机制：占着CPU不走的人，下次把他的VIP卡（优先级）没收💳。"
     },
     {
         id: "hw2-15",
@@ -1572,7 +1692,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "n台设备，3进程分别需3,4,5。最坏占有2,3,4，共9个。确保不锁需9+1=10台。",
+        mnemonic: "计算公式：总需求 = ∑(每人需求-1) + 1️⃣。"
     },
     {
         id: "hw2-18",
@@ -1585,7 +1706,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "当前进程的时间片用完后，该进程状态由执行态变为就绪态，而不是阻塞态。",
+        mnemonic: "误区纠正：时间到是“重新排队”🚶，不是“去睡觉”（阻塞）。"
     },
     {
         id: "hw2-19",
@@ -1598,7 +1720,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "银行家算法通过避免系统进入不安全状态来防止死锁。当系统处于安全状态时，系统中一定无死锁进程。",
+        mnemonic: "安全保证：只要按银行家的规矩办🧮，绝对不会破产（死锁）。"
     },
     {
         id: "hw2-20",
@@ -1611,7 +1734,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "高响应比优先算法满足短任务优先（分母小响应比高）且不会发生饥饿现象（等待久响应比高）。",
+        mnemonic: "双重优势：既照顾了急性子（短作业），也不冷落老实人（长作业）🤝。"
     },
     {
         id: "hw2-21",
@@ -1624,7 +1748,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "①可以通过剥夺进程资源解除死锁；②预防方法能确保不发生死锁；④死锁必然有两个或以上进程阻塞。",
+        mnemonic: "特征记忆：死锁现场一定有一群人在傻等（阻塞🛑）。"
     },
     {
         id: "hw2-23",
@@ -1637,7 +1762,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "非抢占。T时刻都在，优先权P2>P3>P1。顺序：P2 -> P3 -> P1。加上1us开销。P2周转 = 15+1+24 = 40。P3周转 = 18+1+24+1+36 = 80。P1周转 = 30+1+24+1+36+1+12 = 105。平均 = 75。",
+        mnemonic: "易错点：算周转时间别忘了加上那个 1µs 的过路费💸。"
     },
     {
         id: "hw2-25",
@@ -1650,7 +1776,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "P1(30), P2(20)。P1先跑10ms降级去Q2；P2跑10ms降级去Q2。Q1空，Q2按SJF调度，P2(剩10) < P1(剩20)，P2先跑。P1总等待：0(进Q1)+10(等P2在Q1)+10(等P2在Q2) = 20。P2总等待：10(等P1在Q1)。平均等待 15ms。",
+        mnemonic: "过程模拟：想象两个人在不同优先级的柜台间跑来跑去🏃，把每次排队时间加起来。"
     },
     {
         id: "hw3-1",
@@ -1663,7 +1790,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "最佳适应（Best Fit）：找能满足要求且最小的空闲区。需40K。内存中空闲区有：80K、60K、102K。40K最适合放在60K的空闲区（起始地址330K处）。",
+        mnemonic: "强迫症：Best Fit 就是非要找个最紧身👕的穿，一点空隙都不想留。"
     },
     {
         id: "hw3-4",
@@ -1676,7 +1804,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "逻辑地址(2, 154B)。段号2，偏移154。查表：段2基址480K，长度20K。154B < 20K，合法。物理地址 = 480K + 154B。",
+        mnemonic: "基本公式：物理地址 = 段基址 + 段内偏移📍。"
     },
     {
         id: "hw3-5",
@@ -1689,7 +1818,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "动态重定位是在作业的执行过程中（访问内存时）由硬件地址变换机构自动完成的。",
+        mnemonic: "时间点：动态重定位发生在“运行时”⏱️，静态发生在“装入时”。"
     },
     {
         id: "hw3-6",
@@ -1702,7 +1832,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "回收内存时，如果有上邻空闲区，也有下邻空闲区，则三合一，空闲区表项减1。",
+        mnemonic: "合并逻辑：三个小块变一个大块，账本上的记录反而少了一条📝。"
     },
     {
         id: "hw3-7",
@@ -1715,7 +1846,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "固定分区方式在作业装入时就确定了内存位置，且不再改变，因此可以采用静态重定位。",
+        mnemonic: "特性关联：固定分区 = 钉子户🏠，进去了就不挪窝（静态重定位）。"
     },
     {
         id: "hw3-8",
@@ -1728,7 +1860,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "分段管理方式按逻辑分段，无内部碎片（但有外部碎片）。分页有内部碎片。",
+        mnemonic: "对比：分段像量身定做👔（无内碎）；分页像买均码衣服（有内碎）。"
     },
     {
         id: "hw3-9",
@@ -1741,7 +1874,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "段页式访问需三次：1. 查段表；2. 查页表；3. 访问内存数据。",
+        mnemonic: "层级结构：段页式是三层楼🏬，得爬三次才能拿到数据。"
     },
     {
         id: "hw3-10",
@@ -1754,7 +1888,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "C",
         type: "single",
-        explain: "暂无解析"
+        explain: "虚拟存储管理系统的基础是程序的局部性理论（时间局部性和空间局部性）。",
+        mnemonic: "理论基石：虚存能实现，全靠程序自己“不乱跑”（局部性🏠）。"
     },
     {
         id: "hw3-11",
@@ -1767,7 +1902,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "管理空闲磁盘块的数据结构包括：位图、空闲链表、FAT。索引节点用于文件元数据管理。",
+        mnemonic: "归类：inode是管“有主”的，位图是管“无主”的（空闲区）⬜️。"
     },
     {
         id: "hw3-12",
@@ -1780,7 +1916,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "页缓冲队列的长度主要用于优化写回效率，不直接影响系统缺页率。",
+        mnemonic: "因果辨析：缓冲队列只是个缓存区📦，改变不了你“缺页”的命运。"
     },
     {
         id: "hw3-14",
@@ -1793,7 +1930,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "缺页处理不一定包含淘汰内存中的页。如果内存中有空闲页框，则直接调入，无需淘汰。",
+        mnemonic: "逻辑漏洞：只有没地儿住了才赶人（淘汰），有空房直接住🏨。"
     },
     {
         id: "hw3-15",
@@ -1806,7 +1944,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "多进程在主存中互不干扰，是通过内存保护机制来实现的。",
+        mnemonic: "安全机制：内存保护就是给每个进程家里装个防盗门🚪。"
     },
     {
         id: "hw3-16",
@@ -1819,7 +1958,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "缺页处理过程中可能执行：修改页表、磁盘I/O、分配页框。",
+        mnemonic: "流程概括：缺页了？得找房（分配）、搬家（I/O）、改户口（页表）📝。"
     },
     {
         id: "hw3-18",
@@ -1832,7 +1972,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "CPU页表基址寄存器（PTBR）中的内容是当前进程的一级页表的起始物理地址。",
+        mnemonic: "寄存器内容：PTBR存的是“真地址”（物理），不是“假地址”（虚拟）📍。"
     },
     {
         id: "hw3-20",
@@ -1845,7 +1986,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "在可变式分区存储管理中的紧凑技术可以集中空闲区。",
+        mnemonic: "动作形象：紧凑就是把内存里的空隙全都“挤”到一起去🙌。"
     },
     {
         id: "hw3-21",
@@ -1858,7 +2000,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "A",
         type: "single",
-        explain: "暂无解析"
+        explain: "虚拟存储管理策略可以扩大逻辑内存容量。",
+        mnemonic: "核心功能：虚存就是让 4G 内存看起来像 4TB 那么大🌌。"
     },
     {
         id: "hw3-22",
@@ -1871,7 +2014,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "一般情况下，页面大小增加，根据局部性原理，缺页中断次数会减少。",
+        mnemonic: "趋势：页大 = 碗大🥣，盛一次饭能吃更久（缺页少）。"
     },
     {
         id: "hw3-23",
@@ -1884,7 +2028,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "多级页表的主要优点是减少了页表所占的连续内存空间。",
+        mnemonic: "解决痛点：多级页表就是为了不让页表占一大块连续的地皮🗺️。"
     },
     {
         id: "hw3-24",
@@ -1897,7 +2042,8 @@ export const rawQuestions: Question[] = [
         ],
         answer: "D",
         type: "single",
-        explain: "暂无解析"
+        explain: "FIFO, 3页框。序列: 1,2,3,4,1,2,5,1,2,3,4,5,6。缺页时刻：1,2,3(满),4(1出),1(2出),2(3出),5(4出),3(1出),4(2出),6(5出)。共10次缺页。",
+        mnemonic: "FIFO特征：虽然简单，但总是很无情地把老朋友赶走👋。"
     },
     {
         id: "hw3-11",
@@ -1910,7 +2056,7 @@ export const rawQuestions: Question[] = [
         ],
         answer: "B",
         type: "single",
-        explain: "暂无解析"
+        explain: "管理空闲磁盘块的数据结构包括：位图、空闲链表、FAT。索引节点用于文件元数据管理。"
     }
 ];
 
