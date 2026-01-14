@@ -117,13 +117,13 @@ export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onS
           </p>
         </div>
 
-        {/* 大题板块 */}
+        {/* 简答题板块 */}
         <div className="max-w-4xl mx-auto mt-10 sm:mt-12 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center gap-2 mb-3 sm:mb-4">
             <BookMarked className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
-            大题板块
+            简答题板块
           </h2>
-          <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6">简答题、论述题 · 用于背诵</p>
+          <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6">操作系统重点简答题 · 用于背诵</p>
           
           <button
             onClick={() => {
@@ -134,7 +134,7 @@ export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onS
           >
             <div className="flex items-center gap-2 sm:gap-3">
               <BookMarked className="w-8 h-8 sm:w-10 sm:h-10" />
-              <div className="text-2xl sm:text-3xl font-black">📖 简答 & 论述题</div>
+              <div className="text-2xl sm:text-3xl font-black">📖 简答题</div>
               <BookMarked className="w-8 h-8 sm:w-10 sm:h-10" />
             </div>
             <div className="text-sm sm:text-base opacity-90 font-medium">
