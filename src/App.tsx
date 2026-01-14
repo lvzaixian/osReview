@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { BookOpen, GraduationCap } from 'lucide-react';
+import { BookOpen, Sparkles, GraduationCap, Terminal, Book } from 'lucide-react';
 import { getFullStats } from './data';
 import ExamEngineTest from './components/ExamEngineTest';
 import TrashBin from './components/TrashBin';
+import KnowledgeSnapshot from './components/KnowledgeSnapshot';
 import ModeSelector from './components/ModeSelector';
 import EssayMode from './components/EssayMode';
 import SystematicLearning from './components/SystematicLearning';
+import OSConceptCards from './components/OSConceptCards';
+import QuestionBank from './components/QuestionBank';
 import { loadProgress, saveProgress } from './utils/storage';
 import type { ExamMode } from './types';
 
@@ -13,9 +16,12 @@ function App() {
   const [stats, setStats] = useState<ReturnType<typeof getFullStats> | null>(null);
   const [currentMode, setCurrentMode] = useState<ExamMode | null>(null);
   const [showTrashBin, setShowTrashBin] = useState(false);
+  const [showSnapshot, setShowSnapshot] = useState(false);
   const [showModeSelector, setShowModeSelector] = useState(false);
   const [showEssayMode, setShowEssayMode] = useState(false);
   const [showSystematic, setShowSystematic] = useState(false);
+  const [showConceptCards, setShowConceptCards] = useState(false);
+  const [showQuestionBank, setShowQuestionBank] = useState(false);
   const [userProgress, setUserProgress] = useState(() => loadProgress());
 
   // 每次显示垃圾桶时重新加载数据
@@ -83,9 +89,24 @@ function App() {
     alert('此功能将在垃圾桶中查看题目，不需跳转到其他模式');
   };
 
+  // 如果显示知识快照
+  if (showSnapshot) {
+    return <KnowledgeSnapshot onBack={() => setShowSnapshot(false)} />;
+  }
+
   // 如果显示系统化学习
   if (showSystematic) {
     return <SystematicLearning onBack={() => setShowSystematic(false)} />;
+  }
+
+  // 如果显示OS概念卡片
+  if (showConceptCards) {
+    return <OSConceptCards onBack={() => setShowConceptCards(false)} />;
+  }
+
+  // 如果显示题库
+  if (showQuestionBank) {
+    return <QuestionBank onBack={() => setShowQuestionBank(false)} />;
   }
 
   // 如果显示大题模式（优先级高于垃圾桶）
@@ -162,7 +183,7 @@ function App() {
         {/* Header */}
         <div className="text-center mb-10 sm:mb-14">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 mb-3 sm:mb-5">
-            OS Review
+            ExamRank1
           </h1>
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 font-medium">
             操作系统 - 期末突击复习系统
@@ -184,6 +205,32 @@ function App() {
             </div>
           </button>
 
+          {/* 知识快照按钮 */}
+          <button
+            onClick={() => setShowSnapshot(true)}
+            className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-500 hover:from-indigo-600 hover:via-blue-600 hover:to-cyan-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-indigo-500/50 active:scale-95"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+            <Sparkles className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
+            <div className="text-2xl font-black tracking-tight">🎯 操作系统核心考点</div>
+            <div className="text-sm opacity-95 font-medium text-center">
+              基于重点提炼的必考知识
+            </div>
+          </button>
+
+          {/* 命令卡片按钮 */}
+          <button
+            onClick={() => setShowConceptCards(true)}
+            className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-orange-500/50 active:scale-95"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+            <Terminal className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
+            <div className="text-2xl font-black tracking-tight">💻 OS概念记忆卡</div>
+            <div className="text-sm opacity-95 font-medium text-center">
+              全景选项库 · 场景化记忆
+            </div>
+          </button>
+
           {/* 作业题回顾按钮 */}
           <button
             onClick={() => setShowModeSelector(true)}
@@ -194,6 +241,25 @@ function App() {
             <div className="text-2xl font-black tracking-tight">📝 作业题回顾</div>
             <div className="text-sm opacity-95 font-medium text-center">
               {stats?.questionBank.total || 0}道题全面复习
+            </div>
+          </button>
+        </div>
+
+        {/* 题库按钮 - 独立一行 */}
+        <div className="max-w-4xl mx-auto mb-7">
+          <button
+            onClick={() => setShowQuestionBank(true)}
+            className="group w-full relative overflow-hidden flex flex-col items-center justify-center gap-4 px-8 sm:px-10 py-10 sm:py-12 bg-gradient-to-br from-violet-500 via-fuchsia-500 to-pink-500 hover:from-violet-600 hover:via-fuchsia-600 hover:to-pink-600 text-white rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-violet-500/50 active:scale-95"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+            
+            <div className="flex items-center gap-3 sm:gap-4">
+              <Book className="w-10 h-10 sm:w-12 sm:h-12 animate-bounce" style={{animationDuration: '2s'}} />
+              <div className="text-3xl sm:text-4xl font-black tracking-tight">📖 期末复习题库</div>
+              <Book className="w-10 h-10 sm:w-12 sm:h-12 animate-bounce" style={{animationDuration: '2s', animationDelay: '0.2s'}} />
+            </div>
+            <div className="text-base sm:text-lg opacity-95 font-semibold">
+              选择 · 填空 · 判断 · 简答 · 全类型覆盖
             </div>
           </button>
         </div>
