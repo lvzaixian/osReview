@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
-import { Book, Code, Terminal, CheckCircle, HelpCircle, FileText, Menu, X, ChevronDown, ChevronRight, Eye, EyeOff } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { Book, Code, Terminal, CheckCircle, HelpCircle, FileText, Menu, X, ChevronRight, Eye, EyeOff, Shuffle, Layers } from 'lucide-react';
+import { rawQuestions, type ExtendedQuestion } from '../data/raw_questions';
+
+// 调试：检查数据加载
+console.log('题库加载:', rawQuestions.length, '道题');
+console.log('有tableData的题目:', rawQuestions.filter(q => q.tableData && q.tableData.length > 0).map(q => q.id));
 
 const sections = [
-  { id: 'choice', title: '一、选择题', icon: <CheckCircle className="w-5 h-5" /> },
-  { id: 'fill', title: '二、填空题', icon: <FileText className="w-5 h-5" /> },
-  { id: 'boolean', title: '三、判断题', icon: <HelpCircle className="w-5 h-5" /> },
-  { id: 'short', title: '四、简答题', icon: <Book className="w-5 h-5" /> },
-  { id: 'analysis', title: '五、代码解析', icon: <Code className="w-5 h-5" /> },
-  { id: 'coding', title: '六、Shell编程', icon: <Terminal className="w-5 h-5" /> },
+  { id: 'os-choice', title: '一、OS选择题', icon: <Layers className="w-5 h-5" /> },
+  { id: 'choice', title: '二、Linux选择题', icon: <CheckCircle className="w-5 h-5" /> },
+  { id: 'fill', title: '三、填空题', icon: <FileText className="w-5 h-5" /> },
+  { id: 'boolean', title: '四、判断题', icon: <HelpCircle className="w-5 h-5" /> },
+  { id: 'short', title: '五、简答题', icon: <Book className="w-5 h-5" /> },
+  { id: 'analysis', title: '六、代码解析', icon: <Code className="w-5 h-5" /> },
+  { id: 'coding', title: '七、Shell编程', icon: <Terminal className="w-5 h-5" /> },
 ];
+
+// 章节名称映射（简化）
+const chapterDisplayNames: Record<string, string> = {
+  'ch1': 'OS引论、进程、同步',
+  'ch2': '死锁和CPU调度',
+  'ch3': '存储管理、虚拟存储器',
+};
 
 const questionData = {
   choice: [
@@ -336,10 +349,12 @@ interface QuestionBankProps {
 }
 
 export default function QuestionBank({ onBack }: QuestionBankProps) {
-  const [activeSection, setActiveSection] = useState('choice');
+  const [activeSection, setActiveSection] = useState('os-choice');
   const [showAllAnswers, setShowAllAnswers] = useState(false);
   const [visibleAnswers, setVisibleAnswers] = useState<Record<string, boolean>>({});
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [selectedChapter, setSelectedChapter] = useState<string>('all');
+  const [shuffleSeed, setShuffleSeed] = useState(0);
 
   const toggleAnswer = (index: number) => {
     setVisibleAnswers(prev => ({ ...prev, [`${activeSection}-${index}`]: !prev[`${activeSection}-${index}`] }));
@@ -347,8 +362,194 @@ export default function QuestionBank({ onBack }: QuestionBankProps) {
 
   const isAnswerVisible = (index: number) => showAllAnswers || visibleAnswers[`${activeSection}-${index}`];
 
+  // 合并所有OS题目并乱序（使用shuffleSeed触发重新乱序）
+  const allOsQuestions = useMemo(() => {
+    // 使用shuffleSeed作为依赖，每次点击乱序按钮时重新生成
+    const shuffled = [...rawQuestions].sort(() => Math.random() - 0.5);
+    return shuffled;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shuffleSeed]);
+
+  // 获取筛选后的题目
+  const getFilteredQuestions = () => {
+    if (selectedChapter === 'all') return allOsQuestions;
+    return allOsQuestions.filter(q => {
+      // 从 obj_ch1_q001 或 hw_ch1_q001 中提取 ch1
+      const match = q.id.match(/ch(\d+)/);
+      return match && `ch${match[1]}` === selectedChapter;
+    });
+  };
+
+  // 获取每个章节的题目数量
+  const getChapterCounts = () => {
+    const result: Record<string, number> = { ch1: 0, ch2: 0, ch3: 0 };
+    rawQuestions.forEach(q => {
+      const match = q.id.match(/ch(\d+)/);
+      if (match) {
+        const ch = `ch${match[1]}`;
+        if (ch in result) {
+          result[ch]++;
+        }
+      }
+    });
+    return result;
+  };
+
+  // 乱序按钮
+  const handleShuffle = () => {
+    setShuffleSeed(prev => prev + 1);
+    setVisibleAnswers({});
+  };
+
+  // 渲染结构化表格（tableData）
+  const renderTableData = (tableData: string[][]) => {
+    if (!tableData || tableData.length === 0) return null;
+    
+    return (
+      <div className="my-3 overflow-x-auto">
+        <table className="min-w-full border border-gray-300 bg-white rounded-lg overflow-hidden">
+          <tbody>
+            {tableData.map((row, rIdx) => (
+              <tr key={rIdx} className={rIdx === 0 ? 'bg-gray-100' : rIdx % 2 === 0 ? 'bg-gray-50' : ''}>
+                {row.map((cell, cIdx) =>
+                  rIdx === 0 ? (
+                    <th key={cIdx} className="border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 text-left">
+                      {cell}
+                    </th>
+                  ) : (
+                    <td key={cIdx} className="border border-gray-300 px-3 py-2 text-sm text-gray-600">
+                      {cell}
+                    </td>
+                  )
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  // 渲染代码块
+  const renderCodeBlock = (code: string) => {
+    if (!code) return null;
+    
+    return (
+      <div className="my-3">
+        <pre className="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">
+          {code}
+        </pre>
+      </div>
+    );
+  };
+
+  // 渲染单个OS选择题
+  const renderOsQuestion = (item: ExtendedQuestion, index: number) => (
+    <div key={`${item.id}-${shuffleSeed}`} className="bg-white p-5 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+      <div className="flex items-start gap-3 mb-3">
+        <span className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-sm font-bold">
+          {index + 1}
+        </span>
+        <div className="flex-1">
+          <div className="flex gap-2 flex-wrap items-center mb-2">
+            <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">
+              {chapterDisplayNames[`ch${item.id.match(/ch(\d+)/)?.[1] || '1'}`] || '未分类'}
+            </span>
+            {/* 表格/代码块标签 */}
+            {item.tableData && item.tableData.length > 0 && (
+              <span className="text-xs px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full">📊 含表格</span>
+            )}
+            {item.code && (
+              <span className="text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full">💻 含代码</span>
+            )}
+          </div>
+          <div className="font-medium text-gray-800 leading-relaxed">
+            {item.stem}
+          </div>
+          {/* 渲染表格 */}
+          {item.tableData && item.tableData.length > 0 && renderTableData(item.tableData)}
+          {/* 渲染代码块 */}
+          {item.code && renderCodeBlock(item.code)}
+        </div>
+      </div>
+      <div className="ml-11 space-y-1.5 mb-4">
+        {item.options.map((opt) => (
+          <div 
+            key={opt.key} 
+            className={`px-3 py-2 rounded text-sm transition-colors ${
+              isAnswerVisible(index) && opt.key === item.answer
+                ? 'bg-green-100 text-green-800 border border-green-200 font-medium'
+                : 'bg-gray-50 text-gray-600'
+            }`}
+          >
+            <span className="font-medium mr-2">{opt.key}.</span>
+            {opt.text}
+          </div>
+        ))}
+      </div>
+      <div className="ml-11 flex justify-between items-center pt-3 border-t border-gray-100">
+        <button 
+          onClick={() => toggleAnswer(index)}
+          className="text-blue-600 text-sm hover:underline flex items-center"
+        >
+          {isAnswerVisible(index) ? <EyeOff className="w-3 h-3 mr-1"/> : <Eye className="w-3 h-3 mr-1"/>}
+          {isAnswerVisible(index) ? '隐藏答案' : '查看答案'}
+        </button>
+        {isAnswerVisible(index) && (
+          <span className="font-bold text-green-600 animate-in fade-in">答案: {item.answer}</span>
+        )}
+      </div>
+    </div>
+  );
+
   const renderContent = () => {
     switch (activeSection) {
+      case 'os-choice': {
+        const questions = getFilteredQuestions();
+        const chapterCounts = getChapterCounts();
+        return (
+          <div>
+            {/* 工具栏 */}
+            <div className="flex flex-wrap gap-2 mb-6 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+              <button
+                onClick={() => setSelectedChapter('all')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  selectedChapter === 'all' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                全部 ({rawQuestions.length})
+              </button>
+              {Object.entries(chapterCounts).map(([ch, count]) => count > 0 && (
+                <button
+                  key={ch}
+                  onClick={() => setSelectedChapter(ch)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    selectedChapter === ch 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {chapterDisplayNames[ch] || ch} ({count})
+                </button>
+              ))}
+              <button
+                onClick={handleShuffle}
+                className="ml-auto px-4 py-2 rounded-full text-sm font-medium bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors flex items-center gap-1"
+              >
+                <Shuffle className="w-4 h-4" />
+                乱序
+              </button>
+            </div>
+
+            {/* 题目列表 */}
+            <div className="grid grid-cols-1 gap-4">
+              {questions.map((item, index) => renderOsQuestion(item, index))}
+            </div>
+          </div>
+        );
+      }
       case 'choice':
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -376,26 +577,29 @@ export default function QuestionBank({ onBack }: QuestionBankProps) {
         );
       case 'fill':
       case 'boolean':
-      case 'short':
+      case 'short': {
         const data = questionData[activeSection as 'fill' | 'boolean' | 'short'];
         return (
           <div className="space-y-4">
             {data.map((item, index) => (
               <div key={index} className="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
                 <div className="font-medium text-gray-800 mb-2">{item.q}</div>
-                <div className={`mt-3 p-3 rounded bg-blue-50 text-blue-900 text-sm transition-all duration-300 ${isAnswerVisible(index) ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden p-0'}`}>
-                  <strong>参考答案:</strong> <span className="whitespace-pre-line">{item.a}</span>
-                </div>
-                 <button 
-                    onClick={() => toggleAnswer(index)}
-                    className="mt-2 text-blue-600 text-sm hover:underline flex items-center"
-                  >
-                    {isAnswerVisible(index) ? '隐藏答案' : '查看答案'}
-                  </button>
+                {isAnswerVisible(index) && (
+                  <div className="mt-3 p-3 rounded bg-blue-50 text-blue-900 text-sm">
+                    <strong>参考答案:</strong> <span className="whitespace-pre-line">{item.a}</span>
+                  </div>
+                )}
+                <button 
+                  onClick={() => toggleAnswer(index)}
+                  className="mt-2 text-blue-600 text-sm hover:underline flex items-center"
+                >
+                  {isAnswerVisible(index) ? '隐藏答案' : '查看答案'}
+                </button>
               </div>
             ))}
           </div>
         );
+      }
       case 'analysis':
         return (
           <div className="space-y-6">

@@ -40,10 +40,9 @@ export function logQuestionBankStats() {
   
   console.group('📚 ExamRank1 题库统计');
   console.log('总题数:', stats.questionBank.total);
-  console.log('单选题:', stats.questionBank.single);
-  console.log('多选题:', stats.questionBank.multi);
-  console.log('判断题:', stats.questionBank.boolean);
-  console.log('填空题:', stats.questionBank.fill);
+  console.log('第一章:', stats.questionBank.ch1);
+  console.log('第二章:', stats.questionBank.ch2);
+  console.log('第三章:', stats.questionBank.ch3);
   console.log('数据完整:', stats.questionBank.isComplete ? '✅ 是' : '⚠️ 否（待补充）');
   console.groupEnd();
 
@@ -53,7 +52,7 @@ export function logQuestionBankStats() {
 // 重新导出工具函数
 export {
   getQuestionById,
-  getQuestionsByType,
+  getQuestionsByChapter,
   getRandomQuestions,
   getExamQuestions,
 } from './raw_questions';

@@ -36,13 +36,13 @@ const LogicalAddressFormat = () => (
 );
 
 /// 简答题数据（操作系统重点简答题）
-const essayData = [
+const essayData: EssayItem[] = [
   {
     id: 'q1',
     q: '简要描述处理机的双重工作模式。',
     a: [
-      { type: 'point', num: '1', content: '用户态也称为目态，计算机硬件可以通过一个模式位1来表示它；当计算机系统执行用户程序时，系统处于用户态。' },
-      { type: 'point', num: '2', content: '内核态也称为管态或系统态，计算机硬件可以通过一个模式位0来表示它；每当OS能够控制计算机时，它就处于内核态。' }
+      { type: 'point' as const, num: '1', content: '用户态也称为目态，计算机硬件可以通过一个模式位1来表示它；当计算机系统执行用户程序时，系统处于用户态。' },
+      { type: 'point' as const, num: '2', content: '内核态也称为管态或系统态，计算机硬件可以通过一个模式位0来表示它；每当OS能够控制计算机时，它就处于内核态。' }
     ],
     keywords: ['用户态', '目态', '模式位1', '内核态', '管态', '模式位0'],
     tips: '用户态用1表示，内核态用0表示，通过模式位切换',
@@ -230,6 +230,18 @@ type AnswerBlock =
   | { type: 'highlight'; content: string }
   | { type: 'subq'; num: string; content: string }
   | { type: 'image'; component: string };
+
+// 简答题数据类型
+interface EssayItem {
+  id: string;
+  q: string;
+  a: AnswerBlock[];
+  keywords: string[];
+  tips?: string;
+  emoji?: string;
+  important?: boolean;
+  hasImage?: boolean;
+}
 
 // 关键词高亮组件 - 美化版
 const KeywordPill = ({ text, isRevealedGlobal, forceHighlight = false }: { text: string; isRevealedGlobal: boolean; forceHighlight?: boolean }) => {

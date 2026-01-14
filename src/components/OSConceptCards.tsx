@@ -112,7 +112,11 @@ const conceptData: ConceptData[] = [
   }
 ];
 
-export default function OSConceptCards() {
+interface OSConceptCardsProps {
+  onBack?: () => void;
+}
+
+export default function OSConceptCards({ onBack }: OSConceptCardsProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeCard, setActiveCard] = useState<number | null>(null);

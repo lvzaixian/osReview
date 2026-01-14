@@ -1,6 +1,6 @@
 /**
  * 沉浸式学习组件
- * 支持四种模式：背题、刷题、错题、考试
+ * 支持4种模式：背题、刷题、错题、考试
  */
 
 import { useExamEngine } from '../hooks/useExamEngine';
@@ -8,6 +8,213 @@ import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw, Grid3x3, Swords, List,
 import type { ExamMode, Question, ExamResult } from '../types';
 import { useState, useEffect } from 'react';
 import { rawQuestions } from '../data/raw_questions';
+import React from 'react';
+
+// Markdown题干渲染组件
+function MarkdownStem({ content }: { content: string }) {
+  // 处理Markdown表格
+  const renderTable = (tableText: string) => {
+    const lines = tableText.trim().split('\n').filter(line => line.trim());
+    if (lines.length < 2) return tableText;
+    
+    const headers = lines[0].split('|').map(h => h.trim()).filter(h => h);
+    const rows = lines.slice(2).map(line => 
+      line.split('|').map(cell => cell.trim()).filter(cell => cell)
+    );
+    
+    return (
+      <div className="overflow-x-auto my-4">
+        <table className="min-w-full border border-gray-600 text-xs sm:text-sm">
+          <thead className="bg-gray-700">
+            <tr>
+              {headers.map((header, i) => (
+                <th key={i} className="border border-gray-600 px-2 py-1 sm:px-4 sm:py-2 text-left">
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className={i % 2 === 0 ? 'bg-gray-800/50' : 'bg-gray-800/30'}>
+                {row.map((cell, j) => (
+                  <td key={j} className="border border-gray-600 px-2 py-1 sm:px-4 sm:py-2">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  // 处理代码块
+  const renderCodeBlock = (code: string) => {
+    return (
+      <pre className="bg-gray-900 border border-gray-600 rounded p-2 sm:p-3 my-4 overflow-x-auto text-xs sm:text-sm">
+        <code className="text-green-300">{code}</code>
+      </pre>
+    );
+  };
+
+  // 处理HTML内存图（hw3-1题）
+  const renderMemoryDiagram = () => {
+    return (
+      <div className="my-4 flex justify-center">
+        <div className="relative" style={{ width: '180px', border: '2px solid #444' }}>
+          {/* 操作系统 */}
+          <div className="relative flex items-center justify-center" style={{ height: '100px', borderBottom: '2px solid #444' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">0</span>
+            <span className="text-lg font-bold">操作系统</span>
+          </div>
+          {/* 80K空闲 */}
+          <div className="relative flex items-center justify-center" style={{ height: '80px', borderBottom: '2px solid #444' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">100K</span>
+            <span className="absolute right-[-90px] text-base font-bold">80K</span>
+          </div>
+          {/* 占用 */}
+          <div className="relative flex items-center justify-center" style={{ height: '30px', borderBottom: '2px solid #444' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">180K</span>
+            <span>占用</span>
+          </div>
+          {/* 90K空闲 */}
+          <div className="relative flex items-center justify-center" style={{ height: '90px', borderBottom: '2px solid #444' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">190K</span>
+            <span className="absolute right-[-90px] text-base font-bold">90K</span>
+          </div>
+          {/* 占用 */}
+          <div className="relative flex items-center justify-center" style={{ height: '50px', borderBottom: '2px solid #444' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">280K</span>
+            <span>占用</span>
+          </div>
+          {/* 60K空闲 */}
+          <div className="relative flex items-center justify-center" style={{ height: '60px', borderBottom: '2px solid #444' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">330K</span>
+            <span className="absolute right-[-90px] text-base font-bold">60K</span>
+          </div>
+          {/* 占用 */}
+          <div className="relative flex items-center justify-center" style={{ height: '30px', borderBottom: '2px solid #444' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">390K</span>
+            <span>占用</span>
+          </div>
+          {/* 102K-1 */}
+          <div className="relative flex items-center justify-center" style={{ height: '102px' }}>
+            <span className="absolute left-[-70px] top-[-10px] text-sm font-bold">410K</span>
+            <span className="absolute right-[-90px] text-base font-bold">102K-1</span>
+            <span className="absolute left-[-80px] bottom-[-10px] text-sm font-bold">512K-1</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // 解析内容
+  const parseContent = (text: string) => {
+    const parts: React.ReactElement[] = [];
+    let currentIndex = 0;
+    
+    // 匹配表格（修复：支持最后一行没有\n的情况）
+    const tableRegex = /\n(\|.+\|\s*\n)+\|.+\|\s*/g;
+    // 匹配代码块
+    const codeRegex = /```[\s\S]*?```/g;
+    // 匹配HTML内存图特殊标记
+    const memoryDiagramMarker = '内存的分配情况如图所示';
+    
+    let match;
+    const allMatches: Array<{type: 'table' | 'code' | 'memory', start: number, end: number, content: string}> = [];
+    
+    // 检查是否包含内存图
+    const memoryIdx = text.indexOf(memoryDiagramMarker);
+    if (memoryIdx !== -1) {
+      allMatches.push({
+        type: 'memory',
+        start: memoryIdx + memoryDiagramMarker.length,
+        end: memoryIdx + memoryDiagramMarker.length,
+        content: ''
+      });
+    }
+    
+    // 找所有表格
+    while ((match = tableRegex.exec(text)) !== null) {
+      allMatches.push({
+        type: 'table',
+        start: match.index,
+        end: match.index + match[0].length,
+        content: match[0]
+      });
+    }
+    
+    // 找所有代码块
+    while ((match = codeRegex.exec(text)) !== null) {
+      allMatches.push({
+        type: 'code',
+        start: match.index,
+        end: match.index + match[0].length,
+        content: match[0]
+      });
+    }
+    
+    // 按位置排序
+    allMatches.sort((a, b) => a.start - b.start);
+    
+    // 渲染
+    allMatches.forEach((item, idx) => {
+      // 添加之前的文本
+      if (currentIndex < item.start) {
+        const textBefore = text.substring(currentIndex, item.start);
+        if (textBefore.trim()) {
+          parts.push(
+            <div key={`text-${idx}`} className="whitespace-pre-wrap">
+              {textBefore}
+            </div>
+          );
+        }
+      }
+      
+      // 添加表格、代码块或内存图
+      if (item.type === 'table') {
+        parts.push(
+          <div key={`table-${idx}`}>
+            {renderTable(item.content)}
+          </div>
+        );
+      } else if (item.type === 'code') {
+        const codeContent = item.content.replace(/```[\w]*\n?/, '').replace(/```$/, '');
+        parts.push(
+          <div key={`code-${idx}`}>
+            {renderCodeBlock(codeContent)}
+          </div>
+        );
+      } else if (item.type === 'memory') {
+        parts.push(
+          <div key={`memory-${idx}`}>
+            {renderMemoryDiagram()}
+          </div>
+        );
+      }
+      
+      currentIndex = item.end;
+    });
+    
+    // 添加最后的文本
+    if (currentIndex < text.length) {
+      const textAfter = text.substring(currentIndex);
+      if (textAfter.trim()) {
+        parts.push(
+          <div key="text-end" className="whitespace-pre-wrap">
+            {textAfter}
+          </div>
+        );
+      }
+    }
+    
+    return parts.length > 0 ? parts : <div className="whitespace-pre-wrap">{text}</div>;
+  };
+
+  return <div>{parseContent(content)}</div>;
+}
 
 interface ExamEngineTestProps {
   initialMode?: ExamMode;
@@ -291,9 +498,9 @@ export default function ExamEngineTest({
 
           {/* 题干 */}
           <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-100 font-medium">
-              {currentQuestion.stem}
-            </p>
+            <div className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-100 font-medium">
+              <MarkdownStem content={currentQuestion.stem} />
+            </div>
           </div>
 
           {/* 选项或填空输入 */}
@@ -923,9 +1130,9 @@ function QuestionCard({
 
       {/* 题干 */}
       <div className="px-4 sm:px-6 py-4">
-        <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-gray-200">
-          {question.stem}
-        </p>
+        <div className="text-sm sm:text-base lg:text-lg leading-relaxed text-gray-200">
+          <MarkdownStem content={question.stem} />
+        </div>
       </div>
 
       {/* 选项 */}

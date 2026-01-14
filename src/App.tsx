@@ -46,10 +46,9 @@ function App() {
     // 在控制台输出详细统计
     console.group('📚 ExamRank1 题库统计');
     console.log('总题数:', questionStats.questionBank.total);
-    console.log('单选题:', questionStats.questionBank.single);
-    console.log('多选题:', questionStats.questionBank.multi);
-    console.log('判断题:', questionStats.questionBank.boolean);
-    console.log('填空题:', questionStats.questionBank.fill);
+    console.log('第一章:', questionStats.questionBank.ch1);
+    console.log('第二章:', questionStats.questionBank.ch2);
+    console.log('第三章:', questionStats.questionBank.ch3);
     console.log('数据完整:', questionStats.questionBank.isComplete ? '✅ 是' : '⚠️ 否（待补充）');
     console.groupEnd();
   }, []);
