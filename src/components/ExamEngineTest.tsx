@@ -1167,8 +1167,9 @@ function QuestionCard({
         })}
       </div>
 
-      {/* 觨析 */}
+      {/* 解析和助记口诀 */}
       <div className="px-4 sm:px-6 pb-4 space-y-3">
+        {/* 解析 */}
         <div className="bg-blue-500/10 border-l-4 border-blue-500 p-3 rounded-r-lg">
           <div className="font-bold text-blue-300 mb-1 text-xs sm:text-sm flex items-center gap-2">
             <span>💡</span>
@@ -1176,6 +1177,17 @@ function QuestionCard({
           </div>
           <div className="text-blue-100 text-xs sm:text-sm leading-relaxed">{question.explain}</div>
         </div>
+              
+        {/* 助记口诀 */}
+        {question.mnemonic && (
+          <div className="bg-purple-500/10 border-l-4 border-purple-500 p-3 rounded-r-lg">
+            <div className="font-bold text-purple-300 mb-1 text-xs sm:text-sm flex items-center gap-2">
+              <span>🎯</span>
+              <span>助记口诀</span>
+            </div>
+            <div className="text-purple-100 text-xs sm:text-sm leading-relaxed">{question.mnemonic}</div>
+          </div>
+        )}
       </div>
 
       {/* 阅读模式下的操作按钮（与专注模式样式一致） */}
