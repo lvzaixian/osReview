@@ -1,10 +1,10 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Book, Code, Terminal, CheckCircle, HelpCircle, FileText, Menu, X, ChevronRight, Eye, EyeOff, Shuffle, Layers } from 'lucide-react';
-import { rawQuestions, type ExtendedQuestion } from '../data/raw_questions';
+import { rawQuestions } from '../data/raw_questions';
+import type { Question } from '../types';
 
 // 调试：检查数据加载
 console.log('题库加载:', rawQuestions.length, '道题');
-console.log('有tableData的题目:', rawQuestions.filter(q => q.tableData && q.tableData.length > 0).map(q => q.id));
 
 const sections = [
   { id: 'os-choice', title: '一、OS选择题', icon: <Layers className="w-5 h-5" /> },
@@ -444,7 +444,7 @@ export default function QuestionBank({ onBack }: QuestionBankProps) {
   };
 
   // 渲染单个OS选择题
-  const renderOsQuestion = (item: ExtendedQuestion, index: number) => (
+  const renderOsQuestion = (item: Question, index: number) => (
     <div key={`${item.id}-${shuffleSeed}`} className="bg-white p-5 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
       <div className="flex items-start gap-3 mb-3">
         <span className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-sm font-bold">
@@ -455,25 +455,14 @@ export default function QuestionBank({ onBack }: QuestionBankProps) {
             <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">
               {chapterDisplayNames[`ch${item.id.match(/ch(\d+)/)?.[1] || '1'}`] || '未分类'}
             </span>
-            {/* 表格/代码块标签 */}
-            {item.tableData && item.tableData.length > 0 && (
-              <span className="text-xs px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full">📊 含表格</span>
-            )}
-            {item.code && (
-              <span className="text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full">💻 含代码</span>
-            )}
           </div>
           <div className="font-medium text-gray-800 leading-relaxed">
             {item.stem}
           </div>
-          {/* 渲染表格 */}
-          {item.tableData && item.tableData.length > 0 && renderTableData(item.tableData)}
-          {/* 渲染代码块 */}
-          {item.code && renderCodeBlock(item.code)}
         </div>
       </div>
       <div className="ml-11 space-y-1.5 mb-4">
-        {item.options.map((opt) => (
+        {item.options.map((opt: any) => (
           <div 
             key={opt.key} 
             className={`px-3 py-2 rounded text-sm transition-colors ${
@@ -499,6 +488,23 @@ export default function QuestionBank({ onBack }: QuestionBankProps) {
           <span className="font-bold text-green-600 animate-in fade-in">答案: {item.answer}</span>
         )}
       </div>
+      {/* 解析和助记口诀 */}
+      {isAnswerVisible(index) && (
+        <div className="ml-11 mt-3 space-y-2 animate-in fade-in">
+          {item.explain && (
+            <div className="p-3 rounded-lg bg-blue-50 border border-blue-100">
+              <div className="text-xs font-semibold text-blue-700 mb-1">📝 解析</div>
+              <div className="text-sm text-gray-700 leading-relaxed">{item.explain}</div>
+            </div>
+          )}
+          {item.mnemonic && (
+            <div className="p-3 rounded-lg bg-purple-50 border border-purple-100">
+              <div className="text-xs font-semibold text-purple-700 mb-1">💡 助记口诀</div>
+              <div className="text-sm text-gray-700 leading-relaxed">{item.mnemonic}</div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 
