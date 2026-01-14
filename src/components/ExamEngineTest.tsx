@@ -50,15 +50,6 @@ function MarkdownStem({ content }: { content: string }) {
     );
   };
 
-  // 处理代码块
-  const renderCodeBlock = (code: string) => {
-    return (
-      <pre className="bg-gray-900 border border-gray-600 rounded p-2 sm:p-3 my-4 overflow-x-auto text-xs sm:text-sm">
-        <code className="text-green-300">{code}</code>
-      </pre>
-    );
-  };
-
   // 处理HTML内存图（hw3-1题）
   const renderMemoryDiagram = () => {
     return (
@@ -117,13 +108,11 @@ function MarkdownStem({ content }: { content: string }) {
     
     // 匹配表格（修复：支持最后一行没有\n的情况）
     const tableRegex = /\n(\|.+\|\s*\n)+\|.+\|\s*/g;
-    // 匹配代码块
-    const codeRegex = /```[\s\S]*?```/g;
     // 匹配HTML内存图特殊标记
     const memoryDiagramMarker = '内存的分配情况如图所示';
     
     let match;
-    const allMatches: Array<{type: 'table' | 'code' | 'memory', start: number, end: number, content: string}> = [];
+    const allMatches: Array<{type: 'table' | 'memory', start: number, end: number, content: string}> = [];
     
     // 检查是否包含内存图
     const memoryIdx = text.indexOf(memoryDiagramMarker);
@@ -140,16 +129,6 @@ function MarkdownStem({ content }: { content: string }) {
     while ((match = tableRegex.exec(text)) !== null) {
       allMatches.push({
         type: 'table',
-        start: match.index,
-        end: match.index + match[0].length,
-        content: match[0]
-      });
-    }
-    
-    // 找所有代码块
-    while ((match = codeRegex.exec(text)) !== null) {
-      allMatches.push({
-        type: 'code',
         start: match.index,
         end: match.index + match[0].length,
         content: match[0]
@@ -173,18 +152,11 @@ function MarkdownStem({ content }: { content: string }) {
         }
       }
       
-      // 添加表格、代码块或内存图
+      // 添加表格或内存图
       if (item.type === 'table') {
         parts.push(
           <div key={`table-${idx}`}>
             {renderTable(item.content)}
-          </div>
-        );
-      } else if (item.type === 'code') {
-        const codeContent = item.content.replace(/```[\w]*\n?/, '').replace(/```$/, '');
-        parts.push(
-          <div key={`code-${idx}`}>
-            {renderCodeBlock(codeContent)}
           </div>
         );
       } else if (item.type === 'memory') {
