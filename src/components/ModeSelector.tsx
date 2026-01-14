@@ -1,5 +1,4 @@
-import { BookOpen, Brain, RotateCcw, FileText, ArrowLeft, Trash2, BookMarked, ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import { BookOpen, Brain, RotateCcw, FileText, ArrowLeft, Trash2, BookMarked } from 'lucide-react';
 import type { ExamMode, UserProgress } from '../types';
 
 interface ModeSelectorProps {
@@ -12,7 +11,6 @@ interface ModeSelectorProps {
 }
 
 export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onShowEssayMode, userProgress, setShowModeSelector }: ModeSelectorProps) {
-  const [showOtherModes, setShowOtherModes] = useState(false);
   const modes = [
     {
       mode: 'study' as ExamMode,
@@ -62,7 +60,7 @@ export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onS
           </button>
           
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center mb-2 sm:mb-3">
-            题库
+            作业题回顾
           </h1>
           <p className="text-center text-sm sm:text-base text-gray-600">
             选择一种学习模式开始复习
@@ -119,49 +117,30 @@ export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onS
           </p>
         </div>
 
-        {/* 其他板块折叠区域 */}
-        <div className="max-w-4xl mx-auto mt-10 sm:mt-12">
+        {/* 简答题板块 */}
+        <div className="max-w-4xl mx-auto mt-10 sm:mt-12 mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center gap-2 mb-3 sm:mb-4">
+            <BookMarked className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
+            简答题板块
+          </h2>
+          <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6">操作系统重点简答题 · 用于背诵</p>
+          
           <button
-            onClick={() => setShowOtherModes(!showOtherModes)}
-            className="w-full flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors mb-4"
+            onClick={() => {
+              setShowModeSelector(true);
+              onShowEssayMode();
+            }}
+            className="w-full flex flex-col items-center justify-center gap-3 sm:gap-4 px-6 sm:px-8 py-6 sm:py-8 bg-gradient-to-br from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white rounded-xl sm:rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            <span className="text-base sm:text-lg font-semibold text-gray-700">其他板块（开发中）</span>
-            {showOtherModes ? (
-              <ChevronUp className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
-            ) : (
-              <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
-            )}
-          </button>
-
-          {showOtherModes && (
-            <div className="space-y-6 sm:space-y-8 mb-6 sm:mb-8">
-              {/* 简答题板块 */}
-              <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center gap-2 mb-3 sm:mb-4">
-                  <BookMarked className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
-                  简答题板块
-                </h2>
-                <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6">操作系统重点简答题 · 用于背诵</p>
-                
-                <button
-                  onClick={() => {
-                    setShowModeSelector(true);
-                    onShowEssayMode();
-                  }}
-                  className="w-full flex flex-col items-center justify-center gap-3 sm:gap-4 px-6 sm:px-8 py-6 sm:py-8 bg-gradient-to-br from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white rounded-xl sm:rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95"
-                >
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <BookMarked className="w-8 h-8 sm:w-10 sm:h-10" />
-                    <div className="text-2xl sm:text-3xl font-black">📖 简答题</div>
-                    <BookMarked className="w-8 h-8 sm:w-10 sm:h-10" />
-                  </div>
-                  <div className="text-sm sm:text-base opacity-90 font-medium">
-                    知识点背诵模式 · 主动回忆训练
-                  </div>
-                </button>
-              </div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <BookMarked className="w-8 h-8 sm:w-10 sm:h-10" />
+              <div className="text-2xl sm:text-3xl font-black">📖 简答题</div>
+              <BookMarked className="w-8 h-8 sm:w-10 sm:h-10" />
             </div>
-          )}
+            <div className="text-sm sm:text-base opacity-90 font-medium">
+              知识点背诵模式 · 主动回忆训练
+            </div>
+          </button>
         </div>
       </div>
     </div>

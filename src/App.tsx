@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BookOpen, Sparkles, GraduationCap, Terminal, Book } from 'lucide-react';
+import { BookOpen, Sparkles, GraduationCap, Terminal, Book, ChevronDown, ChevronUp } from 'lucide-react';
 import { getFullStats } from './data';
 import ExamEngineTest from './components/ExamEngineTest';
 import TrashBin from './components/TrashBin';
@@ -22,6 +22,7 @@ function App() {
   const [showSystematic, setShowSystematic] = useState(false);
   const [showConceptCards, setShowConceptCards] = useState(false);
   const [showQuestionBank, setShowQuestionBank] = useState(false);
+  const [showOtherModules, setShowOtherModules] = useState(false);
   const [userProgress, setUserProgress] = useState(() => loadProgress());
 
   // 每次显示垃圾桶时重新加载数据
@@ -46,9 +47,6 @@ function App() {
     // 在控制台输出详细统计
     console.group('📚 ExamRank1 题库统计');
     console.log('总题数:', questionStats.questionBank.total);
-    console.log('第一章:', questionStats.questionBank.ch1);
-    console.log('第二章:', questionStats.questionBank.ch2);
-    console.log('第三章:', questionStats.questionBank.ch3);
     console.log('数据完整:', questionStats.questionBank.isComplete ? '✅ 是' : '⚠️ 否（待补充）');
     console.groupEnd();
   }, []);
@@ -189,78 +187,94 @@ function App() {
           </p>
         </div>
 
-        {/* 2x2网格布局 */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-          {/* 系统化学习按钮 */}
-          <button
-            onClick={() => setShowSystematic(true)}
-            className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 hover:from-purple-600 hover:via-pink-600 hover:to-rose-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-purple-500/50 active:scale-95"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
-            <GraduationCap className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
-            <div className="text-2xl font-black tracking-tight">📚 系统化学习</div>
-            <div className="text-sm opacity-95 font-medium text-center">
-              深度课程内容 · 完整知识体系
-            </div>
-          </button>
-
-          {/* 知识快照按钮 */}
-          <button
-            onClick={() => setShowSnapshot(true)}
-            className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-500 hover:from-indigo-600 hover:via-blue-600 hover:to-cyan-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-indigo-500/50 active:scale-95"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
-            <Sparkles className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
-            <div className="text-2xl font-black tracking-tight">🎯 操作系统核心考点</div>
-            <div className="text-sm opacity-95 font-medium text-center">
-              基于重点提炼的必考知识
-            </div>
-          </button>
-
-          {/* 命令卡片按钮 */}
-          <button
-            onClick={() => setShowConceptCards(true)}
-            className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-orange-500/50 active:scale-95"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
-            <Terminal className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
-            <div className="text-2xl font-black tracking-tight">💻 OS概念记忆卡</div>
-            <div className="text-sm opacity-95 font-medium text-center">
-              全景选项库 · 场景化记忆
-            </div>
-          </button>
-
-          {/* 作业题回顾按钮 */}
+        {/* 题库按钮 - 置顶 */}
+        <div className="max-w-4xl mx-auto mb-8">
           <button
             onClick={() => setShowModeSelector(true)}
-            className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-emerald-500/50 active:scale-95"
+            className="group w-full relative overflow-hidden flex flex-col items-center justify-center gap-4 px-8 sm:px-10 py-10 sm:py-12 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-emerald-500/50 active:scale-95"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
-            <BookOpen className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
-            <div className="text-2xl font-black tracking-tight">📝 作业题回顾</div>
-            <div className="text-sm opacity-95 font-medium text-center">
+            
+            <div className="flex items-center gap-3 sm:gap-4">
+              <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 animate-bounce" style={{animationDuration: '2s'}} />
+              <div className="text-3xl sm:text-4xl font-black tracking-tight">📚 题库</div>
+              <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 animate-bounce" style={{animationDuration: '2s', animationDelay: '0.2s'}} />
+            </div>
+            <div className="text-base sm:text-lg opacity-95 font-semibold">
               {stats?.questionBank.total || 0}道题全面复习
             </div>
           </button>
         </div>
 
-        {/* 题库按钮 - 独立一行 */}
-        <div className="max-w-4xl mx-auto mb-7">
+        {/* 其他模块折叠区域 */}
+        <div className="max-w-6xl mx-auto mb-10">
           <button
-            onClick={() => setShowQuestionBank(true)}
-            className="group w-full relative overflow-hidden flex flex-col items-center justify-center gap-4 px-8 sm:px-10 py-10 sm:py-12 bg-gradient-to-br from-violet-500 via-fuchsia-500 to-pink-500 hover:from-violet-600 hover:via-fuchsia-600 hover:to-pink-600 text-white rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-violet-500/50 active:scale-95"
+            onClick={() => setShowOtherModules(!showOtherModules)}
+            className="w-full flex items-center justify-between px-6 py-4 bg-white/60 backdrop-blur-sm hover:bg-white/80 rounded-2xl transition-all shadow-md mb-6 border border-white/50"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
-            
-            <div className="flex items-center gap-3 sm:gap-4">
-              <Book className="w-10 h-10 sm:w-12 sm:h-12 animate-bounce" style={{animationDuration: '2s'}} />
-              <div className="text-3xl sm:text-4xl font-black tracking-tight">📖 期末复习题库</div>
-              <Book className="w-10 h-10 sm:w-12 sm:h-12 animate-bounce" style={{animationDuration: '2s', animationDelay: '0.2s'}} />
-            </div>
-            <div className="text-base sm:text-lg opacity-95 font-semibold">
-              选择 · 填空 · 判断 · 简答 · 全类型覆盖
-            </div>
+            <span className="text-lg font-bold text-gray-700">其他模块（开发中）</span>
+            {showOtherModules ? (
+              <ChevronUp className="w-6 h-6 text-gray-600" />
+            ) : (
+              <ChevronDown className="w-6 h-6 text-gray-600" />
+            )}
           </button>
+
+          {showOtherModules && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* 系统化学习按钮 */}
+              <button
+                onClick={() => setShowSystematic(true)}
+                className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 hover:from-purple-600 hover:via-pink-600 hover:to-rose-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-purple-500/50 active:scale-95"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                <GraduationCap className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
+                <div className="text-2xl font-black tracking-tight">📚 系统化学习</div>
+                <div className="text-sm opacity-95 font-medium text-center">
+                  深度课程内容 · 完整知识体系
+                </div>
+              </button>
+
+              {/* 知识快照按钮 */}
+              <button
+                onClick={() => setShowSnapshot(true)}
+                className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-500 hover:from-indigo-600 hover:via-blue-600 hover:to-cyan-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-indigo-500/50 active:scale-95"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                <Sparkles className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
+                <div className="text-2xl font-black tracking-tight">🎯 操作系统核心考点</div>
+                <div className="text-sm opacity-95 font-medium text-center">
+                  基于重点提炼的必考知识
+                </div>
+              </button>
+
+              {/* 命令卡片按钮 */}
+              <button
+                onClick={() => setShowConceptCards(true)}
+                className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-orange-500/50 active:scale-95"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                <Terminal className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
+                <div className="text-2xl font-black tracking-tight">💻 OS概念记忆卡</div>
+                <div className="text-sm opacity-95 font-medium text-center">
+                  全景选项库 · 场景化记忆
+                </div>
+              </button>
+
+              {/* 期末复习题库按钮 */}
+              <button
+                onClick={() => setShowQuestionBank(true)}
+                className="group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-8 bg-gradient-to-br from-violet-500 via-fuchsia-500 to-pink-500 hover:from-violet-600 hover:via-fuchsia-600 hover:to-pink-600 text-white rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-violet-500/50 active:scale-95"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                <Book className="w-12 h-12 animate-bounce" style={{animationDuration: '2s'}} />
+                <div className="text-2xl font-black tracking-tight">📖 期末复习题库</div>
+                <div className="text-sm opacity-95 font-medium text-center">
+                  选择 · 填空 · 判断 · 简答 · 全类型覆盖
+                </div>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Footer Info */}
