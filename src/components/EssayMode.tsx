@@ -303,23 +303,23 @@ const StructuredAnswer = ({
   forceHighlight?: boolean;
 }) => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {answer.map((block, idx) => {
         switch (block.type) {
           case 'text':
             return (
-              <p key={idx} className="text-gray-800 leading-relaxed">
+              <p key={idx} className="text-gray-800 leading-normal">
                 {highlightKeywords(block.content, keywords, isRevealedGlobal, forceHighlight)}
               </p>
             );
           
           case 'point':
             return (
-              <div key={idx} className="flex items-start gap-2 pl-1">
-                <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-500 text-white text-xs font-bold rounded-full shadow-sm">
+              <div key={idx} className="flex items-start gap-2">
+                <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-500 text-white text-[10px] font-bold rounded-full shadow-sm mt-0.5">
                   {block.num}
                 </span>
-                <p className="flex-1 text-gray-800 leading-relaxed pt-0.5">
+                <p className="flex-1 text-gray-800 leading-normal">
                   {highlightKeywords(block.content, keywords, isRevealedGlobal, forceHighlight)}
                 </p>
               </div>
@@ -327,24 +327,24 @@ const StructuredAnswer = ({
           
           case 'subtitle':
             return (
-              <h4 key={idx} className="font-bold text-gray-900 mt-4 mb-2 flex items-center gap-2">
-                <span className="w-1 h-5 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></span>
+              <h4 key={idx} className="font-bold text-gray-900 mt-3 mb-1 flex items-center gap-2">
+                <span className="w-1 h-4 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></span>
                 {highlightKeywords(block.content, keywords, isRevealedGlobal, forceHighlight)}
               </h4>
             );
           
           case 'inline':
             return (
-              <p key={idx} className="text-gray-800 leading-relaxed bg-gradient-to-r from-purple-50/50 to-transparent p-3 rounded-lg border-l-4 border-purple-400">
+              <p key={idx} className="text-gray-800 leading-normal bg-gradient-to-r from-purple-50/50 to-transparent py-2 px-3 rounded-lg border-l-3 border-purple-400">
                 {highlightKeywords(block.content, keywords, isRevealedGlobal, forceHighlight)}
               </p>
             );
           
           case 'highlight':
             return (
-              <div key={idx} className="bg-gradient-to-r from-amber-50 to-orange-50 p-3 rounded-xl border border-amber-200 shadow-sm">
-                <p className="text-amber-900 font-semibold flex items-center gap-2">
-                  <span className="text-lg">✨</span>
+              <div key={idx} className="bg-gradient-to-r from-amber-50 to-orange-50 py-2 px-3 rounded-lg border border-amber-200">
+                <p className="text-amber-900 font-semibold flex items-center gap-2 leading-normal">
+                  <span className="text-base">✨</span>
                   {highlightKeywords(block.content, keywords, isRevealedGlobal, forceHighlight)}
                 </p>
               </div>
@@ -352,13 +352,13 @@ const StructuredAnswer = ({
           
           case 'subq':
             return (
-              <div key={idx} className="mt-4 first:mt-0">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm font-bold px-3 py-1 rounded-full shadow-sm">
+              <div key={idx} className="mt-3 first:mt-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
                     {block.num}
                   </span>
                 </div>
-                <p className="text-gray-800 leading-relaxed pl-1">
+                <p className="text-gray-800 leading-normal">
                   {highlightKeywords(block.content, keywords, isRevealedGlobal, forceHighlight)}
                 </p>
               </div>
@@ -404,10 +404,10 @@ const Flashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { item:
                <button onClick={() => setRevealAll(!revealAll)} className={`p-1.5 sm:p-2 rounded-full transition-all ${revealAll ? 'bg-purple-500 text-white' : 'bg-purple-100 text-purple-600 hover:bg-purple-200'}`} title={revealAll ? "隐藏关键词" : "显示关键词"}>{revealAll ? <Eye className="w-3 h-3 sm:w-4 sm:h-4" /> : <EyeOff className="w-3 h-3 sm:w-4 sm:h-4" />}</button>
             </div>
             
-            <div className="flex-1 overflow-y-auto mt-6 sm:mt-8 px-1 sm:px-2 pb-3 sm:pb-4">
+            <div className="flex-1 overflow-y-auto mt-6 sm:mt-8 px-1 sm:px-2 pb-2 sm:pb-3">
               {/* 答案内容区 - 结构化渲染 */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-purple-100 shadow-sm">
-                <div className="text-base sm:text-lg">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-purple-100 shadow-sm">
+                <div className="text-sm sm:text-base">
                   <StructuredAnswer 
                     answer={item.a} 
                     keywords={item.keywords} 
@@ -418,12 +418,12 @@ const Flashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { item:
               
               {/* 提示信息 */}
               {item.tips && (
-                <div className="mt-3 sm:mt-4 bg-gradient-to-r from-amber-50 to-orange-50 p-3 sm:p-4 rounded-xl border border-amber-200/50 shadow-sm">
-                  <div className="flex items-start gap-2 sm:gap-3">
-                    <span className="text-xl sm:text-2xl flex-shrink-0">💡</span>
+                <div className="mt-2 sm:mt-3 bg-gradient-to-r from-amber-50 to-orange-50 py-2 px-3 rounded-lg border border-amber-200/50">
+                  <div className="flex items-start gap-2">
+                    <span className="text-lg flex-shrink-0">💡</span>
                     <div className="flex-1">
-                      <div className="font-bold text-amber-900 text-sm sm:text-base mb-1">记忆提示</div>
-                      <div className="text-sm sm:text-base text-amber-800 leading-relaxed">{item.tips}</div>
+                      <div className="font-bold text-amber-900 text-xs sm:text-sm">记忆提示</div>
+                      <div className="text-xs sm:text-sm text-amber-800 leading-snug">{item.tips}</div>
                     </div>
                   </div>
                 </div>
@@ -481,10 +481,10 @@ const ListView = ({ items }: { items: typeof essayData }) => {
           
           <div className={`transition-all duration-300 ease-in-out ${openIndex === idx ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
             <div className="px-4 sm:px-5 pb-4 sm:pb-5 bg-gradient-to-b from-gray-50/50 to-white border-t border-gray-100">
-              <div className="mt-4 sm:mt-5">
+              <div className="mt-3 sm:mt-4">
                 {/* 结构化答案渲染 */}
-                <div className="bg-white rounded-xl p-4 sm:p-5 border border-purple-100 shadow-inner">
-                  <div className="text-base sm:text-lg">
+                <div className="bg-white rounded-xl p-3 sm:p-4 border border-purple-100 shadow-inner">
+                  <div className="text-sm sm:text-base">
                     <StructuredAnswer 
                       answer={item.a} 
                       keywords={item.keywords} 
@@ -496,12 +496,12 @@ const ListView = ({ items }: { items: typeof essayData }) => {
 
                 {/* 提示信息 */}
                 {item.tips && (
-                  <div className="mt-4 bg-gradient-to-r from-amber-50 to-orange-50 p-3 sm:p-4 rounded-xl border border-amber-200/50 shadow-sm">
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-xl sm:text-2xl flex-shrink-0">💡</span>
+                  <div className="mt-3 bg-gradient-to-r from-amber-50 to-orange-50 py-2 px-3 rounded-lg border border-amber-200/50">
+                    <div className="flex items-start gap-2">
+                      <span className="text-lg flex-shrink-0">💡</span>
                       <div className="flex-1">
-                        <div className="font-bold text-amber-900 text-sm sm:text-base mb-1">记忆提示</div>
-                        <div className="text-sm sm:text-base text-amber-800 leading-relaxed">{item.tips}</div>
+                        <div className="font-bold text-amber-900 text-xs sm:text-sm">记忆提示</div>
+                        <div className="text-xs sm:text-sm text-amber-800 leading-snug">{item.tips}</div>
                       </div>
                     </div>
                   </div>
