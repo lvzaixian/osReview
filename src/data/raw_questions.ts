@@ -2,6 +2,473 @@ import type { Question } from '../types';
 
 export const rawQuestions: Question[] = [
     {
+        id: "obj-1",
+        stem: "下列关于 CPU 模式的叙述中，正确的是（ C ）。\n**3.本地用户通过键盘登录系统时，首先获得键盘输入信息的程序是（ B ）。**\n**4.下列关于系统调用的叙述中，正确的是（C）。**\n①在执行系统调用服务程序的过程中，CPU处于内核态\n②操作系统通过提供系统调用避免用户程序直接访问外设\n③不同的操作系统为应用程序提供了统一的系统调用接口\n④系统调用是操作系统内核为应用程序提供服务的接口\n**5.某单CPU系统中有输入和输出设备各1台，现有3个并发执行的作业，每个作业的输入、计算和输出的时间均分别为2ms、3ms和4ms，且都按输入、计算和输出的顺序执行，则执行完3个作业需要的时间最少是（B）。**",
+        options: [
+            { key: "A", text: "CPU处于用户态时只能执行特权指令" },
+            { key: "B", text: "CPU处于内核态时只能执行特权指令" },
+            { key: "C", text: "CPU处于用户态时只能执行非特权指令" },
+            { key: "D", text: "CPU处于内核态时只能执行非特权指令" },
+            { key: "A", text: "命令解释程序" },
+            { key: "B", text: "中断处理程序" },
+            { key: "C", text: "系统调用服务程序" },
+            { key: "D", text: "用户登录程序" },
+            { key: "A", text: "仅①、④" },
+            { key: "B", text: "仅②、③" },
+            { key: "C", text: "仅①、②、④" },
+            { key: "D", text: "仅①、③、④" },
+            { key: "A", text: "15ms" },
+            { key: "B", text: "17ms" },
+            { key: "C", text: "22ms" },
+            { key: "D", text: "27ms" },
+        ],
+        answer: "D",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-2",
+        stem: "下列选项中，会导致进程从执行态变为就绪态的事件是（ D ）。",
+        options: [
+            { key: "A", text: "执行P(wait)操作" },
+            { key: "B", text: "申请内存失败" },
+            { key: "C", text: "启动I/O设备" },
+            { key: "D", text: "被高优先级进程抢占" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-3",
+        stem: "下列事件或操作中，可能导致进程 P 由执行态变为阻塞态的是（ D ）。\n①进程 P 读文件\n②进程 P 的时间片用完\n③进程 P 申请外设\n④进程 P 执行信号量的 wait()操作",
+        options: [
+            { key: "A", text: "仅①、④" },
+            { key: "B", text: "仅②、③" },
+            { key: "C", text: "仅③、④" },
+            { key: "D", text: "仅①、③、④" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-4",
+        stem: "下列操作中，操作系统在创建新进程时，必须完成的是（B）。\n①申请空白的进程控制块\n②初始化进程控制块\n③设置进程状态为执行态",
+        options: [
+            { key: "A", text: "仅①" },
+            { key: "B", text: "仅①、②" },
+            { key: "C", text: "仅①、③" },
+            { key: "D", text: "仅②、③" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-5",
+        stem: "下列关于线程的叙述中，错误的",
+        options: [
+            { key: "A", text: "内核级线程的调度由操作系统完成" },
+            { key: "B", text: "操作系统为每个用户级线程建立一个线程控制块" },
+            { key: "C", text: "用户级线程间的切换比内核级线程间的切换效率高" },
+            { key: "D", text: "用户级线程可以在不支持内核级线程的操作系统上实现" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-6",
+        stem: "在支持多线程的系统中，进程P创建的若干线程不能共享的是",
+        options: [
+            { key: "A", text: "进程P的代码段" },
+            { key: "B", text: "进程P中打开的文件" },
+            { key: "C", text: "进程P的全局变量" },
+            { key: "D", text: "进程P中某线程的栈指针" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-7",
+        stem: "有两个并发执行的进程P1和P2，共享初值为1的变量x。P1对x加1，P2对x减1。\n加1和减1操作的指令序列分别如下所示。两个操作完成后，x的值（C）。\n```\n//加1操作\t\t\t\t\t\t\t\t\t\t //减1操作\nload R1,x\t\t\t//取x到寄存器R1中\t\t\t   load R2, x\ninc R1\t\t\t\t\t\t\t\t\t\t   dee R2\nshore x,R1\t\t\t//将R1的内容存入x\t\t\t   shore x,R2\n```",
+        options: [
+            { key: "A", text: "可能为-1或3" },
+            { key: "B", text: "只能为1" },
+            { key: "C", text: "可能为0、1或2" },
+            { key: "D", text: "可能为-1、0、1或2" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-8",
+        stem: "死锁的预防是根据（C）而采取措施实现的。",
+        options: [
+            { key: "A", text: "配置足够的系统资源" },
+            { key: "B", text: "使进程的推进顺序合理" },
+            { key: "C", text: "破坏死锁的四个必要条件之一" },
+            { key: "D", text: "防止系统进入不安全状态" },
+        ],
+        answer: "D",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-9",
+        stem: "下列选项中，不会影响系统缺页率的是（ D ）。",
+        options: [
+            { key: "A", text: "页置换算法" },
+            { key: "B", text: "工作集的大小" },
+            { key: "C", text: "进程的数量" },
+            { key: "D", text: "页缓冲队列的长度" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-10",
+        stem: "多进程能在主存中彼此互不干扰的环境下运行，OS是通过（B）来实现的。",
+        options: [
+            { key: "A", text: "内存分配" },
+            { key: "B", text: "内存保护" },
+            { key: "C", text: "内存扩充" },
+            { key: "D", text: "地址映射" },
+        ],
+        answer: "D",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-11",
+        stem: "文件系统中用（）管理文件。",
+        options: [
+            { key: "A", text: "作业控制块" },
+            { key: "B", text: "外页表" },
+            { key: "C", text: "目录" },
+            { key: "D", text: "软硬件结合的方法" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-12",
+        stem: "如果文件系统中有两个文件重名，不应采用（ ）。",
+        options: [
+            { key: "A", text: "单级目录结构" },
+            { key: "B", text: "树型目录结构" },
+            { key: "C", text: "二级目录结构" },
+            { key: "D", text: "非循环图目录结构" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-13",
+        stem: "下列选项中，支持文件长度可变、随机访问的磁盘存储空间分配方式是( )。",
+        options: [
+            { key: "A", text: "索引分配" },
+            { key: "B", text: "链接分配" },
+            { key: "C", text: "连续分配" },
+            { key: "D", text: "动态分区分配" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-14",
+        stem: "采用直接存取方法来读写硬盘上的物理记录时，效率最低的文件结构是( )。",
+        options: [
+            { key: "A", text: "连续文件" },
+            { key: "B", text: "索引文件" },
+            { key: "C", text: "链接文件" },
+            { key: "D", text: "索引连续文件" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-15",
+        stem: "在磁盘上容易导致存储碎片发生的物理文件结构是（ ）。",
+        options: [
+            { key: "A", text: "链接文件" },
+            { key: "B", text: "连续文件" },
+            { key: "C", text: "索引文件" },
+            { key: "D", text: "索引和链接文件" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-16",
+        stem: "UNIX系统中对空闲磁盘存储空间采用( )方法管理。",
+        options: [
+            { key: "A", text: "位示图" },
+            { key: "B", text: "空闲块成组链接" },
+            { key: "C", text: "空闲块单向链接" },
+            { key: "D", text: "空闲块表" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-17",
+        stem: "为支持CD-ROM中视频文件的快速随机播放，播放性能最好的文件数据块组织方式（ ）。",
+        options: [
+            { key: "A", text: "连续结构" },
+            { key: "B", text: "链式结构" },
+            { key: "C", text: "直接索引结构" },
+            { key: "D", text: "多级索引结构" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-18",
+        stem: "若某文件系统索引节点(inode)中有直接地址项和间接地址项，则下列选项中，与单个文件长度无关的因素是( )。",
+        options: [
+            { key: "A", text: "索引节点的总数" },
+            { key: "B", text: "间接地址索引的级数" },
+            { key: "C", text: "地址项的个数" },
+            { key: "D", text: "文件块大小" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-19",
+        stem: "一个系统，它的文件控制块占64B，一个磁盘块大小为1KB，采用一级目录。假定文件目录中有3200个目录项。问查找一个文件平均需要（ ）次访问磁盘。",
+        options: [
+            { key: "A", text: "50" },
+            { key: "B", text: "54" },
+            { key: "C", text: "100" },
+            { key: "D", text: "200" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-20",
+        stem: "某文件系统的簇（块）和磁盘扇区大小分别为1 KB和512B。若一个文件的大小为1026B，则系统分配给该文件的磁盘空间大小是( )。",
+        options: [
+            { key: "A", text: "1026B" },
+            { key: "B", text: "1536B" },
+            { key: "C", text: "1538B" },
+            { key: "D", text: "2048B" },
+        ],
+        answer: "D",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-21",
+        stem: "下列选项中，可用于文件系统管理空闲磁盘块的数据结构是( )。\n①位图 ②索引节点 ③空闲磁盘块链IV.文件分配表(FAT)",
+        options: [
+            { key: "A", text: "仅①②" },
+            { key: "B", text: "仅①③④" },
+            { key: "C", text: "仅①③" },
+            { key: "D", text: "仅②③④" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-22",
+        stem: "设文件索引节点中有7个地址项，其中4个地址项为直接地址索引，2个地址项是一级间接地址索引，1个地址项是二级间接地址索引，每个地址项大小为4字节，若磁盘索引块和磁盘数据块大小均为256字节，则可表示的单个文件的最大长度是（ ）。",
+        options: [
+            { key: "A", text: "33KB" },
+            { key: "B", text: "519KB" },
+            { key: "C", text: "1057KB" },
+            { key: "D", text: "16513KB" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-23",
+        stem: "假设某个文件的索引节点已在内存，其他信息均在外存，为了访问该文件的某内容，直接寻址、一次间接、二次间接、三次间接分别需要几次访盘？（ ）",
+        options: [
+            { key: "A", text: "0,1,2,3" },
+            { key: "B", text: "1,2,3,4" },
+            { key: "C", text: "2,3,4,5" },
+            { key: "D", text: "1,3,4,5" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-24",
+        stem: "某文件系统的目录项由文件名和索引节点号构成。若每个目录项长度为64字节，其中4个字节存放索引节点号，60个字节存放文件名，文件名由小写英文字母构成，则该文件系统能创建的文件数量的上限为( )。",
+        options: [
+            { key: "A", text: "2^26" },
+            { key: "B", text: "2^32" },
+            { key: "C", text: "2^60" },
+            { key: "D", text: "2^64" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-25",
+        stem: "现有一个容量为10GB的磁盘分区，磁盘空间以簇(Cluster)为单位进行分配，簇的大小为4KB，若采用位图法管理该分区的空闲空间，即用一位(bit)标识一个簇是否被分配，则存放该位图所需簇的个数为( )。",
+        options: [
+            { key: "A", text: "80" },
+            { key: "B", text: "320" },
+            { key: "C", text: "80K" },
+            { key: "D", text: "320K" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-26",
+        stem: "引入高速缓冲的主要目的是（ ）。",
+        options: [
+            { key: "A", text: "提高CPU的利用率" },
+            { key: "B", text: "提高I/O设备的利用率" },
+            { key: "C", text: "改善CPU和I/O设备之间速度不匹配的情况" },
+            { key: "D", text: "节省内存" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-27",
+        stem: "CPU输出数据的速度远远高于打印机的打印速度，为了解决这一矛盾，可采用（ ）。",
+        options: [
+            { key: "A", text: "并行技术" },
+            { key: "B", text: "通道技术" },
+            { key: "C", text: "缓冲技术" },
+            { key: "D", text: "虚存技术" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-28",
+        stem: "通道相当于小型处理机，它用于实现（ ）之间的信息传输。",
+        options: [
+            { key: "A", text: "内存与外设" },
+            { key: "B", text: "CPU与外设" },
+            { key: "C", text: "内存与外存" },
+            { key: "D", text: "CPU与外存" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-29",
+        stem: "以时间换空间或者以空间换时间是操作系统的基本技术，以下属于以空间换时间的机制是( )。",
+        options: [
+            { key: "A", text: "SPOOLing" },
+            { key: "B", text: "虚拟存储技术" },
+            { key: "C", text: "通道技术" },
+            { key: "D", text: "覆盖技术" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-30",
+        stem: "通过硬件和软件的功能扩充，把原来独占的设备改造成能为若干用户共享的设备，这种设备称为（ ）。",
+        options: [
+            { key: "A", text: "存储设备" },
+            { key: "B", text: "系统设备" },
+            { key: "C", text: "用户设备" },
+            { key: "D", text: "虚拟设备" },
+        ],
+        answer: "D",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-31",
+        stem: "在（ ）I/O控制方式中，设备能直接与内存交换数据而不占用CPU。",
+        options: [
+            { key: "A", text: "轮询" },
+            { key: "B", text: "中断" },
+            { key: "C", text: "DMA" },
+            { key: "D", text: "MMU" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-32",
+        stem: "某系统中磁盘的磁道数为200(0~199)，磁头当前在184号磁道上。用户进程提出的磁盘访问请求对应的磁道号依次为184、 187、176、182、199。若采用最短寻道时间优先调度算法(SSTF)完成磁盘访问，则磁头移动的距离(磁道数)是( )。",
+        options: [
+            { key: "A", text: "37" },
+            { key: "B", text: "38" },
+            { key: "C", text: "41" },
+            { key: "D", text: "42" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-33",
+        stem: "在以下磁盘调度算法中，（ ）算法可能会随时改变移动臂的运动方向 。",
+        options: [
+            { key: "A", text: "最短寻道时间优先" },
+            { key: "B", text: "扫描SCAN（双向扫描）" },
+            { key: "C", text: "巡回扫描C-SCAN（单向扫描）" },
+            { key: "D", text: "都不会" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-34",
+        stem: "一个计算机系统配置了2台同类绘图机和3台同类打印机。为了正确驱动这些设备，系统应该提供（ ）个设备驱动程序。",
+        options: [
+            { key: "A", text: "5" },
+            { key: "B", text: "3" },
+            { key: "C", text: "2" },
+            { key: "D", text: "1" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-35",
+        stem: "磁盘调度的目的是为了缩短（ ）时间。",
+        options: [
+            { key: "A", text: "寻道" },
+            { key: "B", text: "延迟" },
+            { key: "C", text: "传送" },
+            { key: "D", text: "启动" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
         id: "hw1-1",
         stem: "从下面关于并发性的论述中选出一条正确的论述( )。",
         options: [
@@ -146,7 +613,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw1-12",
-        stem: "使用TSL(Test and Set Lock)指令实现进程互斥的伪代码如下所示。下列与该实现机制相关的叙述中，正确的是( )。\n\n```\ndo{\n...\nwhile(TSL(&lock));\ncritical section;\nlock=FALSE;\n...\n}while(TRUE);\n```",
+        stem: "使用TSL(Test and Set Lock)指令实现进程互斥的伪代码如下所示。下列与该实现机制相关的叙述中，正确的是( )。",
         options: [
             { key: "A", text: "退出临界区的进程负责唤醒阻塞态进程" },
             { key: "B", text: "while( TSL( &lock) )语句应在关中断状态下执行" },
@@ -185,7 +652,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw1-15",
-        stem: "有两个并发执行的进程P1和P2，共享初值为1的变量x。P1对x加1，P2对x减1。加1和减1操作的指令序列分别如下所示。两个操作完成后，x的值( )。\n\n```\n//加1操作                    //减1操作\nload R1,x  //取x到寄存器R1中   load R2, x\ninc R1                        dee R2\nshore x,R1 //将R1的内容存入x   shore x,R2\n```",
+        stem: "有两个并发执行的进程P1和P2，共享初值为1的变量x。P1对x加1，P2对x减1。加1和减1操作的指令序列分别如下所示。两个操作完成后，x的值( )。",
         options: [
             { key: "A", text: "只能为1" },
             { key: "B", text: "可能为0、1或2" },
@@ -419,7 +886,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw2-9",
-        stem: "进程P1、P2和P3进入就绪队列的时刻，优先值(越大优先权越高) 以及CPU的执行时间如下表所示。系统采用基于优先权的抢占式CPU调度算法，从0ms时刻开始进行调度，则P1、P2、P3的平均周转时间为( )。\n\n| 进程名 | 进入就绪队列的时刻 | 优先数 | CPU的执行时间 |\n| ------ | ------------------ | ------ | ------------- |\n| p1     | 0ms                | 1      | 60ms          |\n| p2     | 20ms               | 10     | 42ms          |\n| p3     | 30ms               | 100    | 13ms          |",
+        stem: "进程P1、P2和P3进入就绪队列的时刻，优先值(越大优先权越高) 以及CPU的执行时间如下表所示。系统采用基于优先权的抢占式CPU调度算法，从0ms时刻开始进行调度，则P1、P2、P3的平均周转时间为( )。",
         options: [
             { key: "A", text: "60ms" },
             { key: "B", text: "61ms" },
@@ -523,7 +990,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw2-17",
-        stem: "进程P0、P1、P2和P3进入就绪队列的时刻、优先级(值越小优先权越高)及CPU执行时间如下表所示。若系统采用基于优先权的抢占式进程调度算法，则从0ms时刻开始调度，到4个进程都运行结束为止，发生进程调度的总次数为( )。\n\n| 进程 | 进入就绪队列的时刻 | 优先数 | CPU执行时间 |\n| ---- | ------------------ | ------ | ----------- |\n| P0   | 0ms                | 15     | 100ms       |\n| P1   | 10ms               | 20     | 60ms        |\n| P2   | 10ms               | 10     | 20ms        |\n| P3   | 15ms               | 6      | 10ms        |",
+        stem: "进程P0、P1、P2和P3进入就绪队列的时刻、优先级(值越小优先权越高)及CPU执行时间如下表所示。若系统采用基于优先权的抢占式进程调度算法，则从0ms时刻开始调度，到4个进程都运行结束为止，发生进程调度的总次数为( )。",
         options: [
             { key: "A", text: "5" },
             { key: "B", text: "4" },
@@ -588,7 +1055,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw2-22",
-        stem: "某系统正在执行三个进程P1、P2和P3，各进程的计算(CPU)时间和I/O时间比例如下表所示。为提高系统资源利用率，合理的进程优先级设置应为( )。\n\n| 进程 | 计算时间 | I/O时间 |\n| ---- | -------- | ------- |\n| P1   | 90%      | 10%     |\n| P2   | 50%      | 50%     |\n| P3   | 15%      | 85%     |",
+        stem: "某系统正在执行三个进程P1、P2和P3，各进程的计算(CPU)时间和I/O时间比例如下表所示。为提高系统资源利用率，合理的进程优先级设置应为( )。",
         options: [
             { key: "A", text: "P2>P1=P3" },
             { key: "B", text: "P1>P2=P3" },
@@ -601,7 +1068,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw2-23",
-        stem: "某系统采用基于优先权的非抢占式进程调度策略,完成一次进程调度和进程切换的系统时间开销为1 µs。在T时刻就绪队列中有3个进程P1、P2和P3，其在就绪队列中的等待时间、需要的CPU时间和优先权如下表所示。若优先权值大的进程优先获得 CPU，从T时刻起系统开始进程调度，则系统的平均周转时间为( )。\n\n| 进程 | 等待时间 | 需要的CPU时间 | 优先权 |\n| ---- | -------- | ------------- | ------ |\n| P1   | 30μs     | 12μs          | 10     |\n| P2   | 15μs     | 24μs          | 30     |\n| P3   | 18μs     | 36μs          | 20     |",
+        stem: "某系统采用基于优先权的非抢占式进程调度策略,完成一次进程调度和进程切换的系统时间开销为1 µs。在T时刻就绪队列中有3个进程P1、P2和P3，其在就绪队列中的等待时间、需要的CPU时间和优先权如下表所示。若优先权值大的进程优先获得 CPU，从T时刻起系统开始进程调度，则系统的平均周转时间为( )。",
         options: [
             { key: "A", text: "75 µs" },
             { key: "B", text: "73 µs" },
@@ -614,7 +1081,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw2-24",
-        stem: "假设4个作业到达系统的时刻和运行时间如下表所示。系统在t=2时开始作业调度。若分别采用先来先服务和短作业优先调度算法，则选中的作业分别是( )。\n\n| 作业 | 到达时间t | 运行时间 |\n| ---- | --------- | -------- |\n| J1   | 0         | 3        |\n| J2   | 1         | 3        |\n| J3   | 1         | 2        |\n| J4   | 3         | 1        |",
+        stem: "假设4个作业到达系统的时刻和运行时间如下表所示。系统在t=2时开始作业调度。若分别采用先来先服务和短作业优先调度算法，则选中的作业分别是( )。",
         options: [
             { key: "A", text: "J1、J4" },
             { key: "B", text: "J2、J3" },
@@ -640,7 +1107,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw3-1",
-        stem: "设内存的分配情况如图所示。若要申请一址40K的内存空间，采用最佳适应算法，则所得到的分区首址是( )。",
+        stem: "设内存的分配情况如图所示。若要申请一块40K的内存空间，采用最佳适应算法，则所得到的分区首址是( )。",
         options: [
             { key: "A", text: "100K" },
             { key: "B", text: "190K" },
@@ -679,7 +1146,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw3-4",
-        stem: "在一个段式存储管理系统中，段表内容如下表所示。一个逻辑地址为（2, 154B），它对应的物理地址是( )。\n\n| 段号 | 段首地址 | 段长度 |\n| ---- | -------- | ------ |\n| 0    | 120K     | 40K    |\n| 1    | 760K     | 30K    |\n| 2    | 480K     | 20K    |\n| 3    | 370K     | 20K    |",
+        stem: "在一个段式存储管理系统中，段表内容如下表所示。一个逻辑地址为(2, 154B)，它对应的物理地址是( )。",
         options: [
             { key: "A", text: "120K+2B" },
             { key: "B", text: "480K+154B" },
@@ -848,7 +1315,7 @@ export const rawQuestions: Question[] = [
     },
     {
         id: "hw3-17",
-        stem: "某请求分页存储系统的页大小为4KB，按字节编址。系统给进程P分配2个固定的页框,并采用改进型Clock置换算法，进程P页表的部分内容如下表所示。若P访问虚拟地址为02A01H的存储单元，则经地址变换后得到的物理地址是( )。\n\n| 页号 | 页框号 | 存在位(1:存在，0:不存在) | 访问位(1:访问，0:未访问) | 修改位(1:修改，0:未修改) |\n| ---- | ------ | ------------------------ | ------------------------ | ------------------------ |\n| …    | …      | …                        | …                        | …                        |\n| 2    | 20H    | 0                        | 0                        | 0                        |\n| 3    | 60H    | 1                        | 1                        | 0                        |\n| 4    | 80H    | 1                        | 1                        | 1                        |\n| …    | …      | …                        | …                        | …                        |",
+        stem: "某请求分页存储系统的页大小为4KB，按字节编址。系统给进程P分配2个固定的页框,并采用改进型Clock置换算法，进程P页表的部分内容如下表所示。若P访问虚拟地址为02A01H的存储单元，则经地址变换后得到的物理地址是( )。",
         options: [
             { key: "A", text: "00A01H" },
             { key: "B", text: "20A01H" },
@@ -962,13 +1429,338 @@ export const rawQuestions: Question[] = [
         answer: "A",
         type: "single",
         explain: "暂无解析"
+    },
+    {
+        id: "obj-36",
+        stem: "文件系统中用（）管理文件。",
+        options: [
+            { key: "A", text: "作业控制块" },
+            { key: "B", text: "外页表" },
+            { key: "C", text: "目录" },
+            { key: "D", text: "软硬件结合的方法" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-37",
+        stem: "如果文件系统中有两个文件重名，不应采用（ ）。",
+        options: [
+            { key: "A", text: "单级目录结构" },
+            { key: "B", text: "树型目录结构" },
+            { key: "C", text: "二级目录结构" },
+            { key: "D", text: "非循环图目录结构" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-38",
+        stem: "下列选项中，支持文件长度可变、随机访问的磁盘存储空间分配方式是( )。",
+        options: [
+            { key: "A", text: "索引分配" },
+            { key: "B", text: "链接分配" },
+            { key: "C", text: "连续分配" },
+            { key: "D", text: "动态分区分配" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-39",
+        stem: "采用直接存取方法来读写硬盘上的物理记录时，效率最低的文件结构是( )。",
+        options: [
+            { key: "A", text: "连续文件" },
+            { key: "B", text: "索引文件" },
+            { key: "C", text: "链接文件" },
+            { key: "D", text: "索引连续文件" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-40",
+        stem: "在磁盘上容易导致存储碎片发生的物理文件结构是（ ）。",
+        options: [
+            { key: "A", text: "链接文件" },
+            { key: "B", text: "连续文件" },
+            { key: "C", text: "索引文件" },
+            { key: "D", text: "索引和链接文件" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-41",
+        stem: "UNIX系统中对空闲磁盘存储空间采用( )方法管理。",
+        options: [
+            { key: "A", text: "位示图" },
+            { key: "B", text: "空闲块成组链接" },
+            { key: "C", text: "空闲块单向链接" },
+            { key: "D", text: "空闲块表" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-42",
+        stem: "为支持CD-ROM中视频文件的快速随机播放，播放性能最好的文件数据块组织方式（ ）。",
+        options: [
+            { key: "A", text: "连续结构" },
+            { key: "B", text: "链式结构" },
+            { key: "C", text: "直接索引结构" },
+            { key: "D", text: "多级索引结构" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-43",
+        stem: "若某文件系统索引节点(inode)中有直接地址项和间接地址项，则下列选项中，与单个文件长度无关的因素是( )。",
+        options: [
+            { key: "A", text: "索引节点的总数" },
+            { key: "B", text: "间接地址索引的级数" },
+            { key: "C", text: "地址项的个数" },
+            { key: "D", text: "文件块大小" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-44",
+        stem: "一个系统，它的文件控制块占64B，一个磁盘块大小为1KB，采用一级目录。假定文件目录中有3200个目录项。问查找一个文件平均需要（ ）次访问磁盘。",
+        options: [
+            { key: "A", text: "50" },
+            { key: "B", text: "54" },
+            { key: "C", text: "100" },
+            { key: "D", text: "200" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-45",
+        stem: "某文件系统的簇（块）和磁盘扇区大小分别为1 KB和512B。若一个文件的大小为1026B，则系统分配给该文件的磁盘空间大小是( )。",
+        options: [
+            { key: "A", text: "1026B" },
+            { key: "B", text: "1536B" },
+            { key: "C", text: "1538B" },
+            { key: "D", text: "2048B" },
+        ],
+        answer: "D",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-46",
+        stem: "下列选项中，可用于文件系统管理空闲磁盘块的数据结构是( )。\n\t①位图 ②索引节点 ③空闲磁盘块链IV.文件分配表(FAT)",
+        options: [
+            { key: "A", text: "仅①②" },
+            { key: "B", text: "仅①③④" },
+            { key: "C", text: "仅①③" },
+            { key: "D", text: "仅②③④" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-47",
+        stem: "设文件索引节点中有7个地址项，其中4个地址项为直接地址索引，2个地址项是一级间接地址索引，1个地址项是二级间接地址索引，每个地址项大小为4字节，若磁盘索引块和磁盘数据块大小均为256字节，则可表示的单个文件的最大长度是（ ）。",
+        options: [
+            { key: "A", text: "33KB" },
+            { key: "B", text: "519KB" },
+            { key: "C", text: "1057KB" },
+            { key: "D", text: "16513KB" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-48",
+        stem: "假设某个文件的索引节点已在内存，其他信息均在外存，为了访问该文件的某内容，直接寻址、一次间接、二次间接、三次间接分别需要几次访盘？（ ）",
+        options: [
+            { key: "A", text: "0,1,2,3" },
+            { key: "B", text: "1,2,3,4" },
+            { key: "C", text: "2,3,4,5" },
+            { key: "D", text: "1,3,4,5" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-49",
+        stem: "某文件系统的目录项由文件名和索引节点号构成。若每个目录项长度为64字节，其中4个字节存放索引节点号，60个字节存放文件名，文件名由小写英文字母构成，则该文件系统能创建的文件数量的上限为( )。",
+        options: [
+            { key: "A", text: "2^26" },
+            { key: "B", text: "2^32" },
+            { key: "C", text: "2^60" },
+            { key: "D", text: "2^64" },
+        ],
+        answer: "B",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-50",
+        stem: "现有一个容量为10GB的磁盘分区，磁盘空间以簇(Cluster)为单位进行分配，簇的大小为4KB，若采用位图法管理该分区的空闲空间，即用一位(bit)标识一个簇是否被分配，则存放该位图所需簇的个数为( )。",
+        options: [
+            { key: "A", text: "80" },
+            { key: "B", text: "320" },
+            { key: "C", text: "80K" },
+            { key: "D", text: "320K" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-51",
+        stem: "引入高速缓冲的主要目的是（ ）。",
+        options: [
+            { key: "A", text: "提高CPU的利用率" },
+            { key: "B", text: "提高I/O设备的利用率" },
+            { key: "C", text: "改善CPU和I/O设备之间速度不匹配的情况" },
+            { key: "D", text: "节省内存" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-52",
+        stem: "CPU输出数据的速度远远高于打印机的打印速度，为了解决这一矛盾，可采用（ ）。",
+        options: [
+            { key: "A", text: "并行技术" },
+            { key: "B", text: "通道技术" },
+            { key: "C", text: "缓冲技术" },
+            { key: "D", text: "虚存技术" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-53",
+        stem: "通道相当于小型处理机，它用于实现（ ）之间的信息传输。",
+        options: [
+            { key: "A", text: "内存与外设" },
+            { key: "B", text: "CPU与外设" },
+            { key: "C", text: "内存与外存" },
+            { key: "D", text: "CPU与外存" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-54",
+        stem: "以时间换空间或者以空间换时间是操作系统的基本技术，以下属于以空间换时间的机制是( )。",
+        options: [
+            { key: "A", text: "SPOOLing" },
+            { key: "B", text: "虚拟存储技术" },
+            { key: "C", text: "通道技术" },
+            { key: "D", text: "覆盖技术" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-55",
+        stem: "通过硬件和软件的功能扩充，把原来独占的设备改造成能为若干用户共享的设备，这种设备称为（ ）。",
+        options: [
+            { key: "A", text: "存储设备" },
+            { key: "B", text: "系统设备" },
+            { key: "C", text: "用户设备" },
+            { key: "D", text: "虚拟设备" },
+        ],
+        answer: "D",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-56",
+        stem: "在（ ）I/O控制方式中，设备能直接与内存交换数据而不占用CPU。",
+        options: [
+            { key: "A", text: "轮询" },
+            { key: "B", text: "中断" },
+            { key: "C", text: "DMA" },
+            { key: "D", text: "MMU" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-57",
+        stem: "某系统中磁盘的磁道数为200(0~199)，磁头当前在184号磁道上。用户进程提出的磁盘访问请求对应的磁道号依次为184、 187、176、182、199。若采用最短寻道时间优先调度算法(SSTF)完成磁盘访问，则磁头移动的距离(磁道数)是( )。",
+        options: [
+            { key: "A", text: "37" },
+            { key: "B", text: "38" },
+            { key: "C", text: "41" },
+            { key: "D", text: "42" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-58",
+        stem: "在以下磁盘调度算法中，（ ）算法可能会随时改变移动臂的运动方向 。",
+        options: [
+            { key: "A", text: "最短寻道时间优先" },
+            { key: "B", text: "扫描SCAN（双向扫描）" },
+            { key: "C", text: "巡回扫描C-SCAN（单向扫描）" },
+            { key: "D", text: "都不会" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-59",
+        stem: "一个计算机系统配置了2台同类绘图机和3台同类打印机。为了正确驱动这些设备，系统应该提供（ ）个设备驱动程序。",
+        options: [
+            { key: "A", text: "5" },
+            { key: "B", text: "3" },
+            { key: "C", text: "2" },
+            { key: "D", text: "1" },
+        ],
+        answer: "C",
+        type: "single",
+        explain: "暂无解析"
+    },
+    {
+        id: "obj-60",
+        stem: "磁盘调度的目的是为了缩短（ ）时间。",
+        options: [
+            { key: "A", text: "寻道" },
+            { key: "B", text: "延迟" },
+            { key: "C", text: "传送" },
+            { key: "D", text: "启动" },
+        ],
+        answer: "A",
+        type: "single",
+        explain: "暂无解析"
     }
 ];
 
 export const getQuestionBankStats = () => {
     return {
-        total: 74,
-        single: 74,
+        total: 134,
+        single: 134,
         multi: 0,
         boolean: 0,
         fill: 0,
