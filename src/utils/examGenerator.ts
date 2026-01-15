@@ -11,11 +11,11 @@ import type { Question, WrongQuestion } from '../types';
 import { rawQuestions } from '../data/raw_questions';
 
 /**
- * 考试配置：25题 = 5单选 + 20填空
+ * 考试配置：30题 = 6单选 + 24填空
  */
 const EXAM_CONFIG = {
-  single: 5,     // 单选题数量
-  fill: 20,      // 填空题数量
+  single: 6,     // 单选题数量
+  fill: 24,      // 填空题数量
 };
 
 /**
