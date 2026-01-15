@@ -573,7 +573,7 @@ export default function EssayMode({ onBack }: { onBack: () => void }) {
             className="flex items-center gap-1.5 sm:gap-2 text-gray-700 hover:text-gray-900 font-semibold bg-white/95 backdrop-blur-md shadow-lg rounded-xl px-3 sm:px-5 py-2 sm:py-2.5 pointer-events-auto transition-all hover:shadow-xl hover:scale-105 text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="hidden sm:inline">返回作业题回顾</span>
+            <span className="hidden sm:inline">返回主页</span>
             <span className="sm:hidden">返回</span>
           </button>
         </div>

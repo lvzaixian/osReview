@@ -2,15 +2,13 @@ import { BookOpen, Brain, RotateCcw, FileText, ArrowLeft, Trash2, BookMarked } f
 import type { ExamMode, UserProgress } from '../types';
 
 interface ModeSelectorProps {
-  onBack: () => void;
   onSelectMode: (mode: ExamMode) => void;
   onShowTrashBin: () => void;
   onShowEssayMode: () => void; // 新增：显示大题模式
   userProgress: UserProgress;
-  setShowModeSelector: (show: boolean) => void;
 }
 
-export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onShowEssayMode, userProgress, setShowModeSelector }: ModeSelectorProps) {
+export default function ModeSelector({ onSelectMode, onShowTrashBin, onShowEssayMode, userProgress }: ModeSelectorProps) {
   const modes = [
     {
       mode: 'study' as ExamMode,
@@ -49,24 +47,8 @@ export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onS
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-3 sm:px-6 py-6 sm:py-12">
-        {/* Header */}
-        <div className="mb-6 sm:mb-8">
-          <button
-            onClick={onBack}
-            className="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-gray-800 font-medium transition-colors mb-4 sm:mb-6 text-sm sm:text-base"
-          >
-            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            返回主菜单
-          </button>
-          
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center mb-2 sm:mb-3">
-            作业题回顾
-          </h1>
-          <p className="text-center text-sm sm:text-base text-gray-600">
-            选择一种学习模式开始复习
-          </p>
-        </div>
-
+        {/* Header Removed as per request */}
+        
         {/* 选填板块标题 */}
         <div className="max-w-4xl mx-auto mb-3 sm:mb-4">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center gap-2">
@@ -97,7 +79,6 @@ export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onS
         <div className="max-w-4xl mx-auto mb-6 sm:mb-8">
           <button
             onClick={() => {
-              setShowModeSelector(true); // 保持模式选择器状态
               onShowTrashBin();
             }}
             className="w-full flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-6 py-3 sm:py-4 bg-red-500 hover:bg-red-600 text-white rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95"
@@ -127,7 +108,6 @@ export default function ModeSelector({ onBack, onSelectMode, onShowTrashBin, onS
           
           <button
             onClick={() => {
-              setShowModeSelector(true);
               onShowEssayMode();
             }}
             className="w-full flex flex-col items-center justify-center gap-3 sm:gap-4 px-6 sm:px-8 py-6 sm:py-8 bg-gradient-to-br from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white rounded-xl sm:rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95"
