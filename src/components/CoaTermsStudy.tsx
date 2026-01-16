@@ -21,7 +21,7 @@ const TermsFlashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { 
           {/* Front */}
           <div className="absolute inset-0 w-full h-full bg-white rounded-2xl flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 border-2 border-cyan-50 hover:border-cyan-200 relative overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
             {item.important && <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-5 md:right-5 bg-gradient-to-r from-red-500 to-rose-500 text-white text-[10px] sm:text-xs md:text-sm px-2 sm:px-3 md:px-4 py-0.5 sm:py-1 md:py-1.5 rounded-full font-bold shadow-sm">⭐ 重点</div>}
-            <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-3 sm:mb-4 md:mb-6">💻</div>
+            <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-3 sm:mb-4 md:mb-6">{item.emoji || '💻'}</div>
             <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center leading-tight px-2">{item.term}</h3>
             <p className="absolute bottom-4 sm:bottom-6 md:bottom-8 text-gray-400 text-[10px] sm:text-xs md:text-sm animate-pulse flex items-center gap-1"><RotateCcw className="w-3 h-3 md:w-4 md:h-4" /> 点击看答案</p>
           </div>
@@ -33,10 +33,11 @@ const TermsFlashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { 
               {/* 答案内容区 */}
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 sm:p-4 md:p-5 border border-cyan-100 shadow-sm">
                 <div className="text-sm sm:text-base md:text-lg lg:text-xl space-y-3">
-                  {/* 英文全称 */}
+                  {/* 全称 */}
                   <div className="pb-3 border-b-2 border-cyan-100">
-                    <div className="text-xs md:text-sm text-cyan-600 font-bold mb-2">英文全称:</div>
-                    <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{item.fullName}</div>
+                    <div className="text-xs md:text-sm text-cyan-600 font-bold mb-2">全称:</div>
+                    <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{item.fullNameEn}</div>
+                    <div className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mt-1">{item.fullNameCn}</div>
                   </div>
                   
                   {/* 定义 */}
@@ -105,7 +106,7 @@ const ListView = ({ items }: { items: CoaTerm[] }) => {
           >
             <div className="flex items-center gap-3 sm:gap-4 md:gap-5 flex-1 min-w-0">
               <span className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center rounded-xl text-xl sm:text-2xl md:text-3xl bg-gradient-to-br from-cyan-100 to-blue-100 shadow-sm">
-                💻
+                {item.emoji || '💻'}
               </span>
               <div className="flex-1 min-w-0">
                 <span className="font-bold text-gray-800 leading-tight text-lg sm:text-xl md:text-2xl lg:text-3xl block">
@@ -130,10 +131,11 @@ const ListView = ({ items }: { items: CoaTerm[] }) => {
                 {/* 答案内容 - 完全对齐 EssayMode 的答案渲染样式 */}
                 <div className="bg-white rounded-xl p-3 sm:p-4 md:p-5 border border-cyan-100 shadow-inner">
                   <div className="text-sm sm:text-base md:text-lg space-y-3">
-                    {/* 英文全称 */}
+                    {/* 全称 */}
                     <div className="pb-3 border-b-2 border-cyan-100">
-                      <div className="text-xs md:text-sm text-cyan-600 font-bold mb-2">英文全称:</div>
-                      <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{item.fullName}</div>
+                      <div className="text-xs md:text-sm text-cyan-600 font-bold mb-2">全称:</div>
+                      <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{item.fullNameEn}</div>
+                      <div className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mt-1">{item.fullNameCn}</div>
                     </div>
                     
                     {/* 定义 */}
