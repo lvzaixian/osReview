@@ -4,11 +4,13 @@ import ExamEngineTest from './components/ExamEngineTest';
 import TrashBin from './components/TrashBin';
 import ModeSelector from './components/ModeSelector';
 import EssayMode from './components/EssayMode';
+import CoaModeSelector from './components/CoaModeSelector';
 import CoaTermsStudy from './components/CoaTermsStudy';
 import { loadProgress, saveProgress } from './utils/storage';
 import type { ExamMode } from './types';
 
 type StudyDomain = 'os' | 'coa';
+type CoaMode = 'terms' | null;
 
 function App() {
   const [stats, setStats] = useState<ReturnType<typeof getFullStats> | null>(null);
@@ -16,6 +18,7 @@ function App() {
   const [showTrashBin, setShowTrashBin] = useState(false);
   const [showEssayMode, setShowEssayMode] = useState(false);
   const [studyDomain, setStudyDomain] = useState<StudyDomain>('os');
+  const [coaMode, setCoaMode] = useState<CoaMode>(null);
   const [userProgress, setUserProgress] = useState(() => loadProgress());
 
   // 每次显示垃圾桶时重新加载数据
@@ -79,9 +82,25 @@ function App() {
     alert('此功能将在垃圾桶中查看题目，不需跳转到其他模式');
   };
 
-  // COA名词解释模式
-  if (studyDomain === 'coa' && !currentMode && !showTrashBin && !showEssayMode) {
-    return <CoaTermsStudy onBack={() => setStudyDomain('os')} />;
+  // COA 模式选择器
+  if (studyDomain === 'coa' && coaMode === null && !currentMode && !showTrashBin && !showEssayMode) {
+    return (
+      <CoaModeSelector
+        onSelectMode={(mode) => setCoaMode(mode)}
+        onBack={() => setStudyDomain('os')}
+      />
+    );
+  }
+
+  // COA 名词解释学习模式
+  if (studyDomain === 'coa' && coaMode === 'terms' && !currentMode && !showTrashBin && !showEssayMode) {
+    return (
+      <CoaTermsStudy 
+        onBack={() => {
+          setCoaMode(null);
+        }}
+      />
+    );
   }
 
   // 如果显示大题模式（优先级高于垃圾桶）
@@ -130,7 +149,10 @@ function App() {
          {/* 右上角模式切换按钮 */}
          <div className="absolute top-4 right-4 sm:top-8 sm:right-8 flex gap-2">
            <button
-             onClick={() => setStudyDomain('os')}
+             onClick={() => {
+               setStudyDomain('os');
+               setCoaMode(null);
+             }}
              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                studyDomain === 'os'
                  ? 'bg-blue-600 text-white shadow-lg'
@@ -140,7 +162,10 @@ function App() {
              OS
            </button>
            <button
-             onClick={() => setStudyDomain('coa')}
+             onClick={() => {
+               setStudyDomain('coa');
+               setCoaMode(null);
+             }}
              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                studyDomain === 'coa'
                  ? 'bg-blue-600 text-white shadow-lg'
