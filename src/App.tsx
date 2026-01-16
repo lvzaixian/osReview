@@ -4,14 +4,18 @@ import ExamEngineTest from './components/ExamEngineTest';
 import TrashBin from './components/TrashBin';
 import ModeSelector from './components/ModeSelector';
 import EssayMode from './components/EssayMode';
+import CoaTermsStudy from './components/CoaTermsStudy';
 import { loadProgress, saveProgress } from './utils/storage';
 import type { ExamMode } from './types';
+
+type StudyDomain = 'os' | 'coa';
 
 function App() {
   const [stats, setStats] = useState<ReturnType<typeof getFullStats> | null>(null);
   const [currentMode, setCurrentMode] = useState<ExamMode | null>(null);
   const [showTrashBin, setShowTrashBin] = useState(false);
   const [showEssayMode, setShowEssayMode] = useState(false);
+  const [studyDomain, setStudyDomain] = useState<StudyDomain>('os');
   const [userProgress, setUserProgress] = useState(() => loadProgress());
 
   // 每次显示垃圾桶时重新加载数据
@@ -34,7 +38,7 @@ function App() {
     setStats(questionStats);
     
     // 在控制台输出详细统计
-    console.group('📚 ExamRank1 题库统计');
+    console.group('📚 OS&COA Reviewer 题库统计');
     console.log('总题数:', questionStats.questionBank.total);
     console.log('数据完整:', questionStats.questionBank.isComplete ? '✅ 是' : '⚠️ 否（待补充）');
     console.groupEnd();
@@ -75,6 +79,10 @@ function App() {
     alert('此功能将在垃圾桶中查看题目，不需跳转到其他模式');
   };
 
+  // COA名词解释模式
+  if (studyDomain === 'coa' && !currentMode && !showTrashBin && !showEssayMode) {
+    return <CoaTermsStudy onBack={() => setStudyDomain('os')} />;
+  }
 
   // 如果显示大题模式（优先级高于垃圾桶）
   if (showEssayMode) {
@@ -111,13 +119,37 @@ function App() {
   // 默认显示题库主页
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
-       <div className="pt-8 pb-2 text-center">
+       <div className="pt-8 pb-2 text-center relative">
          <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 mb-2">
-            ExamRank1
+            OS&COA Reviewer
          </h1>
          <p className="text-xl text-gray-700 font-medium">
-            操作系统 - 期末突击复习系统
+            操作系统 + 计算机组成原理 - 期末突击复习系统
          </p>
+         
+         {/* 右上角模式切换按钮 */}
+         <div className="absolute top-4 right-4 sm:top-8 sm:right-8 flex gap-2">
+           <button
+             onClick={() => setStudyDomain('os')}
+             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+               studyDomain === 'os'
+                 ? 'bg-blue-600 text-white shadow-lg'
+                 : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+             }`}
+           >
+             OS
+           </button>
+           <button
+             onClick={() => setStudyDomain('coa')}
+             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+               studyDomain === 'coa'
+                 ? 'bg-blue-600 text-white shadow-lg'
+                 : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+             }`}
+           >
+             COA
+           </button>
+         </div>
        </div>
       <ModeSelector 
         onSelectMode={setCurrentMode}
