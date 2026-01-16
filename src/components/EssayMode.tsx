@@ -403,11 +403,11 @@ const Flashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { item:
         <div className="w-full h-full transition-all duration-500 shadow-xl rounded-2xl relative" style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}>
           
           {/* Front */}
-          <div className="absolute inset-0 w-full h-full bg-white rounded-2xl flex flex-col items-center justify-center p-4 sm:p-6 border-2 border-purple-50 hover:border-purple-200 relative overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
-            {item.important && <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-gradient-to-r from-red-500 to-rose-500 text-white text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full font-bold shadow-sm">⭐ 重点</div>}
-            <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">{item.emoji}</div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 text-center leading-tight px-2">{item.q}</h3>
-            <p className="absolute bottom-4 sm:bottom-6 text-gray-400 text-[10px] sm:text-xs animate-pulse flex items-center gap-1"><RotateCcw className="w-3 h-3" /> 点击看答案</p>
+          <div className="absolute inset-0 w-full h-full bg-white rounded-2xl flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 border-2 border-purple-50 hover:border-purple-200 relative overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
+            {item.important && <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-5 md:right-5 bg-gradient-to-r from-red-500 to-rose-500 text-white text-sm sm:text-base md:text-lg px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-bold shadow-sm">⭐ 重点</div>}
+            <div className="text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] mb-4 sm:mb-6 md:mb-8">{item.emoji}</div>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center leading-tight px-2">{item.q}</h3>
+            <p className="absolute bottom-4 sm:bottom-6 md:bottom-8 text-gray-400 text-sm sm:text-base md:text-lg animate-pulse flex items-center gap-1"><RotateCcw className="w-4 h-4 md:w-5 md:h-5" /> 点击看答案</p>
           </div>
 
           {/* Back */}
@@ -416,10 +416,10 @@ const Flashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { item:
                <button onClick={() => setRevealAll(!revealAll)} className={`p-1.5 sm:p-2 rounded-full transition-all ${revealAll ? 'bg-purple-500 text-white' : 'bg-purple-100 text-purple-600 hover:bg-purple-200'}`} title={revealAll ? "隐藏关键词" : "显示关键词"}>{revealAll ? <Eye className="w-3 h-3 sm:w-4 sm:h-4" /> : <EyeOff className="w-3 h-3 sm:w-4 sm:h-4" />}</button>
             </div>
             
-            <div className="flex-1 overflow-y-auto mt-6 sm:mt-8 px-1 sm:px-2 pb-2 sm:pb-3">
+            <div className="flex-1 overflow-y-auto mt-6 sm:mt-8 md:mt-10 px-1 sm:px-2 md:px-3 pb-2 sm:pb-3 md:pb-4">
               {/* 答案内容区 - 结构化渲染 */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-purple-100 shadow-sm">
-                <div className="text-sm sm:text-base">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 sm:p-4 md:p-5 border border-purple-100 shadow-sm">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl">
                   <StructuredAnswer 
                     answer={item.a} 
                     keywords={item.keywords} 
@@ -468,20 +468,20 @@ const ListView = ({ items }: { items: typeof essayData }) => {
         <div key={idx} className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden transition-all hover:shadow-lg hover:border-purple-200">
           <button 
             onClick={() => toggle(idx)}
-            className="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-gradient-to-r hover:from-purple-50/50 hover:to-transparent transition-all"
+            className="w-full flex items-center justify-between p-4 sm:p-5 md:p-6 text-left hover:bg-gradient-to-r hover:from-purple-50/50 hover:to-transparent transition-all"
           >
-            <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-              <span className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl text-xl sm:text-2xl bg-gradient-to-br from-purple-100 to-pink-100 shadow-sm">
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-5 flex-1 min-w-0">
+              <span className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 flex items-center justify-center rounded-xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-br from-purple-100 to-pink-100 shadow-sm">
                 {item.emoji}
               </span>
               <div className="flex-1 min-w-0">
-                <span className="font-bold text-gray-800 leading-tight text-base sm:text-lg block">
+                <span className="font-bold text-gray-800 leading-tight text-lg sm:text-xl md:text-2xl lg:text-3xl block">
                   {item.q}
                 </span>
-                <span className="text-xs sm:text-sm text-gray-500 mt-1 block">第 {idx + 1} 题</span>
+                <span className="text-sm sm:text-base md:text-lg text-gray-500 mt-1 block">第 {idx + 1} 题</span>
               </div>
               {item.important && (
-                 <span className="flex-shrink-0 px-2 sm:px-3 py-1 bg-gradient-to-r from-red-500 to-rose-500 text-white text-[10px] sm:text-xs font-bold rounded-full shadow-sm">
+                 <span className="flex-shrink-0 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-red-500 to-rose-500 text-white text-sm sm:text-base font-bold rounded-full shadow-sm">
                    ⭐ 重点
                  </span>
               )}
@@ -492,11 +492,11 @@ const ListView = ({ items }: { items: typeof essayData }) => {
           </button>
           
           <div className={`transition-all duration-300 ease-in-out ${openIndex === idx ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-            <div className="px-4 sm:px-5 pb-4 sm:pb-5 bg-gradient-to-b from-gray-50/50 to-white border-t border-gray-100">
-              <div className="mt-3 sm:mt-4">
+            <div className="px-4 sm:px-5 md:px-6 pb-4 sm:pb-5 md:pb-6 bg-gradient-to-b from-gray-50/50 to-white border-t border-gray-100">
+              <div className="mt-3 sm:mt-4 md:mt-5">
                 {/* 结构化答案渲染 */}
-                <div className="bg-white rounded-xl p-3 sm:p-4 border border-purple-100 shadow-inner">
-                  <div className="text-sm sm:text-base">
+                <div className="bg-white rounded-xl p-3 sm:p-4 md:p-5 border border-purple-100 shadow-inner">
+                  <div className="text-base sm:text-lg md:text-xl lg:text-2xl">
                     <StructuredAnswer 
                       answer={item.a} 
                       keywords={item.keywords} 
@@ -508,12 +508,12 @@ const ListView = ({ items }: { items: typeof essayData }) => {
 
                 {/* 提示信息 */}
                 {item.tips && (
-                  <div className="mt-3 bg-gradient-to-r from-amber-50 to-orange-50 py-2 px-3 rounded-lg border border-amber-200/50">
+                  <div className="mt-3 bg-gradient-to-r from-amber-50 to-orange-50 py-2 sm:py-3 px-3 sm:px-4 rounded-lg border border-amber-200/50">
                     <div className="flex items-start gap-2">
-                      <span className="text-lg flex-shrink-0">💡</span>
+                      <span className="text-xl sm:text-2xl flex-shrink-0">💡</span>
                       <div className="flex-1">
-                        <div className="font-bold text-amber-900 text-xs sm:text-sm">记忆提示</div>
-                        <div className="text-xs sm:text-sm text-amber-800 leading-snug">{item.tips}</div>
+                        <div className="font-bold text-amber-900 text-sm sm:text-base md:text-lg">记忆提示</div>
+                        <div className="text-sm sm:text-base md:text-lg text-amber-800 leading-snug">{item.tips}</div>
                       </div>
                     </div>
                   </div>

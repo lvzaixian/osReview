@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* 增大整体字体 */
+/* 增大整体字体 - 优化移动端和PC端阅读体验 */
 html {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 @media (max-width: 640px) {
   html {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 

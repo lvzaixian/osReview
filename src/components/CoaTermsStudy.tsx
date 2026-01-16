@@ -20,10 +20,10 @@ const TermsFlashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { 
           
           {/* Front */}
           <div className="absolute inset-0 w-full h-full bg-white rounded-2xl flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 border-2 border-cyan-50 hover:border-cyan-200 relative overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
-            {item.important && <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-5 md:right-5 bg-gradient-to-r from-red-500 to-rose-500 text-white text-[10px] sm:text-xs md:text-sm px-2 sm:px-3 md:px-4 py-0.5 sm:py-1 md:py-1.5 rounded-full font-bold shadow-sm">⭐ 重点</div>}
-            <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-3 sm:mb-4 md:mb-6">{item.emoji || '💻'}</div>
-            <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center leading-tight px-2">{item.term}</h3>
-            <p className="absolute bottom-4 sm:bottom-6 md:bottom-8 text-gray-400 text-[10px] sm:text-xs md:text-sm animate-pulse flex items-center gap-1"><RotateCcw className="w-3 h-3 md:w-4 md:h-4" /> 点击看答案</p>
+            {item.important && <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-5 md:right-5 bg-gradient-to-r from-red-500 to-rose-500 text-white text-sm sm:text-base md:text-lg px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-bold shadow-sm">⭐ 重点</div>}
+            <div className="text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] mb-4 sm:mb-6 md:mb-8">{item.emoji || '💻'}</div>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 text-center leading-tight px-2">{item.term}</h3>
+            <p className="absolute bottom-4 sm:bottom-6 md:bottom-8 text-gray-400 text-sm sm:text-base md:text-lg animate-pulse flex items-center gap-1"><RotateCcw className="w-4 h-4 md:w-5 md:h-5" /> 点击看答案</p>
           </div>
 
           {/* Back */}
@@ -32,17 +32,17 @@ const TermsFlashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { 
             <div className="flex-1 overflow-y-auto mt-6 sm:mt-8 md:mt-10 px-1 sm:px-2 md:px-3 pb-2 sm:pb-3 md:pb-4">
               {/* 答案内容区 */}
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 sm:p-4 md:p-5 border border-cyan-100 shadow-sm">
-                <div className="text-sm sm:text-base md:text-lg lg:text-xl space-y-3">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl space-y-3 sm:space-y-4">
                   {/* 全称 */}
                   <div className="pb-3 border-b-2 border-cyan-100">
-                    <div className="text-xs md:text-sm text-cyan-600 font-bold mb-2">全称:</div>
-                    <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{item.fullNameEn}</div>
-                    <div className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mt-1">{item.fullNameCn}</div>
+                    <div className="text-sm sm:text-base md:text-lg text-cyan-600 font-bold mb-2">全称:</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">{item.fullNameEn}</div>
+                    <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-700 mt-1">{item.fullNameCn}</div>
                   </div>
                   
                   {/* 定义 */}
                   <div>
-                    <div className="text-xs md:text-sm text-gray-600 font-bold mb-2">定义:</div>
+                    <div className="text-sm sm:text-base md:text-lg text-gray-600 font-bold mb-2">定义:</div>
                     <p className="text-gray-800 leading-relaxed">{item.definition}</p>
                   </div>
                   
@@ -81,7 +81,7 @@ const TermsFlashcard = ({ item, onNext, onPrev, isMastered, toggleMastered }: { 
 
       <div className="flex items-center justify-between w-full mt-4 sm:mt-6 gap-2 sm:gap-4">
         <button onClick={(e) => { e.stopPropagation(); onPrev(); }} className="p-3 sm:p-4 rounded-full bg-white shadow-md hover:bg-gray-50 text-gray-700 border border-gray-200 hover:shadow-lg transition-all"><ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" /></button>
-        <button onClick={toggleMastered} className={`flex-1 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl shadow-sm font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${isMastered ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white shadow-green-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:border-gray-300'}`}>{isMastered ? <><CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" /> <span className="hidden sm:inline">已掌握 (移除)</span><span className="sm:hidden">已掌握</span></> : <><Target className="w-3 h-3 sm:w-4 sm:h-4" /> <span className="hidden sm:inline">标记为已掌握</span><span className="sm:hidden">标记</span></>}</button>
+        <button onClick={toggleMastered} className={`flex-1 py-2.5 sm:py-3 md:py-3.5 px-3 sm:px-4 md:px-5 rounded-xl shadow-sm font-bold text-sm sm:text-base md:text-lg transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${isMastered ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white shadow-green-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:border-gray-300'}`}>{isMastered ? <><CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" /> <span className="hidden sm:inline">已掌握 (移除)</span><span className="sm:hidden">已掌握</span></> : <><Target className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" /> <span className="hidden sm:inline">标记为已掌握</span><span className="sm:hidden">已掌握</span></>}</button>
         <button onClick={(e) => { e.stopPropagation(); onNext(); }} className="p-3 sm:p-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shadow-md hover:shadow-lg text-white transition-all hover:scale-105"><ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" /></button>
       </div>
     </div>
@@ -105,17 +105,17 @@ const ListView = ({ items }: { items: CoaTerm[] }) => {
             className="w-full flex items-center justify-between p-4 sm:p-5 md:p-6 text-left hover:bg-gradient-to-r hover:from-cyan-50/50 hover:to-transparent transition-all"
           >
             <div className="flex items-center gap-3 sm:gap-4 md:gap-5 flex-1 min-w-0">
-              <span className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center rounded-xl text-xl sm:text-2xl md:text-3xl bg-gradient-to-br from-cyan-100 to-blue-100 shadow-sm">
+              <span className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 flex items-center justify-center rounded-xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-br from-cyan-100 to-blue-100 shadow-sm">
                 {item.emoji || '💻'}
               </span>
               <div className="flex-1 min-w-0">
-                <span className="font-bold text-gray-800 leading-tight text-lg sm:text-xl md:text-2xl lg:text-3xl block">
+                <span className="font-bold text-gray-800 leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl block">
                   {item.term}
                 </span>
-                <span className="text-xs sm:text-sm md:text-base text-gray-500 mt-1 block">第 {idx + 1} 项</span>
+                <span className="text-sm sm:text-base md:text-lg text-gray-500 mt-1 block">第 {idx + 1} 项</span>
               </div>
               {item.important && (
-                 <span className="flex-shrink-0 px-2 sm:px-3 py-1 bg-gradient-to-r from-red-500 to-rose-500 text-white text-[10px] sm:text-xs font-bold rounded-full shadow-sm">
+                 <span className="flex-shrink-0 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-red-500 to-rose-500 text-white text-sm sm:text-base font-bold rounded-full shadow-sm">
                    ⭐ 重点
                  </span>
               )}
@@ -130,24 +130,24 @@ const ListView = ({ items }: { items: CoaTerm[] }) => {
               <div className="mt-3 sm:mt-4 md:mt-5">
                 {/* 答案内容 - 完全对齐 EssayMode 的答案渲染样式 */}
                 <div className="bg-white rounded-xl p-3 sm:p-4 md:p-5 border border-cyan-100 shadow-inner">
-                  <div className="text-sm sm:text-base md:text-lg space-y-3">
+                  <div className="text-base sm:text-lg md:text-xl lg:text-2xl space-y-3 sm:space-y-4">
                     {/* 全称 */}
                     <div className="pb-3 border-b-2 border-cyan-100">
-                      <div className="text-xs md:text-sm text-cyan-600 font-bold mb-2">全称:</div>
-                      <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{item.fullNameEn}</div>
-                      <div className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mt-1">{item.fullNameCn}</div>
+                      <div className="text-sm sm:text-base md:text-lg text-cyan-600 font-bold mb-2">全称:</div>
+                      <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">{item.fullNameEn}</div>
+                      <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-700 mt-1">{item.fullNameCn}</div>
                     </div>
                     
                     {/* 定义 */}
                     <div>
-                      <div className="text-xs md:text-sm text-gray-600 font-bold mb-2">定义:</div>
+                      <div className="text-sm sm:text-base md:text-lg text-gray-600 font-bold mb-2">定义:</div>
                       <p className="text-gray-800 leading-relaxed">{item.definition}</p>
                     </div>
                     
                     {/* 关键词 */}
                     {item.keywords && item.keywords.length > 0 && (
                       <div>
-                        <div className="text-xs md:text-sm text-gray-600 font-bold mb-2">关键词:</div>
+                        <div className="text-sm sm:text-base md:text-lg text-gray-600 font-bold mb-2">关键词:</div>
                         <div className="flex flex-wrap gap-2">
                           {item.keywords.map((kw, kidx) => (
                             <span key={kidx} className="bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full text-xs sm:text-sm md:text-base">
@@ -224,9 +224,9 @@ export default function CoaTermsStudy({ onBack }: CoaTermsStudyProps) {
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <button
             onClick={onBack}
-            className="flex items-center gap-1.5 sm:gap-2 text-gray-700 hover:text-gray-900 font-semibold bg-white/95 backdrop-blur-md shadow-lg rounded-xl px-3 sm:px-5 py-2 sm:py-2.5 pointer-events-auto transition-all hover:shadow-xl hover:scale-105 text-sm sm:text-base"
+            className="flex items-center gap-1.5 sm:gap-2 text-gray-700 hover:text-gray-900 font-semibold bg-white/95 backdrop-blur-md shadow-lg rounded-xl px-4 sm:px-6 py-2.5 sm:py-3 md:py-3.5 pointer-events-auto transition-all hover:shadow-xl hover:scale-105 text-base sm:text-lg md:text-xl"
           >
-            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
             <span className="hidden sm:inline">返回主页</span>
             <span className="sm:hidden">返回</span>
           </button>

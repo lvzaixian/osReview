@@ -139,10 +139,10 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
        <div className="pt-8 pb-2 text-center relative">
-         <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 mb-2">
+         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 mb-2 sm:mb-3">
             OS&COA Reviewer
          </h1>
-         <p className="text-xl text-gray-700 font-medium">
+         <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-medium">
             操作系统 + 计算机组成原理 - 期末突击复习系统
          </p>
          
@@ -153,7 +153,7 @@ function App() {
                setStudyDomain('os');
                setCoaMode(null);
              }}
-             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+             className={`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg font-semibold text-base sm:text-lg md:text-xl transition-all ${
                studyDomain === 'os'
                  ? 'bg-blue-600 text-white shadow-lg'
                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
@@ -166,7 +166,7 @@ function App() {
                setStudyDomain('coa');
                setCoaMode(null);
              }}
-             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+             className={`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg font-semibold text-base sm:text-lg md:text-xl transition-all ${
                studyDomain === 'coa'
                  ? 'bg-blue-600 text-white shadow-lg'
                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
