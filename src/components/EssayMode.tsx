@@ -191,6 +191,7 @@ const essayData: EssayItem[] = [
     q: '简述I/O管理中引入缓冲区的目的。',
     a: [
       { type: 'point', num: '①', content: '缓和CPU与I/O设备间速度不匹配的矛盾；' },
+      { type: 'point', num: '②', content: '减少对CPU的中断频率，放宽对CPU中断响应时间的限制；' },
       { type: 'point', num: '③', content: '解决数据粒度不匹配的问题；' },
       { type: 'point', num: '④', content: '提高CPU与I/O设备之间的并行性。' }
     ],
