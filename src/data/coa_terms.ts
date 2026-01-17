@@ -15,6 +15,7 @@ export interface CoaTerm {
 }
 
 export const coaTerms: CoaTerm[] = [
+  // ==================== 存储器家族 ====================
   {
     id: 'coa-1',
     term: 'ROM',
@@ -25,127 +26,6 @@ export const coaTerms: CoaTerm[] = [
     tips: '只读 = 不能写，断电不丢失',
     important: true,
     emoji: '💾'
-  },
-  {
-    id: 'coa-2',
-    term: 'CU',
-    fullNameEn: 'Control Unit',
-    fullNameCn: '控制单元',
-    definition: '处理器的重要组成部分，主要功能是向计算机中各部分发送控制信号。CU负责指令的解析和执行控制，根据指令操作码产生相应的微操作序列，驱动整个计算机工作。',
-    keywords: ['控制信号', '指令解析', '微操作', '核心部件'],
-    tips: '控制单元 = CPU的"大脑"，负责控制整个系统',
-    important: true,
-    emoji: '🎮'
-  },
-  {
-    id: 'coa-3',
-    term: 'DRAM',
-    fullNameEn: 'Dynamic Random-Access Memory',
-    fullNameCn: '动态随机存取存储器',
-    definition: '一种使用电容存储信息的存储器。由于电容会自然放电，所以需要定期刷新以保持数据。DRAM具有集成度高、功耗低、成本低的优点，是现在最常见的主存储器。',
-    keywords: ['动态', '电容', '需要刷新', '主存', '成本低'],
-    tips: '动态 = 需要定期刷新，这就是名字的来源',
-    important: true,
-    emoji: '⚡'
-  },
-  {
-    id: 'coa-4',
-    term: 'RISC',
-    fullNameEn: 'Reduced Instruction Set Computer',
-    fullNameCn: '精简指令集计算机',
-    definition: '一种处理器设计哲学，采用指令集简洁、指令数量少、指令长度固定的设计方案。RISC处理器执行速度快，易于设计，但程序代码较长。',
-    keywords: ['精简', '指令集少', '执行快', '易设计'],
-    tips: '精简 = 指令少但执行快，代码长',
-    important: true,
-    emoji: '🚀'
-  },
-  {
-    id: 'coa-5',
-    term: 'EEPROM',
-    fullNameEn: 'Electrically Erasable Programmable Read-Only Memory',
-    fullNameCn: '电可擦除可编程只读存储器',
-    definition: '一种可重复擦除和编程的只读存储器。可以用电信号擦除其中全部或部分内容，然后重新编程。EEPROM具有非易失性，常用于存储系统参数和用户数据。',
-    keywords: ['可擦除', '可编程', '电信号', '非易失'],
-    tips: '电可擦除 = 用电信号就能擦掉，可以多次重写',
-    important: false,
-    emoji: '🔌'
-  },
-  {
-    id: 'coa-6',
-    term: 'HLDA',
-    fullNameEn: 'Hold Acknowledge',
-    fullNameCn: '总线响应信号',
-    definition: '由处理器输出的总线响应信号，用于向DMA控制器或其他总线管理器表示处理器已释放总线控制权。当HLDA为高电平时，表示处理器同意放弃总线。',
-    keywords: ['总线', '响应信号', 'DMA', '释放控制权'],
-    tips: '总线响应 = 处理器告诉DMA：我把总线让给你了',
-    important: false,
-    emoji: '🔄'
-  },
-  {
-    id: 'coa-7',
-    term: 'MDR',
-    fullNameEn: 'Memory Data Register',
-    fullNameCn: '存储器数据寄存器',
-    definition: '用于暂存从存储器读出的数据或要写入存储器的数据。MDR的位数等于存储器的字长，是处理器与存储器间的数据通道。',
-    keywords: ['数据缓存', '存储器', '字长', '数据通道'],
-    tips: '数据寄存器 = 存储器和处理器之间的中转站',
-    important: true,
-    emoji: '📦'
-  },
-  {
-    id: 'coa-8',
-    term: 'INTA',
-    fullNameEn: 'Interrupt Acknowledge',
-    fullNameCn: '中断响应信号',
-    definition: '由处理器输出的中断响应信号。当处理器同意接受中断并准备响应中断时，INTA信号有效。中断控制器可通过INTA信号向处理器提供中断向量或中断类型号。',
-    keywords: ['中断', '响应信号', '中断向量', '中断类型'],
-    tips: '中断响应 = 处理器告诉外设：我收到你的中断了',
-    important: false,
-    emoji: '⏸️'
-  },
-  {
-    id: 'coa-9',
-    term: 'PC',
-    fullNameEn: 'Program Counter',
-    fullNameCn: '程序计数器',
-    definition: '处理器中的一个寄存器，用于存放下一条要执行的指令的地址。PC会自动递增或根据转移指令的结果进行修改，是实现程序顺序执行和转移的关键。',
-    keywords: ['指令地址', '自动递增', '转移控制', '核心寄存器'],
-    tips: '程序计数器 = 告诉处理器下一步去哪儿',
-    important: true,
-    emoji: '🔢'
-  },
-  {
-    id: 'coa-10',
-    term: 'EPROM',
-    fullNameEn: 'Erasable Programmable Read-Only Memory',
-    fullNameCn: '可编程只读存储器',
-    definition: '一种可以多次改写内容的只读存储器。用紫外线照射可以将其全部内容擦除，然后可以重新编程。具有非易失性，曾广泛用于存储BIOS等固件。',
-    keywords: ['可编程', '紫外线擦除', '非易失', '固件'],
-    tips: '可编程只读 = 能改写但需要紫外线擦除',
-    important: false,
-    emoji: '☀️'
-  },
-  {
-    id: 'coa-11',
-    term: 'MAR',
-    fullNameEn: 'Memory Address Register',
-    fullNameCn: '存储器地址寄存器',
-    definition: '用于暂存要访问的存储器单元的地址。MAR的位数等于存储器的地址位数，决定了存储器的寻址范围。',
-    keywords: ['地址缓存', '存储寻址', '地址范围', '位宽'],
-    tips: '地址寄存器 = 告诉存储器要去找哪个单元',
-    important: true,
-    emoji: '📍'
-  },
-  {
-    id: 'coa-12',
-    term: 'DMA',
-    fullNameEn: 'Direct Memory Access',
-    fullNameCn: '直接内存访问',
-    definition: '允许设备与内存之间进行直接的数据传输，而不需要经过处理器。DMA控制器管理这个传输过程，大大提高了I/O效率，减少了处理器负担。',
-    keywords: ['直接传输', '不经过处理器', '高效', 'I/O'],
-    tips: '直接内存访问 = 外设和内存绕过处理器直接对话',
-    important: true,
-    emoji: '🔀'
   },
   {
     id: 'coa-13',
@@ -159,6 +39,28 @@ export const coaTerms: CoaTerm[] = [
     emoji: '💿'
   },
   {
+    id: 'coa-17',
+    term: 'SRAM',
+    fullNameEn: 'Static Random-Access Memory',
+    fullNameCn: '静态随机存取存储器',
+    definition: '一种使用触发器存储信息的存储器，只要电源不断电，存储的数据就不会丢失。SRAM速度快、易于使用，但集成度低、功耗大、成本高，常用作高速缓存。',
+    keywords: ['静态', '触发器', '速度快', '成本高', '缓存'],
+    tips: '静态 = 不需要刷新，但速度快成本贵',
+    important: true,
+    emoji: '⚙️'
+  },
+  {
+    id: 'coa-3',
+    term: 'DRAM',
+    fullNameEn: 'Dynamic Random-Access Memory',
+    fullNameCn: '动态随机存取存储器',
+    definition: '一种使用电容存储信息的存储器。由于电容会自然放电，所以需要定期刷新以保持数据。DRAM具有集成度高、功耗低、成本低的优点，是现在最常见的主存储器。',
+    keywords: ['动态', '电容', '需要刷新', '主存', '成本低'],
+    tips: '动态 = 需要定期刷新，这就是名字的来源',
+    important: true,
+    emoji: '⚡'
+  },
+  {
     id: 'coa-14',
     term: 'PROM',
     fullNameEn: 'Programmable Read-Only Memory',
@@ -168,6 +70,40 @@ export const coaTerms: CoaTerm[] = [
     tips: '一次性编程 = 写进去就改不了了',
     important: false,
     emoji: '🔒'
+  },
+  {
+    id: 'coa-10',
+    term: 'EPROM',
+    fullNameEn: 'Erasable Programmable Read-Only Memory',
+    fullNameCn: '可编程只读存储器',
+    definition: '一种可以多次改写内容的只读存储器。用紫外线照射可以将其全部内容擦除，然后可以重新编程。具有非易失性，曾广泛用于存储BIOS等固件。',
+    keywords: ['可编程', '紫外线擦除', '非易失', '固件'],
+    tips: '可编程只读 = 能改写但需要紫外线擦除',
+    important: false,
+    emoji: '☀️'
+  },
+  {
+    id: 'coa-5',
+    term: 'EEPROM',
+    fullNameEn: 'Electrically Erasable Programmable Read-Only Memory',
+    fullNameCn: '电可擦除可编程只读存储器',
+    definition: '一种可重复擦除和编程的只读存储器。可以用电信号擦除其中全部或部分内容，然后重新编程。EEPROM具有非易失性，常用于存储系统参数和用户数据。',
+    keywords: ['可擦除', '可编程', '电信号', '非易失'],
+    tips: '电可擦除 = 用电信号就能擦掉，可以多次重写',
+    important: false,
+    emoji: '🔌'
+  },
+  // ==================== CPU与指令系统 ====================
+  {
+    id: 'coa-2',
+    term: 'CU',
+    fullNameEn: 'Control Unit',
+    fullNameCn: '控制单元',
+    definition: '处理器的重要组成部分，主要功能是向计算机中各部分发送控制信号。CU负责指令的解析和执行控制，根据指令操作码产生相应的微操作序列，驱动整个计算机工作。',
+    keywords: ['控制信号', '指令解析', '微操作', '核心部件'],
+    tips: '控制单元 = CPU的"大脑"，负责控制整个系统',
+    important: true,
+    emoji: '🎮'
   },
   {
     id: 'coa-15',
@@ -181,6 +117,17 @@ export const coaTerms: CoaTerm[] = [
     emoji: '➕'
   },
   {
+    id: 'coa-9',
+    term: 'PC',
+    fullNameEn: 'Program Counter',
+    fullNameCn: '程序计数器',
+    definition: '处理器中的一个寄存器，用于存放下一条要执行的指令的地址。PC会自动递增或根据转移指令的结果进行修改，是实现程序顺序执行和转移的关键。',
+    keywords: ['指令地址', '自动递增', '转移控制', '核心寄存器'],
+    tips: '程序计数器 = 告诉处理器下一步去哪儿',
+    important: true,
+    emoji: '🔢'
+  },
+  {
     id: 'coa-16',
     term: 'IR',
     fullNameEn: 'Instruction Register',
@@ -192,15 +139,37 @@ export const coaTerms: CoaTerm[] = [
     emoji: '📝'
   },
   {
-    id: 'coa-17',
-    term: 'SRAM',
-    fullNameEn: 'Static Random-Access Memory',
-    fullNameCn: '静态随机存取存储器',
-    definition: '一种使用触发器存储信息的存储器，只要电源不断电，存储的数据就不会丢失。SRAM速度快、易于使用，但集成度低、功耗大、成本高，常用作高速缓存。',
-    keywords: ['静态', '触发器', '速度快', '成本高', '缓存'],
-    tips: '静态 = 不需要刷新，但速度快成本贵',
+    id: 'coa-11',
+    term: 'MAR',
+    fullNameEn: 'Memory Address Register',
+    fullNameCn: '存储器地址寄存器',
+    definition: '用于暂存要访问的存储器单元的地址。MAR的位数等于存储器的地址位数，决定了存储器的寻址范围。',
+    keywords: ['地址缓存', '存储寻址', '地址范围', '位宽'],
+    tips: '地址寄存器 = 告诉存储器要去找哪个单元',
     important: true,
-    emoji: '⚙️'
+    emoji: '📍'
+  },
+  {
+    id: 'coa-7',
+    term: 'MDR',
+    fullNameEn: 'Memory Data Register',
+    fullNameCn: '存储器数据寄存器',
+    definition: '用于暂存从存储器读出的数据或要写入存储器的数据。MDR的位数等于存储器的字长，是处理器与存储器间的数据通道。',
+    keywords: ['数据缓存', '存储器', '字长', '数据通道'],
+    tips: '数据寄存器 = 存储器和处理器之间的中转站',
+    important: true,
+    emoji: '📦'
+  },
+  {
+    id: 'coa-4',
+    term: 'RISC',
+    fullNameEn: 'Reduced Instruction Set Computer',
+    fullNameCn: '精简指令集计算机',
+    definition: '一种处理器设计哲学，采用指令集简洁、指令数量少、指令长度固定的设计方案。RISC处理器执行速度快，易于设计，但程序代码较长。',
+    keywords: ['精简', '指令集少', '执行快', '易设计'],
+    tips: '精简 = 指令少但执行快，代码长',
+    important: true,
+    emoji: '🚀'
   },
   {
     id: 'coa-18',
@@ -214,17 +183,6 @@ export const coaTerms: CoaTerm[] = [
     emoji: '🔧'
   },
   {
-    id: 'coa-19',
-    term: 'MREQ',
-    fullNameEn: 'Memory Request',
-    fullNameCn: '访存控制信号',
-    definition: '由处理器输出的存储请求信号。当处理器需要读写存储器时，MREQ信号有效，告诉存储系统处理器要访问存储器。',
-    keywords: ['存储访问', '读写请求', '控制信号'],
-    tips: '存储请求 = 处理器告诉存储器：我要读/写你',
-    important: false,
-    emoji: '📡'
-  },
-  {
     id: 'coa-20',
     term: 'FLOPS',
     fullNameEn: 'Floating Point Operations Per Second',
@@ -234,6 +192,51 @@ export const coaTerms: CoaTerm[] = [
     tips: '浮点运算 = 衡量计算机计算能力的标准尺子',
     important: false,
     emoji: '📊'
+  },
+  // ==================== 接口与总线控制 ====================
+  {
+    id: 'coa-12',
+    term: 'DMA',
+    fullNameEn: 'Direct Memory Access',
+    fullNameCn: '直接内存访问',
+    definition: '允许设备与内存之间进行直接的数据传输，而不需要经过处理器。DMA控制器管理这个传输过程，大大提高了I/O效率，减少了处理器负担。',
+    keywords: ['直接传输', '不经过处理器', '高效', 'I/O'],
+    tips: '直接内存访问 = 外设和内存绕过处理器直接对话',
+    important: true,
+    emoji: '🔀'
+  },
+  {
+    id: 'coa-8',
+    term: 'INTA',
+    fullNameEn: 'Interrupt Acknowledge',
+    fullNameCn: '中断响应信号',
+    definition: '由处理器输出的中断响应信号。当处理器同意接受中断并准备响应中断时，INTA信号有效。中断控制器可通过INTA信号向处理器提供中断向量或中断类型号。',
+    keywords: ['中断', '响应信号', '中断向量', '中断类型'],
+    tips: '中断响应 = 处理器告诉外设：我收到你的中断了',
+    important: false,
+    emoji: '⏸️'
+  },
+  {
+    id: 'coa-6',
+    term: 'HLDA',
+    fullNameEn: 'Hold Acknowledge',
+    fullNameCn: '总线响应信号',
+    definition: '由处理器输出的总线响应信号，用于向DMA控制器或其他总线管理器表示处理器已释放总线控制权。当HLDA为高电平时，表示处理器同意放弃总线。',
+    keywords: ['总线', '响应信号', 'DMA', '释放控制权'],
+    tips: '总线响应 = 处理器告诉DMA：我把总线让给你了',
+    important: false,
+    emoji: '🔄'
+  },
+  {
+    id: 'coa-19',
+    term: 'MREQ',
+    fullNameEn: 'Memory Request',
+    fullNameCn: '访存控制信号',
+    definition: '由处理器输出的存储请求信号。当处理器需要读写存储器时，MREQ信号有效，告诉存储系统处理器要访问存储器。',
+    keywords: ['存储访问', '读写请求', '控制信号'],
+    tips: '存储请求 = 处理器告诉存储器：我要读/写你',
+    important: false,
+    emoji: '📡'
   }
 ];
 
